@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>新神戸駅バスナビ</title>
+  <style>
+    :root{
+      --blue:#0b7ff3;
+      --blue-dark:#075db3;
+      --gray:#666;
+      --light:#f7f9fc;
+      --border:#d9dde5;
+      --pink:#e9458f;
+      --yellow:#fff7d8;
+      --text:#111;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:var(--text);background:white;line-height:1.65}
+    .app{max-width:1240px;margin:0 auto;padding:18px 20px 32px}
+    .lang{display:flex;gap:12px;margin-bottom:14px}
+    .lang button{border:0;border-radius:10px;padding:9px 22px;font-size:18px;color:#fff;background:var(--gray);cursor:pointer}
+    .lang button.active{background:var(--blue)}
+    h1{font-size:34px;margin:0 0 4px;letter-spacing:.02em}.subtitle{font-size:18px;margin:0 0 16px}.gamepad{font-size:34px;vertical-align:-4px;margin-right:10px}.title-icon{width:42px;height:42px;object-fit:contain;vertical-align:-10px;margin-right:8px}.red{color:#c40000;font-weight:800}
+    .layout{display:grid;grid-template-columns:350px 1fr;gap:26px;align-items:start}.panel{border:1px solid var(--border);border-radius:14px;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.04)}
+    .destinations{padding:18px 16px}.kana{font-weight:700;font-size:20px;margin:8px 0 9px}.dest-btn{width:100%;border:0;border-radius:9px;background:var(--blue);color:#fff;text-align:left;padding:10px 16px;margin:6px 0;font-size:18px;cursor:pointer;transition:.12s}.dest-btn:hover,.dest-btn.selected{background:var(--blue-dark);transform:translateY(-1px)}
+    .small-note{font-size:13px;color:#555;margin-top:16px;border-top:1px solid #eee;padding-top:10px}.detail{padding:20px 18px} .detail h2{font-size:34px;margin:0 0 4px}.lead{margin:0 0 14px;font-size:16px}.route-card{border:1px solid var(--border);border-radius:14px;padding:18px;margin:16px 0;background:#fff}.route-title{font-size:26px;font-weight:800;margin:0 0 4px;display:flex;gap:10px;align-items:center}.stop{font-size:20px;margin:8px 0 14px;font-weight:700}.stop .place{color:var(--blue-dark);font-weight:900}.stop .place.pink{color:var(--pink)}
+    .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0}.photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:1px solid #e4e4e4;display:block}.photo figcaption{text-align:center;font-size:14px;margin-top:5px;color:#333}.point{border:1px solid #b7d8ff;background:#f1f8ff;border-radius:9px;padding:12px 14px;margin-top:12px}.point.pink{border-color:#ffb9d5;background:#fff2f8}.point strong{display:block;color:var(--blue-dark);margin-bottom:4px}.point.pink strong{color:var(--pink)}.notice{background:var(--yellow);border:1px solid #f2d56b;border-radius:10px;padding:14px 16px;margin:18px 0}.notice h3{margin:0 0 6px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}.action-btn{border:1px solid var(--blue);background:#fff;color:var(--blue-dark);border-radius:8px;padding:10px 14px;font-size:16px;font-weight:700;cursor:pointer}.action-btn.pink{border-color:var(--pink);color:var(--pink)}.back{border:0;background:#eee;border-radius:8px;padding:9px 15px;font-size:16px;cursor:pointer;margin-top:8px}.empty{padding:30px;color:#555}
+    .guide{display:none;border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:18px;background:#fbfcff}.guide.show{display:block}.guide h3{font-size:24px;margin:0 0 8px}.guide-img{width:100%;border-radius:10px;border:1px solid #ddd;margin:12px 0}.guide-step{margin:14px 0 18px}.guide-step img{width:100%;border-radius:10px;border:1px solid #ddd;display:block}.guide-step figcaption{font-size:16px;font-weight:700;margin-top:6px}.steps{padding-left:1.2em;margin:8px 0}.steps li{margin:5px 0}.tag{display:inline-block;background:#eef4ff;color:#074c94;border-radius:999px;padding:2px 10px;margin:3px;font-size:13px}
+    .warning{border:2px solid #ffb300;background:#fff8dd;border-radius:10px;padding:12px 14px;margin:12px 0;font-weight:700}.warning strong{color:#b15a00;display:block;margin-bottom:4px}.danger{border-color:#ff8a8a;background:#fff1f1}.danger strong{color:#c40000}.loop-help{border:1px solid #cfd8e6;background:#f8fbff;border-radius:12px;padding:14px;margin:16px 0}.loop-help h3{margin:0 0 8px;font-size:21px}.wide-img{width:100%;border-radius:10px;border:1px solid #ddd;margin:10px 0}.loop-lists{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}.loop-list{background:white;border:1px solid var(--border);border-radius:10px;padding:12px}.loop-list h4{margin:0 0 8px;font-size:17px}.loop-list ul{margin:0;padding-left:1.1em;font-size:14px}.loop-list li{margin:2px 0}.transfer-stop{background:#fff3a6;border-radius:6px;padding:2px 6px;font-weight:800}.transfer-legend{background:#fff3a6;border:1px solid #f0cc45;border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:700}.ticket-box{background:#eefaf1;border:1px solid #a9d8b4;border-radius:10px;padding:12px 14px;margin:12px 0}.ticket-box strong{display:block;color:#11652a;margin-bottom:4px}.transfer-box{background:#fff7d8;border:1px solid #f2d56b;border-radius:10px;padding:12px 14px;margin:14px 0}.transfer-box strong{display:block;color:#8a6400;margin-bottom:4px}.loop-note{font-size:14px;color:#444;margin-top:8px}@media(max-width:640px){.loop-lists{grid-template-columns:1fr}}
+    @media(max-width:860px){.app{padding:12px}.layout{grid-template-columns:1fr;gap:14px}.destinations{max-height:none}.photos{grid-template-columns:1fr}h1{font-size:29px}.detail h2{font-size:28px}.route-title{font-size:23px}.lang button{font-size:16px;padding:8px 18px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="lang"><button id="jaBtn" class="active">日本語</button><button id="enBtn">English</button></div>
+  <h1><span class="gamepad">🎮</span><span data-ja="新神戸駅バスナビ" data-en="Shin-Kobe Station Bus Navi">新神戸駅バスナビ</span></h1>
+  <p class="subtitle" data-ja="行き先を選んでください" data-en="Choose your destination">行き先を選んでください</p>
+  <div class="layout">
+    <aside class="panel destinations" id="destinations"></aside>
+    <main class="panel detail" id="detail"></main>
+  </div>
+</div>
+<script>
+const ASSETS = {
+  east:'assets/east.jpg', tunnel:'assets/tunnel.jpg', middle:'assets/middle.jpg',
+  westOverview:'assets/west_overview.jpg', westCL:'assets/west_cl.jpg', westPL:'assets/west_pl.jpg',
+  westLoopStops:'assets/west_loop_stops.jpg',
+  tunnelRoute:'assets/tunnel_route.jpg',
+  kobeAirportEast:'assets/kobe_airport_east.png',
+  kobeAirportMiddle:'assets/kobe_airport_middle.png',
+  hotelPlaceholder:'assets/hotel_placeholder.svg',
+  hotelArrivalPlaceholder:'assets/hotel_arrival_placeholder.svg',
+  hotelGuideSteps12:'assets/hotel_guide_steps12.png',
+  hotelMainStop:'assets/hotel_main_stop.jpg',
+  hotelStep1:'assets/hotel_step1.jpg',
+  hotelStep2:'assets/hotel_step2.jpg',
+  hotelStep3:'assets/hotel_step3.jpg',
+  hotelStep4:'assets/hotel_step4.jpg',
+  hotelStep5:'assets/hotel_step5.jpg',
+  hotelStep6:'assets/hotel_step6.jpg',
+  tunnelMainStop:'assets/tunnel_main_stop.jpg',
+  tunnelStep1:'assets/tunnel_step1.jpg',
+  tunnelStep2:'assets/tunnel_step2.jpg',
+  tunnelStep3:'assets/tunnel_step3.jpg',
+  tunnelStep4:'assets/tunnel_step4.jpg',
+  tunnelOverview:'assets/tunnel_overview.jpg',
+  weathercock:'assets/weathercock.png',
+  nankinmachiGate:'assets/nankinmachi_gate.png',
+  kobeAirportShinkiStop:'assets/kobe_airport_shinki_stop.png',
+  tsukushigaokaMinatoStop:'assets/tsukushigaoka_minato_stop.png',
+  rokkoIslandMinatoStop:'assets/rokko_island_minato_stop.png',
+  rokkomichi18Stop:'assets/rokkomichi_18_stop.png',
+  minatoBusStop:'assets/minato_bus_stop.png',
+  kobeAirportMiddleNew:'assets/kobe_airport_middle_new.png'
+};
+const stopPhotos = {
+  east: [
+    {src:ASSETS.east, ja:'JR高速バス②のりば', en:'JR Express Bus stop 2'}
+  ],
+  middle: [
+    {src:ASSETS.middle, ja:'ロータリー中央付近', en:'Middle of the rotary'}
+  ],
+  west: [
+    {src:ASSETS.westLoopStops, ja:'シティーループ（City Loop）・ポートループ（Port Loop）のバス停', en:'City Loop / Port Loop bus stops'},
+    {src:ASSETS.westCL, ja:'シティーループ（City Loop）停車中', en:'City Loop bus'},
+    {src:ASSETS.westPL, ja:'ポートループ（Port Loop）停車中', en:'Port Loop bus'}
+  ],
+  tunnel: [
+    {src:ASSETS.tunnelMainStop, ja:'新神戸駅（トンネル入口）バスのりば', en:'Shin-Kobe Station Tunnel Entrance bus stop'}
+  ],
+  hotel: [
+    {src:ASSETS.hotelMainStop, ja:'ホテル玄関前（4階）のりば周辺', en:'Hotel entrance / 4F bus stop area'}
+  ]
+};
+const stopInfo = {
+  east:{ja:'1階ロータリー東端', en:'1F rotary east end', cls:'', pointJa:'1階ロータリー東端の「JR高速バス②のりば」付近から乗車します。', pointEn:'Board near JR Express Bus stop 2 at the east end of the 1F rotary.'},
+  middle:{ja:'1階ロータリー中ほど', en:'1F rotary middle', cls:'pink', pointJa:'ロータリー中央付近寄りの乗り場です。神姫バスや一部路線バスはこのあたりから乗車します。', pointEn:'This is around the middle of the rotary. Shinki Bus and some local buses board here.'},
+  west:{ja:'1階ロータリー西端', en:'1F rotary west end', cls:'', pointJa:'ロータリー西端の観光系バス乗り場です。シティーループ、ポートループなどはこの付近から乗車します。', pointEn:'This is the west-end sightseeing bus area. City Loop and Port Loop board here.'},
+  tunnel:{ja:'トンネル入口バス停', en:'Tunnel Entrance bus stop', cls:'', pointJa:'1階ロータリー内にはありません。駅西端から見える道路をはさんで向かいにある、緑色の屋根があるバス停へ向かいます。', pointEn:'This is not inside the 1F rotary. Go to the bus stop with the green roof across the road from the west end of the station.'},
+  hotel:{ja:'ホテル玄関前（4階）', en:'Hotel entrance / 4F', cls:'pink', pointJa:'1階ロータリー内ではありません。渡り廊下をそのまま進み、ホテル入口・玄関前（4階）のりばへ向かいます。', pointEn:'This is not inside the 1F rotary. Continue along the walkway toward the hotel entrance / 4F.'}
+};
+const groups = [
+  {kana:'あ行', items:['有馬温泉','淡路島','アリーナ前','小野']},
+  {kana:'か行', items:['かもめりあ','関空リムジン','KIITO前','北野異人館','神戸駅南口','神戸空港']},
+  {kana:'さ行', items:['新港町','三田関西学院','三田プレミアムアウトレット']},
+  {kana:'た行', items:['高松','筑紫が丘','徳島']},
+  {kana:'な行', items:['南京町']},
+  {kana:'は行', items:['ハーバーランド・モザイク','ポートタワー']},
+  {kana:'ま行', items:['箕谷・神戸北町','三木','メリケンパーク']},
+  {kana:'や行・ら行', items:['社','六甲アイランド','六甲道']}
+];
+const data = {
+  '神戸空港': {icon:'✈️', en:'Kobe Airport', leadJa:'利用するバスを選ばなくても、両方の乗り場を確認できます。', leadEn:'You can check both boarding points here.', routes:[
+    {companyJa:'JRバス',companyEn:'JR Bus',stop:'east',
+      photos:[{src:ASSETS.kobeAirportEast, ja:'JR高速バス②のりば。「神戸空港（マリンエアシャトル）」の表示が目印', en:'JR Express Bus stop 2. Look for “Kobe Airport (Marine Air Shuttle)”.'}],
+      pointJa:'「JR高速バス ②のりば」標識の中に「神戸空港（マリンエアシャトル）」の表示があります。',
+      pointEn:'On the “JR Express Bus stop 2” sign, look for the wording “Kobe Airport (Marine Air Shuttle)”.',
+      noteJa:'JRバスは神戸空港へ直行します。1時間に1本程度です。',
+      noteEn:'JR Bus goes directly to Kobe Airport. Service is about once an hour.'},
+    {companyJa:'神姫バス',companyEn:'Shinki Bus',stop:'middle',
+      photos:[{src:ASSETS.kobeAirportShinkiStop, ja:'神姫バス 神戸空港行きのバス停', en:'Shinki Bus stop for Kobe Airport'}],
+      pointJa:'乗り場：1階ロータリー中ほど',
+      pointEn:'Boarding point: around the middle of the 1F rotary.',
+      noteJa:'<br><strong>神姫バス 神戸空港行き</strong><br>途中停車する主なバス停：地下鉄三宮駅、北埠頭、中埠頭、港湾短大前、物流センター（どうぶつ王国東）、神戸空港、神戸空港第2ターミナル。<br>※停車地・運行内容は変更される場合があります。ご利用前に最新情報をご確認ください。',
+      noteEn:'<br><strong>Shinki Bus for Kobe Airport</strong><br>Main stops on the way include Subway Sannomiya Station, Kita-futo, Naka-futo, Port & Island College, Distribution Center (Kobe Animal Kingdom East), Kobe Airport, and Kobe Airport Terminal 2. Service details may change. Please check the latest information before use.'}
+  ], guideJa:'どちらのバスも道路状況により遅れることがあります。', guideEn:'Both buses may be delayed depending on traffic.'},
+
+  '有馬温泉': {icon:'♨️', en:'Arima Onsen', leadJa:'有馬温泉へ行く方法は4つあります。①JRバス　②神姫バス　③布引ロープウェイ　④神戸市営地下鉄〜神鉄（神戸電鉄）', leadEn:'There are four ways to get to Arima Onsen: JR Bus, Shinki Bus, Nunobiki Ropeway, or Subway plus Kobe Electric Railway.', routes:[
+    {companyJa:'JRバス',companyEn:'JR Bus',stop:'east',pointJa:'1階ロータリー東端の「JR高速バス②のりば」付近から乗車します。',pointEn:'Board near JR Express Bus stop 2 at the east end of the 1F rotary.',noteJa:'写真の目印を確認して乗り場へ向かってください。',noteEn:'Use the photo as a landmark and go to the boarding point.'},
+    {companyJa:'神姫バス',companyEn:'Shinki Bus',stop:'tunnel',pointJa:'1階ロータリー内にはありません。駅西端から見える道路をはさんで向かいにある、緑色の屋根があるバス停へ向かいます。',pointEn:'This is not inside the 1F rotary. Go to the bus stop with the green roof across the road from the west end of the station.',noteJa:'トンネル入口バス停への行き方を確認してください。',noteEn:'Check how to get to the Tunnel Entrance bus stop.'}
+  ]},
+
+  '徳島': {icon:'🚌', en:'Tokushima', leadJa:'JRバスと、徳島バス・阪神バス・神姫バスで乗り場が違います。ここが一番大事です。', leadEn:'Boarding points differ between JR Bus and Tokushima/Hanshin/Shinki buses.', routes:[
+    {companyJa:'JRバス',companyEn:'JR Bus',stop:'east',pointJa:'1階ロータリー東端の「JR高速バス②のりば」付近から乗車します。',pointEn:'Board near JR Express Bus stop 2 at the east end of the 1F rotary.',noteJa:'写真の目印を確認して乗り場へ向かってください。',noteEn:'Use the photo as a landmark and go to the boarding point.'},
+    {companyJa:'徳島バス・阪神バス・神姫バス',companyEn:'Tokushima Bus / Hanshin Bus / Shinki Bus',stop:'hotel',noteJa:'ホテル玄関前（4階）から乗車します。',noteEn:'Go to the hotel entrance / 4F. This is not the 1F rotary.'}
+  ], noticeJa:'JRバス徳島行きは1階ロータリー東端。徳島バス・阪神バス・神姫バスはホテル玄関前（4階）です。乗り場を間違えないでください。', noticeEn:'JR Bus for Tokushima boards at the east end of the 1F rotary. Tokushima/Hanshin/Shinki buses board at the hotel entrance / 4F. Do not mix up the stops.'},
+
+  '関空リムジン': {icon:'🛫', en:'Kansai Airport Limousine', leadJa:'1階ロータリー内ではなく、ホテル玄関前（4階）へ向かいます。', leadEn:'Go to the hotel entrance / 4F, not the 1F rotary.', routes:[
+    {companyJa:'関空リムジン',companyEn:'Kansai Airport Limousine',stop:'hotel',noteJa:'ホテル玄関前（4階）から乗車します。',noteEn:'Board from the hotel entrance / 4F.'}
+  ]},
+
+  'アリーナ前': {icon:'🏟️', en:'Arena-mae', leadJa:'アリーナ前へ行く人は、ポートループ（Port Loop）を利用してください。', leadEn:'Take Port Loop for Arena-mae.', loopHelp:true, routes:[
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「Port Loop」を確認してください。',noteEn:'Check that the bus display says Port Loop.',avoidTitleJa:'乗らないでください',avoidTitleEn:'Do not take this bus',avoidJa:'<span class="red">シティーループ（City Loop）はアリーナ前を通りません。</span>',avoidEn:'City Loop does not go to Arena-mae.'}
+  ]},
+
+  'かもめりあ': {icon:'⛴️', en:'Kamomeria', transferGood:true, leadJa:'シティーループ（City Loop）とポートループ（Port Loop）の両方で行けます。停車位置が異なります。', leadEn:'Both City Loop and Port Loop can be used. Their stopping positions are different.', loopHelp:true, routes:[
+    {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'到着地では、シティーループ（City Loop）はポートループ（Port Loop）の後方に停車します。',noteEn:'City Loop stops behind the Port Loop stopping position.'},
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'到着地では、ポートループ（Port Loop）の停車位置は、かもめりあの入口前方です。',noteEn:'Port Loop stops in front of the Kamomeria entrance.'}
+  ]},
+
+  'KIITO前': {icon:'🏢', en:'KIITO-mae', leadJa:'KIITO前へはポートループです。', leadEn:'Take Port Loop for KIITO-mae.', loopHelp:true, routes:[
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「Port Loop」を確認してください。',noteEn:'Check that the bus display says Port Loop.',avoidTitleJa:'ご注意',avoidTitleEn:'Note',avoidJa:'シティーループ（City Loop）は、KIITO前を通りません。',avoidEn:'City Loop does not pass KIITO-mae.'}
+  ]},
+
+  '北野異人館': {icon:'<img class="title-icon" src="'+ASSETS.weathercock+'" alt="">', en:'Kitano Ijinkan', leadJa:'北野異人館へはシティーループです。', leadEn:'Take City Loop for Kitano Ijinkan.', loopHelp:true, routes:[
+    {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「City Loop」を確認してください。',noteEn:'Check that the bus display says City Loop.',avoidTitleJa:'ご注意',avoidTitleEn:'Note',avoidJa:'ポートループ（Port Loop）は、山側にある北野異人館方面には行きません。',avoidEn:'Port Loop does not go toward the Kitano Ijinkan area on the mountain side.'}
+  ]},
+
+  '神戸駅南口': {icon:'🚉', en:'Kobe Station South Exit', leadJa:'神戸駅南口へはポートループです。', leadEn:'Take Port Loop for Kobe Station South Exit.', loopHelp:true, routes:[
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「Port Loop」を確認してください。',noteEn:'Check that the bus display says Port Loop.',avoidTitleJa:'ご注意',avoidTitleEn:'Note',avoidJa:'シティーループ（City Loop）では、神戸駅南口を通りません。',avoidEn:'City Loop does not pass Kobe Station South Exit.'}
+  ]},
+
+  '新港町': {icon:'⚓', en:'Shinkocho', leadJa:'新港町へはポートループです。', leadEn:'Take Port Loop for Shinkocho.', loopHelp:true, routes:[
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「Port Loop」を確認してください。',noteEn:'Check that the bus display says Port Loop.',avoidTitleJa:'ご注意',avoidTitleEn:'Note',avoidJa:'シティーループ（City Loop）は、新港町を通りません。',avoidEn:'City Loop does not pass Shinkocho.'}
+  ]},
+
+  '南京町': {icon:'<img class="title-icon" src="'+ASSETS.nankinmachiGate+'" alt="">', en:'Nankinmachi', leadJa:'南京町へ行く人は、シティーループ（City Loop）にご乗車ください。ポートループ（Port Loop）は通りません。', leadEn:'For Nankinmachi, take City Loop. Port Loop does not pass Nankinmachi.', loopHelp:true, routes:[
+    {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「City Loop」を確認してください。',noteEn:'Check that the bus display says City Loop.',avoidTitleJa:'ご注意',avoidTitleEn:'Note',avoidJa:'ポートループ（Port Loop）は南京町を通りません。',avoidEn:'Port Loop does not pass Nankinmachi.'}
+  ]},
+
+  'ポートタワー': {icon:'🗼', en:'Port Tower', transferGood:true, leadJa:'シティーループ（City Loop）とポートループ（Port Loop）の両方が停車します。バス停は10メートルほど離れているだけです。ただし、回る順番が違うため、ポートループが先に出発しても、あとから出発したシティーループの方が先に到着する場合があります。', leadEn:'Both City Loop and Port Loop stop here. The stops are only about 10 meters apart. Because the route order is different, City Loop may arrive earlier even if Port Loop leaves first.', loopHelp:true, routes:[
+    {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'到着地では、シティーループ（City Loop）とポートループ（Port Loop）の停車位置は約10m離れています。',noteEn:'Stops inside the rotary. The drop-off stop differs from Port Loop, so please be careful.'},
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'到着地では、シティーループ（City Loop）とポートループ（Port Loop）の停車位置は約10m離れています。',noteEn:'Stops inside the rotary. The drop-off stop differs from City Loop, so please be careful.'}
+  ]},
+
+  'メリケンパーク': {icon:'🌊', en:'Meriken Park', transferGood:true, leadJa:'この停留所は、シティーループ（City Loop）とポートループ（Port Loop）の乗換がしやすい場所です。', leadEn:'This is a convenient stop for transferring between City Loop and Port Loop.', loopHelp:true, routes:[
+    {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'到着地では、シティーループ（City Loop）は進行方向後方で停車します。',noteEn:'City Loop stops toward the rear in the direction of travel.'},
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'到着地では、ポートループ（Port Loop）は進行方向前方で停車します。',noteEn:'Port Loop stops toward the front in the direction of travel.'}
+  ]},
+
+  '高松': {icon:'🚌', en:'Takamatsu', leadJa:'乗り場を写真で確認してください。', leadEn:'Check the boarding point with the photo.', routes:[
+    {companyJa:'JRバス、他',companyEn:'JR Bus and other highway buses',stop:'east',pointJa:'1階ロータリー東端の「JR高速バス②のりば」付近から乗車します。',pointEn:'Board near JR Express Bus stop 2 at the east end of the 1F rotary.',noteJa:'JRバス、他社の高速バスも発着します。',noteEn:'JR Bus and other companies’ highway buses also depart and arrive here.'}
+  ]},
+
+  '淡路島': {icon:'🌉', en:'Awaji Island', leadJa:'乗り場を写真で確認してください。', leadEn:'Check the boarding point with the photo.', routes:[
+    {companyJa:'高速バス',companyEn:'Highway Bus',stop:'east',pointJa:'1階ロータリー東端の「JR高速バス②のりば」付近から乗車します。',pointEn:'Board near JR Express Bus stop 2 at the east end of the 1F rotary.',noteJa:'写真の目印を確認して乗り場へ向かってください。',noteEn:'Use the photo as a landmark and go to the boarding point.'}
+  ]},
+
+  '小野': {icon:'🚌', en:'Ono', leadJa:'乗り場を写真で確認してください。', leadEn:'Check the boarding point with the photo.', routes:[
+    {companyJa:'神姫バス',companyEn:'Shinki Bus',stop:'tunnel',pointJa:'1階ロータリー内にはありません。駅西端から見える道路をはさんで向かいにある、緑色の屋根があるバス停へ向かいます。',pointEn:'This is not inside the 1F rotary. Go to the bus stop with the green roof across the road from the west end of the station.',noteJa:'トンネル入口バス停への行き方を確認してください。',noteEn:'Check how to get to the Tunnel Entrance bus stop.'}
+  ]},
+
+  '三田関西学院': routeSimple('🎓','Sanda Kwansei Gakuin','神姫バス','Shinki Bus','tunnel'),
+  '三田プレミアムアウトレット': routeSimple('🛍️','Sanda Premium Outlets','神姫バス','Shinki Bus','tunnel'),
+
+  '筑紫が丘': {icon:'🚌', en:'Tsukushigaoka', leadJa:'みなと観光バスのバス停を写真で確認してください。', leadEn:'Check the Minato Kanko Bus stop with the photo.', routes:[
+    {companyJa:'みなと観光バス',companyEn:'Minato Kanko Bus',stop:'middle', photos:[{src:ASSETS.tsukushigaokaMinatoStop, ja:'紺地に白いカモメのマークのバス停が目印', en:'Look for the navy stop sign with the white seagull mark.'}], pointJa:'紺地に白いカモメのマークのバス停が目印です。', pointEn:'Use the navy stop sign with the white seagull mark as your landmark.', noteJa:'みなと観光バスの表示を確認して乗車してください。', noteEn:'Check the Minato Kanko Bus display before boarding.'}
+  ]},
+
+  '箕谷・神戸北町': routeSimple('🚌','Minotani / Kobe-Kitamachi','神戸市バス64系統','Kobe City Bus 64','tunnel'),
+  '三木': routeSimple('🚌','Miki','神姫バス','Shinki Bus','tunnel'),
+  '社': routeSimple('🚌','Yashiro','神姫バス','Shinki Bus','tunnel'),
+
+  '六甲アイランド': {icon:'🏝️', en:'Rokko Island', leadJa:'みなと観光バスのバス停を写真で確認してください。', leadEn:'Check the Minato Kanko Bus stop with the photo.', routes:[
+    {companyJa:'みなと観光バス',companyEn:'Minato Kanko Bus',stop:'middle', photos:[{src:ASSETS.rokkoIslandMinatoStop, ja:'紺地に白いカモメのマークのバス停が目印', en:'Look for the navy stop sign with the white seagull mark.'}], pointJa:'紺地に白いカモメのマークのバス停が目印です。', pointEn:'Use the navy stop sign with the white seagull mark as your landmark.', noteJa:'「みなと観光バス」の表示を確認して乗車してください。運行本数が少ないため、三宮からJR住吉経由で六甲ライナーを利用する方法もあります。', noteEn:'Check the Minato Kanko Bus display before boarding. Service is limited, so you can also go from Sannomiya via JR Sumiyoshi and the Rokko Liner.'}
+  ]},
+
+  '六甲道': {icon:'🚏', en:'Rokkomichi', leadJa:'神戸市バス18系統は土日限定で新神戸駅を通ります。', leadEn:'Kobe City Bus 18 serves Shin-Kobe only on weekends/holidays.', routes:[
+    {companyJa:'神戸市バス18系統（土日限定）',companyEn:'Kobe City Bus 18 / weekends only',stop:'middle', photos:[{src:ASSETS.rokkomichi18Stop, ja:'神戸市バス18系統（土日限定）のバス停', en:'Kobe City Bus 18 weekend-only stop'}], pointJa:'ロータリー中央付近寄りの乗り場です。神姫バスや一部路線バスはこのあたりから乗車します。', pointEn:'This is near the middle of the rotary. Shinki Bus and some local buses board around here.', noteJa:'写真の目印を確認して乗り場へ向かってください。<br>平日は徒歩で布引バス停まで移動して、18系統をご利用ください。新神戸駅から歩いて行く経路はこちら。', noteEn:'Use the photo as a landmark and go to the boarding point. On weekdays, walk to Nunobiki bus stop and use bus route 18.'}
+  ]},
+
+  'ハーバーランド・モザイク': {icon:'🎡', en:'Harborland / Mosaic', leadJa:'複数ルートがあります。観光系バスはシティーループ（City Loop）／ポートループ（Port Loop）の違いに注意してください。', leadEn:'Several routes are possible. For sightseeing buses, pay attention to the difference between City Loop and Port Loop.', loopHelp:true, routes:[
+    {companyJa:'みなと観光バス（本数少ない）',companyEn:'Minato Kanko Bus / limited service',stop:'middle', photos:[{src:ASSETS.tsukushigaokaMinatoStop, ja:'紺地に白いカモメのマークのバス停が目印', en:'Look for the navy stop sign with the white seagull mark.'}], pointJa:'紺地に白いカモメのマークのバス停が目印です。', pointEn:'Use the navy stop sign with the white seagull mark as your landmark.', noteJa:'本数が少ないため時刻表を確認してください。<br><span class="red">1日乗車券・2日乗車券はご利用になれません。</span>',noteEn:'Service is limited, so check the timetable. 1-day and 2-day sightseeing passes cannot be used.'},
+    {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「City Loop」を確認してください。',noteEn:'Check the City Loop display.'},
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「Port Loop」を確認してください。',noteEn:'Check the Port Loop display.'}
+  ]}
+};
+function routeSimple(icon,en,cja,cen,stop){return {icon,en,leadJa:'乗り場を写真で確認してください。',leadEn:'Check the boarding point with the photos.',routes:[{companyJa:cja,companyEn:cen,stop,noteJa:'写真の目印を確認して乗り場へ向かってください。',noteEn:'Use the photos as landmarks and go to the boarding point.'}]}}
+function multiSimple(icon,en,arr){return {icon,en,leadJa:'複数のバスで行ける場合があります。乗り場を確認してください。',leadEn:'Several buses may be available. Please check the boarding points.',routes:arr.map(a=>({companyJa:a[0],companyEn:a[1],stop:a[2],noteJa:'車体表示と行き先を確認してください。',noteEn:'Check the bus display and destination.'}))}}
+let lang='ja', current='神戸空港';
+function t(ja,en){return lang==='ja'?ja:en}
+function renderDest(){const el=document.getElementById('destinations');el.innerHTML='';groups.forEach(g=>{const h=document.createElement('div');h.className='kana';h.textContent=g.kana;el.appendChild(h);g.items.forEach(name=>{const b=document.createElement('button');b.className='dest-btn'+(name===current?' selected':'');b.textContent=lang==='ja'?name:(data[name]?.en||name);b.onclick=()=>{current=name;render()};el.appendChild(b)})});const note=document.createElement('div');note.className='small-note';note.textContent=t('※バスの運行状況は変更される場合があります。ご利用の際は最新情報をご確認ください。','Bus services may change. Please check the latest information before use.');el.appendChild(note)}
+function renderDetail(){const d=data[current]; const el=document.getElementById('detail'); if(!d){el.innerHTML='<div class="empty">データ準備中です。</div>';return} const cards=d.routes.map((r,i)=>routeCard(r,i)).join(''); el.innerHTML=`<h2>${d.icon||'🚌'} ${t(current,d.en)}</h2><p class="lead">${t(d.leadJa,d.leadEn)}</p>${cards}${d.transferGood?transferBox():''}${d.loopHelp?loopHelp():''}${d.noticeJa?`<div class="warning danger"><strong>${t('⚠ 乗り間違い注意','⚠ Avoid boarding the wrong bus')}</strong>${t(d.noticeJa,d.noticeEn)}</div>`:''}<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べてください。','Compare the photos with the signs at the station.')}</li><li>${t('道路状況により遅延することがあります。','Buses may be delayed due to traffic.')}</li><li>${t('時刻表リンクはあとで公式サイトURLを設定してください。','Official timetable links can be added later.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div><div class="actions"><button class="action-btn">${t('公式時刻表リンクを追加予定','Official timetable link to be added')}</button></div><button class="back" onclick="window.scrollTo({top:0,behavior:'smooth'})">← ${t('行き先一覧に戻る','Back to destination list')}</button><div id="guideArea" class="guide"></div>`}
+function routeCard(r,i){const s=stopInfo[r.stop]; let photos=r.photos || stopPhotos[r.stop]||[];
+  if(r.stop==='west' && !r.photos){
+    if((r.companyJa||'').includes('シティーループ') || (r.companyEn||'').includes('City Loop')){
+      photos=[{src:ASSETS.westCL, ja:'シティーループ（City Loop）停車中', en:'City Loop bus'}];
+    }else if((r.companyJa||'').includes('ポートループ') || (r.companyEn||'').includes('Port Loop')){
+      photos=[{src:ASSETS.westPL, ja:'ポートループ（Port Loop）停車中', en:'Port Loop bus'}];
+    }
+  } const photoHtml=photos.slice(0,3).map(p=>`<figure class="photo"><img src="${p.src}" alt="${t(p.ja,p.en)}"><figcaption>${t(p.ja,p.en)}</figcaption></figure>`).join(''); const guideBtn=(r.stop==='tunnel'||r.stop==='hotel')?`<button class="action-btn ${r.stop==='hotel'?'pink':''}" onclick="showGuide('${r.stop}')">${t(s.ja+'への行き方を見る','How to get to '+s.en)}</button>`:''; const warn=r.warnJa?`<div class="warning ${r.danger?'danger':''}"><strong>${t(r.warnTitleJa||'⚠ 間違えやすいです',r.warnTitleEn||'⚠ Easy to mix up')}</strong>${t(r.warnJa,r.warnEn)}</div>`:''; const avoid=r.avoidJa?`<div class="warning danger"><strong>${t(r.avoidTitleJa||'乗らないでください',r.avoidTitleEn||'Do not take this bus')}</strong>${t(r.avoidJa,r.avoidEn)}</div>`:''; return `<section class="route-card"><div class="route-title">${r.icon|| (r.stop==='middle'?'🚌':r.stop==='hotel'?'🧳':'🚌')} ${t(r.companyJa,r.companyEn)}</div><div class="stop">${t('乗り場：','Boarding point: ')} <span class="place ${s.cls}">${t(s.ja,s.en)}</span></div>${warn}${avoid}<div class="photos">${photoHtml}</div><div class="point ${s.cls}"><strong>${t('ポイント','Point')}</strong>${t(r.pointJa||s.pointJa,r.pointEn||s.pointEn)}<br>${t(r.noteJa,r.noteEn)}</div><div class="actions">${guideBtn}</div></section>`}
+
+function transferBox(){
+  return `<div class="transfer-box"><strong>${t('◎乗換がしやすい停留所','Convenient transfer stop')}</strong>${t('この停留所は、シティーループ（City Loop）とポートループ（Port Loop）の乗換がしやすい場所です。','This stop is a convenient place to transfer between City Loop and Port Loop.')}</div>`
+}
+
+function loopHelp(){
+  const cityStopsJa=['かもめりあ','ハーバーランド（モザイク前）','西元町','みなと元町駅前','南京町方面','旧居留地（市立博物館）','京町筋','三宮センター街東口','地下鉄三宮駅前','北野坂','北野異人館','神戸布引ハーブ園／ロープウェイ','新神戸駅前','市役所前','南京町（元町商店街）','メリケンパーク','ポートタワー前'];
+  const cityStopsEn=['Kamomeria','Harborland / Mosaic','Nishi-Motomachi','Minato Motomachi','Nankinmachi area','Former Foreign Settlement / Kobe City Museum','Kyomachi-suji','Sannomiya Center Gai East','Subway Sannomiya Sta.','Kitanozaka','Kitano Ijinkan','Kobe Nunobiki Herb Gardens / Ropeway','Shin-Kobe Sta.','City Hall','Nankinmachi / Motomachi Shopping Street','Meriken Park','Port Tower'];
+  const portStopsJa=['新神戸駅前1F','三宮前','市役所・東遊園地前','KIITO前（三宮図書館）','アリーナ前','新港町','ポートタワー前','神戸駅南口','ハーバーランド（モザイク前）','メリケンパーク','かもめりあ（神戸港観光船のりば・ポートタワー西）'];
+  const portStopsEn=['Shin-Kobe Sta. 1F','Sannomiya-mae','City Hall / Higashi Yuenchi','KIITO-mae / Sannomiya Library','Arena-mae','Shinkocho','Port Tower','Kobe Station South Exit','Harborland / Mosaic','Meriken Park','Kamomeria / Kobe sightseeing boat pier / west of Port Tower'];
+  const transferWordsJa=['ポートタワー前','メリケンパーク','かもめりあ'];
+  const transferWordsEn=['Port Tower','Meriken Park','Kamomeria'];
+  const isTransfer=(ja,en)=>transferWordsJa.some(w=>ja.includes(w)) || transferWordsEn.some(w=>en.includes(w));
+  const list=(ja,en)=>ja.map((x,i)=>`<li class="${isTransfer(x,en[i])?'transfer-stop':''}">${t(x,en[i])}${isTransfer(x,en[i])?` <span>${t('（乗換がしやすい停留所）','(easier transfer stop)')}</span>`:''}</li>`).join('');
+  return `<div class="loop-help"><h3>${t('シティーループ（City Loop）とポートループ（Port Loop）の違い','City Loop vs Port Loop')}</h3><p>${t('同じロータリー西端付近でも、シティーループ（City Loop）とポートループ（Port Loop）は停車するバス停・行き先が違います。車体表示も確認してください。公式図の画像は使わず、停留所名を案内用に整理しています。','Even around the same west-end rotary area, City Loop and Port Loop use different stops and destinations. This app does not show the official route-map image; it lists stop names in a simplified guide.')}</p><div class="ticket-box"><strong>${t('1日・2日乗車券について','About 1-day / 2-day tickets')}</strong>${t('City Loop と Port Loop の両方で利用できる乗車券があります。購入・利用時は券面と最新案内を確認してください。','Some 1-day / 2-day tickets can be used on both City Loop and Port Loop. Please check the ticket and the latest information when buying or using it.')}</div><div class="transfer-legend">${t('黄色表示：City Loop と Port Loop の乗換がしやすい停留所','Yellow highlight: stops where シティーループ（City Loop）／ポートループ（Port Loop） transfers are easier')}</div><div class="loop-lists"><div class="loop-list"><h4>🟩 ${t('シティーループ 主な停留所','Main City Loop stops')}</h4><ul>${list(cityStopsJa,cityStopsEn)}</ul></div><div class="loop-list"><h4>🟦 ${t('ポートループ 主な停留所','Main Port Loop stops')}</h4><ul>${list(portStopsJa,portStopsEn)}</ul></div></div><div class="warning danger"><strong>${t('⚠ 乗り間違い注意','⚠ Avoid boarding the wrong bus')}</strong>${t('アリーナ前へ行く人はポートループ（車体表示：Port Loop）。南京町へ行く人はシティーループ（車体表示：City Loop）です。バス停表示と車体表示を必ず確認してください。','For Arena-mae, take Port Loop. For Nankinmachi, take City Loop. Always check both the bus-stop sign and the bus display.')}</div><p class="loop-note">${t('※停留所名は案内用の簡略表示です。運行状況・停車順は変更される場合があります。黄色表示の停留所でも、同じバス停に停まるとは限りません。','Stop names are simplified for guidance. Operations and stop order may change. Even at yellow-highlighted stops, the two buses may not stop at exactly the same bus stop.')}</p></div>`}
+
+
+function showGuide(type){const el=document.getElementById('guideArea'); if(type==='tunnel'){el.innerHTML=`<h3>🚶 ${t('トンネル入口バス停への行き方','How to get to the Tunnel Entrance bus stop')}</h3>
+<p>${t('有馬温泉・三田プレミアムアウトレット・三木・小野方面などの神姫バスは、1階ロータリーではなく「トンネル入口バス停」から乗車します。','For Arima Onsen, Sanda Premium Outlets, Miki, Ono and other Shinki Bus destinations, board at the Tunnel Entrance bus stop, not the 1F rotary.')}</p>
+
+<figure class="guide-step"><img src="${ASSETS.tunnelStep1}" alt="Tunnel step 1"><figcaption>${t('① 2階へ上がり、外へ出ます。','① Go up to the 2nd floor and go outside.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.tunnelStep2}" alt="Tunnel step 2"><figcaption>${t('② ホテルへの渡り廊下へ進みます。','② Go to the walkway to the hotel.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.tunnelStep3}" alt="Tunnel step 3"><figcaption>${t('③ 渡り廊下を進みながら、左側を確認します。','③ Walk along the walkway and check the left side.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.tunnelStep4}" alt="Tunnel step 4"><figcaption>${t('④ 左側の白い階段を下ります。','④ Go down the white stairs on your left.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.tunnelMainStop}" alt="Tunnel step 5"><figcaption>${t('⑤ 階段を下りると、新神戸駅（トンネル入口）バスのりばに到着します。','⑤ After going down the stairs, you arrive at the Shin-Kobe Station Tunnel Entrance bus stop.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.tunnelOverview}" alt="Tunnel overview"><figcaption>${t('補足：JR新神戸駅とトンネル入口バス停の位置関係です。','Extra: This shows the positional relationship between JR Shin-Kobe Station and the Tunnel Entrance bus stop.')}</figcaption></figure>
+
+<div class="point"><strong>${t('ポイント','Point')}</strong>${t('ここは1階ロータリー内ではありません。バス停表示で目的地を確認してください。','This is not inside the 1F rotary. Check the destination on the bus-stop sign.')}</div>
+<p><span class="tag">有馬温泉</span><span class="tag">三田プレミアムアウトレット</span><span class="tag">三木</span><span class="tag">小野</span><span class="tag">64系統</span></p>`}
+else{el.innerHTML=`<h3>🧳 ${t('ホテル玄関前（4階）への行き方','How to get to the hotel entrance / 4F')}</h3>
+<p>${t('徳島バス・阪神バス・神姫バスの徳島方面、関空リムジンはホテル玄関前（4階）へ向かいます。1階ロータリーではありません。','Tokushima/Hanshin/Shinki buses for Tokushima and the Kansai Airport Limousine board at the hotel entrance / 4F. This is not the 1F rotary.')}</p>
+
+<figure class="guide-step"><img src="${ASSETS.hotelStep1}" alt="Step 1"><figcaption>${t('① 2階へ上がり、外へ出ます。','① Go up to the 2nd floor and go outside.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.hotelStep2}" alt="Step 2"><figcaption>${t('② ホテルへの渡り廊下へ進みます。','② Go to the walkway to the hotel.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.hotelStep3}" alt="Step 3"><figcaption>${t('③ 渡り廊下をまっすぐ進みます。','③ Walk straight along the walkway.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.hotelStep4}" alt="Step 4"><figcaption>${t('④ 渡り廊下を渡り切り、ホテル側に入ります。','④ Cross the walkway and enter the hotel side.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.hotelStep5}" alt="Step 5"><figcaption>${t('⑤ ANA CROWNE PLAZA KOBE の表示が見えたら、4階ホテル側に到着です。','⑤ When you see “ANA CROWNE PLAZA KOBE,” you have arrived on the hotel side, 4th floor.')}</figcaption></figure>
+<figure class="guide-step"><img src="${ASSETS.hotelStep6}" alt="Step 6"><figcaption>${t('⑥ ホテル玄関前へ進みます。','⑥ Proceed to the hotel entrance area.')}</figcaption></figure>
+
+<div class="point pink"><strong>${t('ポイント','Point')}</strong>${t('ホテル玄関前（4階）のりばは、1階ロータリーではありません。現地では「徳島方面」「関西空港方面」の表示を確認してください。','The hotel entrance / 4F bus stop is not the 1F rotary. At the site, check the signs for “Tokushima” or “Kansai Airport”.')}</div>
+<p><span class="tag">徳島</span><span class="tag">関空リムジン</span></p>`} el.classList.add('show'); el.scrollIntoView({behavior:'smooth',block:'start'});}
+function renderStaticText(){document.querySelectorAll('[data-ja]').forEach(e=>{e.textContent=t(e.dataset.ja,e.dataset.en)});document.getElementById('jaBtn').classList.toggle('active',lang==='ja');document.getElementById('enBtn').classList.toggle('active',lang==='en')}
+function render(){renderStaticText();renderDest();renderDetail()}
+document.getElementById('jaBtn').onclick=()=>{lang='ja';render()};document.getElementById('enBtn').onclick=()=>{lang='en';render()};render();
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>新神戸駅バスナビ</title>
+  <title>新神戸駅迷わせないナビ</title>
   <style>
     :root{
       --blue:#0b7ff3;
@@ -23,7 +23,7 @@
     .lang button.active{background:var(--blue)}
     h1{font-size:34px;margin:0 0 4px;letter-spacing:.02em}.subtitle{font-size:18px;margin:0 0 16px}.gamepad{font-size:34px;vertical-align:-4px;margin-right:10px}.title-icon{width:42px;height:42px;object-fit:contain;vertical-align:-10px;margin-right:8px}.red{color:#c40000;font-weight:800}
     .layout{display:grid;grid-template-columns:350px 1fr;gap:26px;align-items:start}.panel{border:1px solid var(--border);border-radius:14px;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.04)}
-    .destinations{padding:18px 16px}.kana{font-weight:700;font-size:20px;margin:8px 0 9px}.dest-btn{width:100%;border:0;border-radius:9px;background:var(--blue);color:#fff;text-align:left;padding:10px 16px;margin:6px 0;font-size:18px;cursor:pointer;transition:.12s}.dest-btn:hover,.dest-btn.selected{background:var(--blue-dark);transform:translateY(-1px)}.dest-btn.selected{outline:4px solid #ffcc33;box-shadow:0 0 0 2px rgba(255,204,51,.35)}.selected-banner{background:#fff7d8;border:2px solid #ffcc33;border-radius:12px;padding:10px 14px;margin:0 0 14px;font-weight:800;font-size:18px}
+    .destinations{padding:18px 16px}.kana{font-weight:800;font-size:21px;margin:14px 0 9px;padding:8px 10px;border-radius:10px;background:#eef6ff;color:#075db3}.dest-btn{width:100%;border:0;border-radius:9px;background:var(--blue);color:#fff;text-align:left;padding:10px 16px;margin:6px 0;font-size:18px;cursor:pointer;transition:.12s}.dest-btn:hover,.dest-btn.selected{background:var(--blue-dark);transform:translateY(-1px)}.dest-btn.selected{outline:4px solid #ffcc33;box-shadow:0 0 0 2px rgba(255,204,51,.35)}.selected-banner{background:#fff7d8;border:2px solid #ffcc33;border-radius:12px;padding:10px 14px;margin:0 0 14px;font-weight:800;font-size:18px}
     .small-note{font-size:13px;color:#555;margin-top:16px;border-top:1px solid #eee;padding-top:10px}.detail{padding:20px 18px} .detail h2{font-size:34px;margin:0 0 4px}.lead{margin:0 0 14px;font-size:16px}.route-card{border:1px solid var(--border);border-radius:14px;padding:18px;margin:16px 0;background:#fff}.route-title{font-size:26px;font-weight:800;margin:0 0 4px;display:flex;gap:10px;align-items:center}.stop{font-size:20px;margin:8px 0 14px;font-weight:700}.stop .place{color:var(--blue-dark);font-weight:900}.stop .place.pink{color:var(--pink)}
     .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0}.photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:1px solid #e4e4e4;display:block}.photo figcaption{text-align:center;font-size:14px;margin-top:5px;color:#333}.point{border:1px solid #b7d8ff;background:#f1f8ff;border-radius:9px;padding:12px 14px;margin-top:12px}.point.pink{border-color:#ffb9d5;background:#fff2f8}.point strong{display:block;color:var(--blue-dark);margin-bottom:4px}.point.pink strong{color:var(--pink)}.notice{background:var(--yellow);border:1px solid #f2d56b;border-radius:10px;padding:14px 16px;margin:18px 0}.notice h3{margin:0 0 6px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}.action-btn{border:1px solid var(--blue);background:#fff;color:var(--blue-dark);border-radius:8px;padding:10px 14px;font-size:16px;font-weight:700;cursor:pointer}.action-btn.pink{border-color:var(--pink);color:var(--pink)}.back{border:0;background:#eee;border-radius:8px;padding:9px 15px;font-size:16px;cursor:pointer;margin-top:8px}.empty{padding:30px;color:#555}
     .guide{display:none;border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:18px;background:#fbfcff}.guide.show{display:block}.guide h3{font-size:24px;margin:0 0 8px}.guide-img{width:100%;border-radius:10px;border:1px solid #ddd;margin:12px 0}.guide-step{margin:14px 0 18px}.guide-step img{width:100%;border-radius:10px;border:1px solid #ddd;display:block}.guide-step figcaption{font-size:16px;font-weight:700;margin-top:6px}.steps{padding-left:1.2em;margin:8px 0}.steps li{margin:5px 0}.tag{display:inline-block;background:#eef4ff;color:#074c94;border-radius:999px;padding:2px 10px;margin:3px;font-size:13px}
@@ -34,8 +34,8 @@
 <body>
 <div class="app">
   <div class="lang"><button id="jaBtn" class="active">日本語</button><button id="enBtn">English</button></div>
-  <h1><span class="gamepad">🎮</span><span data-ja="新神戸駅バスナビ" data-en="Shin-Kobe Station Bus Navi">新神戸駅バスナビ</span></h1>
-  <p class="subtitle" data-ja="行き先を選んでください" data-en="Choose your destination">行き先を選んでください</p>
+  <h1><span class="gamepad">🎮</span><span data-ja="新神戸駅迷わせないナビ" data-en="Shin-Kobe Station Bus Navi">新神戸駅迷わせないナビ</span></h1>
+  <p class="subtitle" data-ja="写真つき案内｜バス・徒歩・地下鉄・布引方面" data-en="Photo guide for buses, walking routes, subway, and Nunobiki area">写真つき案内｜バス・徒歩・地下鉄・布引方面</p>
   <div class="layout">
     <aside class="panel destinations" id="destinations"></aside>
     <main class="panel detail" id="detail"></main>
@@ -98,19 +98,46 @@ const stopInfo = {
   middle:{ja:'1階ロータリー中ほど', en:'1F rotary middle', cls:'pink', pointJa:'ロータリー中央付近寄りの乗り場です。神姫バスや一部路線バスはこのあたりから乗車します。', pointEn:'This is around the middle of the rotary. Shinki Bus and some local buses board here.'},
   west:{ja:'1階ロータリー西端', en:'1F rotary west end', cls:'', pointJa:'ロータリー西端の観光系バス乗り場です。シティーループ、ポートループなどはこの付近から乗車します。', pointEn:'This is the west-end sightseeing bus area. City Loop and Port Loop board here.'},
   tunnel:{ja:'トンネル入口バス停', en:'Tunnel Entrance bus stop', cls:'', pointJa:'1階ロータリー内にはありません。駅西端から見える道路をはさんで向かいにある、緑色の屋根があるバス停へ向かいます。', pointEn:'This is not inside the 1F rotary. Go to the bus stop with the green roof across the road from the west end of the station.'},
-  hotel:{ja:'ホテル玄関前（4階）', en:'Hotel entrance / 4F', cls:'pink', pointJa:'1階ロータリー内ではありません。渡り廊下をそのまま進み、ホテル入口・玄関前（4階）のりばへ向かいます。', pointEn:'This is not inside the 1F rotary. Continue along the walkway toward the hotel entrance / 4F.'}
+  hotel:{ja:'ホテル玄関前（4階）', en:'Hotel entrance / 4F', cls:'pink', pointJa:'1階ロータリー内ではありません。渡り廊下をそのまま進み、ホテル入口・玄関前（4階）のりばへ向かいます。', pointEn:'This is not inside the 1F rotary. Continue along the walkway toward the hotel entrance / 4F.'},
+  none:{ja:'案内ルート', en:'Guide route', cls:'', pointJa:'写真つき案内を追加予定です。', pointEn:'Photo guidance will be added soon.'}
 };
 const groups = [
-  {kana:'あ行', items:['有馬温泉','淡路島','アリーナ前','小野']},
-  {kana:'か行', items:['かもめりあ','関空リムジン','KIITO前','北野異人館','神戸駅南口','神戸空港']},
-  {kana:'さ行', items:['新港町','三田関西学院','三田プレミアムアウトレット']},
-  {kana:'た行', items:['高松','筑紫が丘','徳島']},
-  {kana:'な行', items:['南京町']},
-  {kana:'は行', items:['ハーバーランド・モザイク','ポートタワー']},
-  {kana:'ま行', items:['箕谷・神戸北町','三木','メリケンパーク']},
-  {kana:'や行・ら行', items:['社','六甲アイランド','六甲道']}
+  {kana:'🚌 バスで行く', items:['有馬温泉','淡路島','アリーナ前','小野','かもめりあ','関空リムジン','KIITO前','北野異人館','神戸駅南口','神戸空港','シティーループ／ポートループ','新港町','三田関西学院','三田プレミアムアウトレット','高松','筑紫が丘','徳島','南京町','ハーバーランド・モザイク','ポートタワー','箕谷・神戸北町','三木','メリケンパーク','社','六甲アイランド','六甲道']},
+  {kana:'🚶 徒歩で行く', items:['布引の滝','2系統・18系統「布引」バス停','92系統「布引」バス停']},
+  {kana:'🚉 地下鉄・鉄道へ乗り継ぐ', items:['地下鉄新神戸駅','有馬温泉へ地下鉄・神鉄で行く','神戸空港へ地下鉄・ポートライナーで行く','六甲アイランドへ鉄道で行く']},
+  {kana:'🚡 ロープウェイ・観光', items:['布引ロープウェイ']}
 ];
 const data = {
+  '有馬温泉へ地下鉄・神鉄で行く': {icon:'🚉', en:'To Arima Onsen by Subway and Kobe Electric Railway', leadJa:'夕方以降やバスが少ない時間帯の代替ルートです。地下鉄新神戸駅から谷上駅へ行き、神戸電鉄に乗り換えて有馬温泉方面へ向かいます。', leadEn:'Alternative route to Arima Onsen by subway and Kobe Electric Railway.', routes:[{companyJa:'地下鉄新神戸駅＋神鉄',companyEn:'Subway + Kobe Electric Railway',stop:'none',photos:[],pointJa:'地下鉄新神戸駅へ向かい、谷上駅で神戸電鉄に乗り換えます。詳しい写真つき手順は次回追加予定です。',pointEn:'Go to Subway Shin-Kobe Station and transfer at Tanigami. Detailed photo steps will be added soon.',noteJa:'時刻・乗り換え・運行状況は最新情報をご確認ください。',noteEn:'Please check the latest timetable and service status.'}]},
+
+  '神戸空港へ地下鉄・ポートライナーで行く': {icon:'✈️', en:'To Kobe Airport by Subway and Port Liner', leadJa:'神戸空港へ急ぐ場合や、空港行きバスの時間が合わない場合の代替ルートです。', leadEn:'Alternative route to Kobe Airport when the bus schedule does not fit.', routes:[{companyJa:'地下鉄＋ポートライナー',companyEn:'Subway + Port Liner',stop:'none',photos:[],pointJa:'地下鉄新神戸駅から三宮方面へ行き、三宮でポートライナーに乗り換えて神戸空港へ向かいます。詳しい写真つき手順は次回追加予定です。',pointEn:'Take the subway toward Sannomiya, then transfer to the Port Liner for Kobe Airport. Detailed photo steps will be added soon.',noteJa:'空港へ急ぐ場合は、乗り換え時間も含めて確認してください。',noteEn:'Check transfer time if you are in a hurry.'}]},
+
+  '六甲アイランドへ鉄道で行く': {icon:'🚉', en:'To Rokko Island by Rail', leadJa:'六甲アイランド方面のバスが少ない時間帯の代替ルートです。地下鉄・JR・六甲ライナーを乗り継ぎます。', leadEn:'Alternative route to Rokko Island when buses are infrequent.', routes:[{companyJa:'地下鉄＋JR＋六甲ライナー',companyEn:'Subway + JR + Rokko Liner',stop:'none',photos:[],pointJa:'地下鉄新神戸駅から三宮方面へ行き、JR三ノ宮・住吉方面を経由して、六甲ライナーに乗り換えます。詳しい写真つき手順は次回追加予定です。',pointEn:'Take the subway toward Sannomiya, continue via JR Sannomiya / Sumiyoshi, then transfer to the Rokko Liner. Detailed photo steps will be added soon.',noteJa:'バスの本数が少ない場合の代替ルートとして確認してください。',noteEn:'Use this as an alternative route when buses are infrequent.'}]},
+
+  'シティーループ／ポートループ': {icon:'🚌', en:'City Loop / Port Loop', leadJa:'シティーループ（City Loop）とポートループ（Port Loop）の違いを確認します。車体表示と行き先を確認してください。', leadEn:'Check the difference between City Loop and Port Loop. Please confirm the bus display and destination.', loopHelp:true, routes:[
+    {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',pointEn:'At Shin-Kobe Station, board near the west end of the 1F rotary.',noteJa:'車体表示「City Loop」を確認してください。',noteEn:'Check the bus display says City Loop.'},
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',pointEn:'At Shin-Kobe Station, board near the west end of the 1F rotary.',noteJa:'ポートループは、代車として神姫カラーのオレンジ色の路線バスが来る場合があります。車体の色だけで判断せず、前面や側面の「Port Loop」表示を確認してください。',noteEn:'Port Loop may sometimes use an orange substitute bus. Do not judge only by the bus color; check the Port Loop display on the front or side.'}
+  ]},
+
+  '布引の滝': {icon:'🥾', en:'Nunobiki Falls', leadJa:'布引の滝への徒歩ルート案内です。写真つき案内を追加していきます。', leadEn:'Walking route guide to Nunobiki Falls. Photo guidance will be added.', routes:[
+    {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[],pointJa:'新神戸駅から布引の滝方面へ向かう徒歩案内です。詳しい写真つき手順は次回追加予定です。',pointEn:'This is a walking guide from Shin-Kobe Station toward Nunobiki Falls. Detailed photo steps will be added soon.',noteJa:'階段や坂があります。足元に注意してください。',noteEn:'There are stairs and slopes. Please watch your step.'}
+  ]},
+
+  '2系統・18系統「布引」バス停': {icon:'🚏', en:'Nunobiki bus stop / Routes 2 and 18', leadJa:'南出口から、2系統・18系統「布引」バス停へ歩く経路です。', leadEn:'Walking route from the South Exit to the Nunobiki bus stop for routes 2 and 18.', routes:[
+    {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[],pointJa:'南出口から外へ出て、道路向かいの「布引」バス停へ向かいます。詳しい写真つき手順は次回追加予定です。',pointEn:'Go out from the South Exit and head to the Nunobiki bus stop across the road. Detailed photo steps will be added soon.',noteJa:'横断歩道を使ってください。車道を歩かないでください。',noteEn:'Use the crosswalk. Do not walk on the bus road.'}
+  ]},
+
+  '92系統「布引」バス停': {icon:'🚏', en:'Nunobiki bus stop / Route 92', leadJa:'92系統「布引」バス停への徒歩経路です。', leadEn:'Walking route to the Nunobiki bus stop for route 92.', routes:[
+    {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[],pointJa:'92系統の「布引」バス停へ向かう徒歩案内です。2系統・18系統の布引バス停とは場所が異なります。',pointEn:'This is the walking guide to the Nunobiki bus stop for route 92. It is not the same location as the Nunobiki stop for routes 2 and 18.',noteJa:'詳しい写真つき手順は次回追加予定です。',noteEn:'Detailed photo steps will be added soon.'}
+  ]},
+
+  '地下鉄新神戸駅': {icon:'🚇', en:'Subway Shin-Kobe Station', leadJa:'バスが終わったあと、またはバスの本数が少ない行き先へ向かう場合は、地下鉄・鉄道への乗り継ぎも選択肢になります。', leadEn:'When buses have ended or are infrequent, subway and railway transfers may be useful options.', routes:[{companyJa:'地下鉄新神戸駅へ',companyEn:'To Subway Shin-Kobe Station',stop:'none',photos:[],pointJa:'新幹線・駅周辺から地下鉄新神戸駅へ向かう案内です。詳しい写真つき手順は次回追加予定です。',pointEn:'Guide from the Shinkansen / station area to Subway Shin-Kobe Station. Detailed photo steps will be added soon.',noteJa:'有馬温泉、神戸空港、六甲アイランド方面への代替ルートにも使えます。',noteEn:'This can also be used for alternative routes to Arima Onsen, Kobe Airport, and Rokko Island.'}]},
+
+  '布引ロープウェイ': {icon:'🚡', en:'Nunobiki Ropeway', leadJa:'有馬温泉方面へ向かう方法のひとつとして、布引ロープウェイへの案内を追加予定です。', leadEn:'Guide to Nunobiki Ropeway, one of the possible ways toward Arima Onsen, will be added.', routes:[
+    {companyJa:'徒歩・ロープウェイ',companyEn:'Walking / Ropeway',stop:'none',photos:[],pointJa:'新神戸駅から布引ロープウェイのりばへ向かう案内です。詳しい写真つき手順は次回追加予定です。',pointEn:'Guide from Shin-Kobe Station to the Nunobiki Ropeway station. Detailed photo steps will be added soon.',noteJa:'ロープウェイの運行状況・営業時間をご確認ください。',noteEn:'Please check the ropeway operating status and hours.'}
+  ]},
+
+
   '神戸空港': {icon:'✈️', en:'Kobe Airport', leadJa:'利用するバスを選ばなくても、両方の乗り場を確認できます。', leadEn:'You can check both boarding points here.', routes:[
     {companyJa:'JRバス',companyEn:'JR Bus',stop:'east',
       photos:[{src:ASSETS.kobeAirportEast, ja:'JR高速バス②のりば。「神戸空港（マリンエアシャトル）」の表示が目印', en:'JR Express Bus stop 2. Look for “Kobe Airport (Marine Air Shuttle)”.'}],
@@ -126,7 +153,7 @@ const data = {
       noteEn:'<br><strong>Shinki Bus for Kobe Airport</strong><br>Main stops on the way include Subway Sannomiya Station, Kita-futo, Naka-futo, Port & Island College, Distribution Center (Kobe Animal Kingdom East), Kobe Airport, and Kobe Airport Terminal 2. Service details may change. Please check the latest information before use.'}
   ], guideJa:'どちらのバスも道路状況により遅れることがあります。', guideEn:'Both buses may be delayed depending on traffic.'},
 
-  '有馬温泉': {icon:'♨️', en:'Arima Onsen', leadJa:'有馬温泉へ行く方法は4つあります。①JRバス　②神姫バス　③布引ロープウェイ　④神戸市営地下鉄〜神鉄（神戸電鉄）', leadEn:'There are four ways to get to Arima Onsen: JR Bus, Shinki Bus, Nunobiki Ropeway, or Subway plus Kobe Electric Railway.', routes:[
+  '有馬温泉': {icon:'♨️', en:'Arima Onsen', leadJa:'有馬温泉への行き方は4つあります。JRバス、神姫バス、地下鉄新神戸駅＋神鉄、布引ロープウェイ方面から選べます。', leadEn:'There are four ways to get to Arima Onsen: JR Bus, Shinki Bus, Nunobiki Ropeway, or Subway plus Kobe Electric Railway.', routes:[
     {companyJa:'JRバス',companyEn:'JR Bus',stop:'east',pointJa:'1階ロータリー東端の「JR高速バス②のりば」付近から乗車します。',pointEn:'Board near JR Express Bus stop 2 at the east end of the 1F rotary.',noteJa:'写真の目印を確認して乗り場へ向かってください。',noteEn:'Use the photo as a landmark and go to the boarding point.'},
     {companyJa:'神姫バス',companyEn:'Shinki Bus',stop:'tunnel',pointJa:'1階ロータリー内にはありません。駅西端から見える道路をはさんで向かいにある、緑色の屋根があるバス停へ向かいます。',pointEn:'This is not inside the 1F rotary. Go to the bus stop with the green roof across the road from the west end of the station.',noteJa:'トンネル入口バス停への行き方を確認してください。',noteEn:'Check how to get to the Tunnel Entrance bus stop.'}
   ]},
@@ -226,7 +253,7 @@ function scrollToDetail(){
   setTimeout(()=>{ el.scrollIntoView({behavior:'smooth', block:'start'}); },80);
 }
 function renderDest(){const el=document.getElementById('destinations');el.innerHTML='';groups.forEach(g=>{const h=document.createElement('div');h.className='kana';h.textContent=g.kana;el.appendChild(h);g.items.forEach(name=>{const b=document.createElement('button');b.className='dest-btn'+(name===current?' selected':'');b.textContent=lang==='ja'?name:(data[name]?.en||name);b.onclick=()=>{current=name;render();scrollToDetail()};el.appendChild(b)})});const note=document.createElement('div');note.className='small-note';note.textContent=t('※バスの運行状況は変更される場合があります。ご利用の際は最新情報をご確認ください。','Bus services may change. Please check the latest information before use.');el.appendChild(note)}
-function renderDetail(){const d=data[current]; const el=document.getElementById('detail'); if(!d){el.innerHTML='<div class="empty">データ準備中です。</div>';return} const cards=d.routes.map((r,i)=>routeCard(r,i)).join(''); el.innerHTML=`<div class="selected-banner">${t('選択中：','Now showing: ')}${t(current,d.en)}</div><h2>${d.icon||'🚌'} ${t(current,d.en)}</h2><p class="lead">${t(d.leadJa,d.leadEn)}</p>${cards}${d.transferGood?transferBox():''}${d.loopHelp?loopHelp():''}${d.noticeJa?`<div class="warning danger"><strong>${t('⚠ 乗り間違い注意','⚠ Avoid boarding the wrong bus')}</strong>${t(d.noticeJa,d.noticeEn)}</div>`:''}<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べてください。','Compare the photos with the signs at the station.')}</li><li>${t('道路状況により遅延することがあります。','Buses may be delayed due to traffic.')}</li><li>${t('時刻表リンクはあとで公式サイトURLを設定してください。','Official timetable links can be added later.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div><div class="actions"><button class="action-btn">${t('公式時刻表リンクを追加予定','Official timetable link to be added')}</button></div><button class="back" onclick="window.scrollTo({top:0,behavior:'smooth'})">← ${t('行き先一覧に戻る','Back to destination list')}</button><div id="guideArea" class="guide"></div>`}
+function renderDetail(){const d=data[current]; const el=document.getElementById('detail'); if(!d){el.innerHTML='<div class="empty">データ準備中です。</div>';return} const cards=d.routes.map((r,i)=>routeCard(r,i)).join(''); el.innerHTML=`<div class="selected-banner">${t('選択中：','Now showing: ')}${t(current,d.en)}</div><h2>${d.icon||'🚌'} ${t(current,d.en)}</h2><p class="lead">${t(d.leadJa,d.leadEn)}</p>${cards}${d.transferGood?transferBox():''}${d.loopHelp?loopHelp():''}${d.noticeJa?`<div class="warning danger"><strong>${t('⚠ 乗り間違い注意','⚠ Avoid boarding the wrong bus')}</strong>${t(d.noticeJa,d.noticeEn)}</div>`:''}<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べてください。','Compare the photos with the signs at the station.')}</li><li>${t('道路状況により遅延することがあります。','Buses may be delayed due to traffic.')}</li><li>${t('公式リンクはあとで追加予定です。','Official links can be added later.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div><div class="actions"><button class="action-btn">${t('公式時刻表リンクを追加予定','Official timetable link to be added')}</button></div><button class="back" onclick="window.scrollTo({top:0,behavior:'smooth'})">← ${t('行き先一覧に戻る','Back to destination list')}</button><div id="guideArea" class="guide"></div>`}
 function routeCard(r,i){const s=stopInfo[r.stop]; let photos=r.photos || stopPhotos[r.stop]||[];
   if(r.stop==='west' && !r.photos){
     if((r.companyJa||'').includes('シティーループ') || (r.companyEn||'').includes('City Loop')){

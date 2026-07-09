@@ -91,7 +91,8 @@ const ASSETS = {
   nunobiki218Page2:'assets/nunobiki_2_18_page2.jpg',
   nunobiki92Page1:'assets/nunobiki_92_page1.jpg',
   nunobiki92Page2:'assets/nunobiki_92_page2.jpg',
-  nunobiki92Page3:'assets/nunobiki_92_page3.jpg'
+  nunobiki92Page3:'assets/nunobiki_92_page3.jpg',
+  nunobikiFallsDoor:'assets/nunobiki_falls_door.png'
 };
 const stopPhotos = {
   east: [
@@ -138,8 +139,8 @@ const data = {
     {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',photos:[{src:ASSETS.westPL, ja:'通常のポートループ（連節バス）', en:'Regular Port Loop articulated bus'},{src:ASSETS.portLoopSubstitutePhoto, ja:'代車として来る場合がある神姫カラーのオレンジ色の路線バス', en:'Orange substitute bus that may operate as Port Loop'}],pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',pointEn:'At Shin-Kobe Station, board near the west end of the 1F rotary.',noteJa:'ポートループは、代車として神姫カラーのオレンジ色の路線バスが来る場合があります。車体の色だけで判断せず、前面や側面の「Port Loop」表示を確認してください。',noteEn:'Port Loop may sometimes use an orange substitute bus. Do not judge only by the bus color; check the Port Loop display on the front or side.'}
   ]},
 
-  '布引の滝': {icon:'🥾', en:'Nunobiki Falls', leadJa:'布引の滝への徒歩ルート案内です。写真つき案内を追加していきます。', leadEn:'Walking route guide to Nunobiki Falls. Photo guidance will be added.', routes:[
-    {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[],pointJa:'新神戸駅から布引の滝方面へ向かう徒歩案内です。詳しい写真つき手順は次回追加予定です。',pointEn:'This is a walking guide from Shin-Kobe Station toward Nunobiki Falls. Detailed photo steps will be added soon.',noteJa:'階段や坂があります。足元に注意してください。',noteEn:'There are stairs and slopes. Please watch your step.'}
+  '布引の滝': {icon:'🥾', en:'Nunobiki Falls', leadJa:'布引の滝へ行く場合は、1階東端のドアから外へ出ます。外に出たら、案内表示に従って山側へ進みます。', leadEn:'To go to Nunobiki Falls, exit from the door at the 1F East End. After going outside, follow the signs and walk toward the mountain side.', routes:[
+    {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[{src:ASSETS.nunobikiFallsDoor, guidePage:true, ja:'1階東端のドア。布引の滝へ行く場合は、ここから外へ出ます。', en:'The door at the 1F East End. Exit here to go to Nunobiki Falls.'}],pointJa:'布引の滝へ行く場合は、1階東端のこのドアから外へ出ます。外に出たら、案内表示に従って山側へ進みます。',pointEn:'To go to Nunobiki Falls, exit from this door at the 1F East End. After going outside, follow the signs and walk toward the mountain side.',noteJa:'布引の滝への道は、途中から坂道や階段があります。足元に注意して進んでください。',noteEn:'The route to Nunobiki Falls includes slopes and stairs. Please watch your step.'}
   ]},
 
   '2系統・18系統「布引」バス停': {icon:'🚏', en:'Nunobiki bus stop / Routes 2 and 18', leadJa:'南出口を出て、2系統・18系統「布引」バス停へ歩く経路です。', leadEn:'Walking route from the South Exit to the Nunobiki bus stop for routes 2 and 18.', routes:[

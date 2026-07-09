@@ -30,12 +30,14 @@
     .warning{border:2px solid #ffb300;background:#fff8dd;border-radius:10px;padding:12px 14px;margin:12px 0;font-weight:700}.warning strong{color:#b15a00;display:block;margin-bottom:4px}.danger{border-color:#ff8a8a;background:#fff1f1}.danger strong{color:#c40000}.loop-help{border:1px solid #cfd8e6;background:#f8fbff;border-radius:12px;padding:14px;margin:16px 0}.loop-help h3{margin:0 0 8px;font-size:21px}.wide-img{width:100%;border-radius:10px;border:1px solid #ddd;margin:10px 0}.loop-lists{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}.loop-list{background:white;border:1px solid var(--border);border-radius:10px;padding:12px}.loop-list h4{margin:0 0 8px;font-size:17px}.loop-list ul{margin:0;padding-left:1.1em;font-size:14px}.loop-list li{margin:2px 0}.transfer-stop{background:#fff3a6;border-radius:6px;padding:2px 6px;font-weight:800}.transfer-legend{background:#fff3a6;border:1px solid #f0cc45;border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:700}.ticket-box{background:#eefaf1;border:1px solid #a9d8b4;border-radius:10px;padding:12px 14px;margin:12px 0}.ticket-box strong{display:block;color:#11652a;margin-bottom:4px}.transfer-box{background:#fff7d8;border:1px solid #f2d56b;border-radius:10px;padding:12px 14px;margin:14px 0}.transfer-box strong{display:block;color:#8a6400;margin-bottom:4px}.loop-note{font-size:14px;color:#444;margin-top:8px}@media(max-width:640px){.loop-lists{grid-template-columns:1fr}}
     @media(max-width:860px){.app{padding:12px}.layout{grid-template-columns:1fr;gap:14px}.destinations{max-height:none}.photos{grid-template-columns:1fr}h1{font-size:29px}.detail h2{font-size:28px}.route-title{font-size:23px}.lang button{font-size:16px;padding:8px 18px}}
   
-.photo.guide-wide{grid-column:1/-1;overflow-x:auto;padding-bottom:4px}
-.photo.guide-wide a{display:block;width:max-content;max-width:none}
-.photo.guide-wide img{width:auto;min-width:1100px;max-width:none;height:auto;aspect-ratio:auto;object-fit:contain;background:#fff;border:1px solid #ddd}
-.photo.guide-wide figcaption{font-weight:700}
-.tap-note{font-size:13px;color:#555;margin-top:6px}
-@media(max-width:860px){.photo.guide-wide img{min-width:950px}}
+.photo.guide-shot{grid-column:1/-1}
+.photo.guide-shot img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;background:#fff;border:1px solid #ddd}
+.photo.guide-shot figcaption{font-weight:700}
+
+
+.photo.guide-page{grid-column:1/-1}
+.photo.guide-page img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;background:#fff;border:1px solid #ddd}
+.photo.guide-page figcaption{font-weight:700}
 
 </style>
 </head>
@@ -82,8 +84,14 @@ const ASSETS = {
   minatoBusStop:'assets/minato_bus_stop.png',
   kobeAirportMiddleNew:'assets/kobe_airport_middle_new.png',
   portLoopSubstitutePhoto:'assets/portloop_substitute_photo.png',
-  nunobiki218Word:'assets/nunobiki_2_18_word_screenshot.png',
-  nunobiki92Word:'assets/nunobiki_92_word_screenshot.png'
+  nunobiki218Vertical:'assets/nunobiki_2_18_vertical.png',
+  nunobiki92Vertical1:'assets/nunobiki_92_vertical_1.png',
+  nunobiki92Vertical2:'assets/nunobiki_92_vertical_2.png',
+  nunobiki218Page1:'assets/nunobiki_2_18_page1.jpg',
+  nunobiki218Page2:'assets/nunobiki_2_18_page2.jpg',
+  nunobiki92Page1:'assets/nunobiki_92_page1.jpg',
+  nunobiki92Page2:'assets/nunobiki_92_page2.jpg',
+  nunobiki92Page3:'assets/nunobiki_92_page3.jpg'
 };
 const stopPhotos = {
   east: [
@@ -135,11 +143,11 @@ const data = {
   ]},
 
   '2系統・18系統「布引」バス停': {icon:'🚏', en:'Nunobiki bus stop / Routes 2 and 18', leadJa:'南出口を出て、2系統・18系統「布引」バス停へ歩く経路です。', leadEn:'Walking route from the South Exit to the Nunobiki bus stop for routes 2 and 18.', routes:[
-    {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[{src:ASSETS.nunobiki218Word, guideWide:true, ja:'南出口から2系統・18系統「布引」バス停への徒歩ルート', en:'Walking route from the South Exit to the Nunobiki bus stop for routes 2 and 18'}],pointJa:'南出口から外へ出て左へ進み、少し進むと2系統・18系統の「布引」バス停に到着します。',pointEn:'Exit from the South Exit, turn left, and walk a short distance to the Nunobiki bus stop for Routes 2 and 18.',noteJa:'写真の案内を見ながら進んでください。画像は大きめ表示です。左右にスクロールしながら読んでください。タップすると別表示でも開けます。',noteEn:'Please follow the photo guide.'}
+    {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[{src:ASSETS.nunobiki218Page1, guidePage:true, ja:'南出口から2系統・18系統「布引」バス停への徒歩ルート 1', en:'Walking route to the Nunobiki bus stop for routes 2 and 18 / page 1'},{src:ASSETS.nunobiki218Page2, guidePage:true, ja:'南出口から2系統・18系統「布引」バス停への徒歩ルート 2', en:'Walking route to the Nunobiki bus stop for routes 2 and 18 / page 2'}],pointJa:'南出口から外へ出て左へ進み、少し進むと2系統・18系統の「布引」バス停に到着します。',pointEn:'Exit from the South Exit, turn left, and walk a short distance to the Nunobiki bus stop for Routes 2 and 18.',noteJa:'写真の案内を見ながら進んでください。',noteEn:'Please follow the photo guide.'}
   ]},
 
   '92系統「布引」バス停': {icon:'🚏', en:'Nunobiki bus stop / Route 92', leadJa:'92系統「布引」バス停への徒歩経路です。', leadEn:'Walking route to the Nunobiki bus stop for route 92.', routes:[
-    {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[{src:ASSETS.nunobiki92Word, guideWide:true, ja:'92系統「布引」バス停への徒歩ルート', en:'Walking route to the Nunobiki bus stop for Route 92'}],pointJa:'92系統の「布引」バス停へ向かう徒歩案内です。2系統・18系統の「布引」バス停とは場所が異なります。',pointEn:'This is the walking guide to the Nunobiki bus stop for Route 92. It is different from the Nunobiki stop for Routes 2 and 18.',noteJa:'写真の案内を見ながら進んでください。画像は大きめ表示です。左右にスクロールしながら読んでください。タップすると別表示でも開けます。',noteEn:'Please follow the photo guide.'}
+    {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[{src:ASSETS.nunobiki92Page1, guidePage:true, ja:'92系統「布引」バス停への徒歩ルート 1', en:'Walking route to the Route 92 Nunobiki bus stop / page 1'},{src:ASSETS.nunobiki92Page2, guidePage:true, ja:'92系統「布引」バス停への徒歩ルート 2', en:'Walking route to the Route 92 Nunobiki bus stop / page 2'},{src:ASSETS.nunobiki92Page3, guidePage:true, ja:'92系統「布引」バス停への徒歩ルート 3', en:'Walking route to the Route 92 Nunobiki bus stop / page 3'}],pointJa:'92系統の「布引」バス停へ向かう徒歩案内です。2系統・18系統の「布引」バス停とは場所が異なります。',pointEn:'This is the walking guide to the Nunobiki bus stop for Route 92. It is different from the Nunobiki stop for Routes 2 and 18.',noteJa:'写真の案内を見ながら進んでください。',noteEn:'Please follow the photo guide.'}
   ]},
 
   '地下鉄新神戸駅': {icon:'🚇', en:'Subway Shin-Kobe Station', leadJa:'バスが終わったあと、またはバスの本数が少ない行き先へ向かう場合は、地下鉄・鉄道への乗り継ぎも選択肢になります。', leadEn:'When buses have ended or are infrequent, subway and railway transfers may be useful options.', routes:[{companyJa:'地下鉄新神戸駅へ',companyEn:'To Subway Shin-Kobe Station',stop:'none',photos:[],pointJa:'新幹線・駅周辺から地下鉄新神戸駅へ向かう案内です。詳しい写真つき手順は次回追加予定です。',pointEn:'Guide from the Shinkansen / station area to Subway Shin-Kobe Station. Detailed photo steps will be added soon.',noteJa:'有馬温泉、神戸空港、六甲アイランド方面への代替ルートにも使えます。',noteEn:'This can also be used for alternative routes to Arima Onsen, Kobe Airport, and Rokko Island.'}]},
@@ -272,7 +280,7 @@ function routeCard(r,i){const s=stopInfo[r.stop]; let photos=r.photos || stopPho
     }else if((r.companyJa||'').includes('ポートループ') || (r.companyEn||'').includes('Port Loop')){
       photos=[{src:ASSETS.westPL, ja:'ポートループ（Port Loop）停車中', en:'Port Loop bus'}];
     }
-  } const photoHtml=photos.map(p=>`<figure class="photo ${p.guideWide?'guide-wide':''}"><a href="${p.src}" target="_blank" rel="noopener"><img src="${p.src}" alt="${t(p.ja,p.en)}"></a><figcaption>${t(p.ja,p.en)}${p.guideWide?`<div class="tap-note">${t('画像は大きめ表示です。左右にスクロールしながら読んでください。タップすると別表示でも開けます。','The image is shown at a larger size. Scroll sideways to read it, or tap to open it separately.')}</div>`:''}</figcaption></figure>`).join(''); const guideBtn=(r.stop==='tunnel'||r.stop==='hotel')?`<button class="action-btn ${r.stop==='hotel'?'pink':''}" onclick="showGuide('${r.stop}')">${t(s.ja+'への行き方を見る','How to get to '+s.en)}</button>`:''; const warn=r.warnJa?`<div class="warning ${r.danger?'danger':''}"><strong>${t(r.warnTitleJa||'⚠ 間違えやすいです',r.warnTitleEn||'⚠ Easy to mix up')}</strong>${t(r.warnJa,r.warnEn)}</div>`:''; const avoid=r.avoidJa?`<div class="warning danger"><strong>${t(r.avoidTitleJa||'乗らないでください',r.avoidTitleEn||'Do not take this bus')}</strong>${t(r.avoidJa,r.avoidEn)}</div>`:''; return `<section class="route-card"><div class="route-title">${r.icon|| (r.stop==='middle'?'🚌':r.stop==='hotel'?'🧳':'🚌')} ${t(r.companyJa,r.companyEn)}</div><div class="stop">${t('乗り場：','Boarding point: ')} <span class="place ${s.cls}">${t(s.ja,s.en)}</span></div>${warn}${avoid}<div class="photos">${photoHtml}</div><div class="point ${s.cls}"><strong>${t('ポイント','Point')}</strong>${t(r.pointJa||s.pointJa,r.pointEn||s.pointEn)}<br>${t(r.noteJa,r.noteEn)}</div><div class="actions">${guideBtn}</div></section>`}
+  } const photoHtml=photos.map(p=>`<figure class="photo ${p.guideShot?'guide-shot':''} ${p.guidePage?'guide-page':''}"><img src="${p.src}" alt="${t(p.ja,p.en)}"><figcaption>${t(p.ja,p.en)}</figcaption></figure>`).join(''); const guideBtn=(r.stop==='tunnel'||r.stop==='hotel')?`<button class="action-btn ${r.stop==='hotel'?'pink':''}" onclick="showGuide('${r.stop}')">${t(s.ja+'への行き方を見る','How to get to '+s.en)}</button>`:''; const warn=r.warnJa?`<div class="warning ${r.danger?'danger':''}"><strong>${t(r.warnTitleJa||'⚠ 間違えやすいです',r.warnTitleEn||'⚠ Easy to mix up')}</strong>${t(r.warnJa,r.warnEn)}</div>`:''; const avoid=r.avoidJa?`<div class="warning danger"><strong>${t(r.avoidTitleJa||'乗らないでください',r.avoidTitleEn||'Do not take this bus')}</strong>${t(r.avoidJa,r.avoidEn)}</div>`:''; return `<section class="route-card"><div class="route-title">${r.icon|| (r.stop==='middle'?'🚌':r.stop==='hotel'?'🧳':'🚌')} ${t(r.companyJa,r.companyEn)}</div><div class="stop">${t('乗り場：','Boarding point: ')} <span class="place ${s.cls}">${t(s.ja,s.en)}</span></div>${warn}${avoid}<div class="photos">${photoHtml}</div><div class="point ${s.cls}"><strong>${t('ポイント','Point')}</strong>${t(r.pointJa||s.pointJa,r.pointEn||s.pointEn)}<br>${t(r.noteJa,r.noteEn)}</div><div class="actions">${guideBtn}</div></section>`}
 
 function transferBox(){
   return `<div class="transfer-box"><strong>${t('◎乗換がしやすい停留所','Convenient transfer stop')}</strong>${t('この停留所は、シティーループ（City Loop）とポートループ（Port Loop）の乗換がしやすい場所です。','This stop is a convenient place to transfer between City Loop and Port Loop.')}</div>`

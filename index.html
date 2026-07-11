@@ -285,6 +285,23 @@ const data = {
     {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「Port Loop」を確認してください。',noteEn:'Check the Port Loop display.'}
   ]}
 };
+const rotaryStopRoutes = [
+  {
+    titleJa:'神戸市バス18系統 摩耶ケーブル方面',
+    titleEn:'Kobe City Bus Route 18: Maya Cable direction',
+    stops:['新神戸駅前','熊内6丁目','熊内5丁目','野崎通5丁目','野崎通3丁目','篠原通3丁目','青谷','青谷橋','神戸高校前','観音寺北','観音寺','摩耶ケーブル下','観音寺北','五毛天神','五毛','護国神社前','篠原本町3丁目','篠原本町2丁目','六甲登山口','阪急六甲','六甲口','JR六甲道'],
+    cautionJa:'※18系統は土日祝日のみ新神戸駅に参ります。平日は布引バス停からご利用ください。',
+    cautionEn:'Route 18 serves Shin-Kobe Station only on Saturdays, Sundays and public holidays. On weekdays, please use the Nunobiki bus stop.'
+  },
+  {
+    titleJa:'神戸市バス18系統 三宮方面',
+    titleEn:'Kobe City Bus Route 18: Sannomiya direction',
+    stops:['新神戸駅前','布引','加納町2丁目','加納町3丁目','地下鉄三宮駅前','三宮駅ターミナル前'],
+    cautionJa:'※18系統は土日祝日のみ新神戸駅に参ります。平日は布引バス停からご利用ください。',
+    cautionEn:'Route 18 serves Shin-Kobe Station only on Saturdays, Sundays and public holidays. On weekdays, please use the Nunobiki bus stop.'
+  }
+];
+
 const tunnelStopRoutes = [
   {
     titleJa:'神戸市バス64系統',
@@ -367,8 +384,10 @@ else{el.innerHTML=`<h3>🧳 ${t('ホテル玄関前（4階）への行き方','H
 <p><span class="tag">徳島</span><span class="tag">関空リムジン</span></p>`} el.classList.add('show'); el.scrollIntoView({behavior:'smooth',block:'start'});}
 function renderStopList(){
   const page=document.getElementById('stopListPage');
-  const routes=tunnelStopRoutes.map((r,idx)=>`<details class="route-list" ${idx===0?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stops.map(x=>`<li>${x}</li>`).join('')}</ol></div></details>`).join('');
-  page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅1階案内へ戻る','Back to Shin-Kobe Station 1F Guide')}</a></div><h2>🚌 ${t('系統別・全バス停名一覧','All bus stops by route')}</h2><p class="stop-list-intro">${t('路線名を押すと、バス停名の一覧が開きます。','Select a route to open its stop list.')}</p><div class="stop-group"><h3>${t('トンネル入口発着','Departing from the Tunnel Entrance stop')}</h3>${routes}</div><p class="small-note">${t('※停留所名・停車順・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Stop names, order and service details may change. Please also check signs and the latest official information.')}</p>`;
+  const routeDetails=(items,openFirst=false)=>items.map((r,idx)=>`<details class="route-list" ${(openFirst&&idx===0)?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stops.map(x=>`<li>${x}</li>`).join('')}</ol></div></details>`).join('');
+  const rotaryRoutes=routeDetails(rotaryStopRoutes,true);
+  const tunnelRoutes=routeDetails(tunnelStopRoutes,false);
+  page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅1階案内へ戻る','Back to Shin-Kobe Station 1F Guide')}</a></div><h2>🚌 ${t('系統別・全バス停名一覧','All bus stops by route')}</h2><p class="stop-list-intro">${t('路線名を押すと、バス停名の一覧が開きます。','Select a route to open its stop list.')}</p><div class="stop-group"><h3>${t('1階ロータリー発着','Departing from the 1F rotary')}</h3>${rotaryRoutes}</div><div class="stop-group"><h3>${t('トンネル入口発着','Departing from the Tunnel Entrance stop')}</h3>${tunnelRoutes}</div><p class="small-note">${t('※停留所名・停車順・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Stop names, order and service details may change. Please also check signs and the latest official information.')}</p>`;
 }
 const stopListView=new URLSearchParams(location.search).get('view')==='stops';
 

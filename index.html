@@ -39,6 +39,27 @@
 .photo.guide-page img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;background:#fff;border:1px solid #ddd}
 .photo.guide-page figcaption{font-weight:700}
 
+
+    .stop-list-link{display:block;margin-top:22px;padding:14px 16px;border:2px solid #6d7f96;border-radius:10px;background:#f4f7fa;color:#24364a;text-align:center;text-decoration:none;font-size:18px;font-weight:800}
+    .stop-list-link:hover{background:#e9eff5}
+    .stop-list-page{display:none;margin-top:8px}
+    .stop-list-page.show{display:block}
+    .stop-list-page h2{font-size:30px;margin:8px 0 4px}
+    .stop-list-intro{margin:0 0 16px;color:#444}
+    .stop-group{border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0;background:#fff}
+    .stop-group>h3{font-size:24px;margin:0 0 12px;color:var(--blue-dark)}
+    details.route-list{border:1px solid #d8e0ea;border-radius:10px;margin:10px 0;background:#fbfdff;overflow:hidden}
+    details.route-list summary{cursor:pointer;padding:14px 16px;font-size:19px;font-weight:800;background:#eef6ff;list-style:none}
+    details.route-list summary::-webkit-details-marker{display:none}
+    details.route-list summary::after{content:'＋';float:right;font-size:22px}
+    details.route-list[open] summary::after{content:'－'}
+    .route-list-body{padding:14px 16px}
+    .route-list-body ol{margin:8px 0;padding-left:1.7em}
+    .route-list-body li{margin:5px 0}
+    .route-caution{border:2px solid #ffb300;background:#fff8dd;border-radius:10px;padding:12px 14px;margin:10px 0;font-weight:700}
+    .page-nav{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+    .page-nav a{display:inline-block;border:1px solid var(--blue);border-radius:8px;padding:9px 14px;color:var(--blue-dark);text-decoration:none;font-weight:700;background:#fff}
+
 </style>
 </head>
 <body>
@@ -46,10 +67,11 @@
   <div class="lang"><button id="jaBtn" class="active">日本語</button><button id="enBtn">English</button></div>
   <h1><span class="gamepad">🎮</span><span data-ja="新神戸駅１階案内" data-en="Shin-Kobe Station 1F Guide">新神戸駅１階案内</span></h1>
   <p class="subtitle" data-ja="バス・鉄道・徒歩で利用" data-en="For bus, rail, and walking access">バス・鉄道・徒歩で利用</p>
-  <div class="layout">
+  <div class="layout" id="mainLayout">
     <aside class="panel destinations" id="destinations"></aside>
     <main class="panel detail" id="detail"></main>
   </div>
+  <section class="stop-list-page" id="stopListPage"></section>
 </div>
 <script>
 const ASSETS = {
@@ -263,6 +285,26 @@ const data = {
     {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「Port Loop」を確認してください。',noteEn:'Check the Port Loop display.'}
   ]}
 };
+const tunnelStopRoutes = [
+  {
+    titleJa:'神戸市バス64系統',
+    titleEn:'Kobe City Bus Route 64',
+    stops:['三宮駅ターミナル前','地下鉄三宮駅前','新神戸駅前','箕谷','松が枝町','箕谷駅前','松が枝町','日の峰1丁目','松が枝町2丁目','日の峰3丁目','日の峰2丁目','桂木3丁目','桂木2丁目','大原1丁目','大原3丁目','神戸北町'],
+    cautionJa:'※2026年8月1日から、64系統は便によって運行ルートが異なります。ご利用のバスが目的の停留所に停車するか、乗車時に運転士へご確認ください。',
+    cautionEn:'From August 1, 2026, Route 64 may use different routes depending on the service. Please ask the driver whether the bus stops at your destination.'
+  },
+  {
+    titleJa:'特急 フラワータウン・関西学院方面',
+    titleEn:'Express: Flower Town / Kwansei Gakuin',
+    stops:['神戸空港（T1）','神戸空港（T2）','三宮バスターミナル','新神戸駅','弥生が丘5丁目','狭間が丘県住前','フラワータウンセンター','えるむプラザ前','けやき台1丁目','センチュリープラザ前','あかしあ台ハイツ前','ゆりのき台中学校前','西陵高校前','ゆりのき台3丁目','ゆりのき台4丁目','関西学院前','関西学院大学','地区センター前','学園小学校前','学園7丁目']
+  },
+  {
+    titleJa:'特急 有馬温泉・三田駅方面',
+    titleEn:'Express: Arima Onsen / Sanda Station',
+    stops:['神戸空港（T1）','神戸空港（T2）','三宮バスターミナル','新神戸駅','有馬温泉（太閤橋）','藤原台北町4丁目','京地1丁目','京地2丁目','鹿の子台南町2丁目','掖谷公園前','掖谷大池','千代ヶ谷公園前','鹿の子台北町5丁目','吉尾インター','フルーツ・フラワーパーク','上津公園前','イオンモール神戸北','神戸三田プレミアム・アウトレット','上津台1丁目西','鹿の子台西口','キリンビール工場前（土休日のみ）','市立図書館前','三田本町','三田駅']
+  }
+];
+
 function routeSimple(icon,en,cja,cen,stop){return {icon,en,leadJa:'乗り場を写真で確認してください。',leadEn:'Check the boarding point with the photos.',routes:[{companyJa:cja,companyEn:cen,stop,noteJa:'写真の目印を確認して乗り場へ向かってください。',noteEn:'Use the photos as landmarks and go to the boarding point.'}]}}
 function multiSimple(icon,en,arr){return {icon,en,leadJa:'複数のバスで行ける場合があります。乗り場を確認してください。',leadEn:'Several buses may be available. Please check the boarding points.',routes:arr.map(a=>({companyJa:a[0],companyEn:a[1],stop:a[2],noteJa:'車体表示と行き先を確認してください。',noteEn:'Check the bus display and destination.'}))}}
 let lang='ja', current='神戸空港';
@@ -272,7 +314,7 @@ function scrollToDetail(){
   if(!el) return;
   setTimeout(()=>{ el.scrollIntoView({behavior:'smooth', block:'start'}); },80);
 }
-function renderDest(){const el=document.getElementById('destinations');el.innerHTML='';groups.forEach(g=>{const h=document.createElement('div');h.className='kana';h.textContent=g.kana;el.appendChild(h);g.items.forEach(name=>{const b=document.createElement('button');b.className='dest-btn'+(name===current?' selected':'');b.textContent=lang==='ja'?name:(data[name]?.en||name);b.onclick=()=>{current=name;render();scrollToDetail()};el.appendChild(b)})});const note=document.createElement('div');note.className='small-note';note.textContent=t('※バスの運行状況は変更される場合があります。ご利用の際は最新情報をご確認ください。','Bus services may change. Please check the latest information before use.');el.appendChild(note)}
+function renderDest(){const el=document.getElementById('destinations');el.innerHTML='';groups.forEach(g=>{const h=document.createElement('div');h.className='kana';h.textContent=g.kana;el.appendChild(h);g.items.forEach(name=>{const b=document.createElement('button');b.className='dest-btn'+(name===current?' selected':'');b.textContent=lang==='ja'?name:(data[name]?.en||name);b.onclick=()=>{current=name;render();scrollToDetail()};el.appendChild(b)})});const note=document.createElement('div');note.className='small-note';note.textContent=t('※バスの運行状況は変更される場合があります。ご利用の際は最新情報をご確認ください。','Bus services may change. Please check the latest information before use.');el.appendChild(note);const link=document.createElement('a');link.className='stop-list-link';link.href='?view=stops';link.target='_blank';link.rel='noopener';link.textContent=t('系統別・全バス停名一覧','All bus stops by route');el.appendChild(link)}
 function renderDetail(){const d=data[current]; const el=document.getElementById('detail'); if(!d){el.innerHTML='<div class="empty">データ準備中です。</div>';return} const cards=d.routes.map((r,i)=>routeCard(r,i)).join(''); el.innerHTML=`<div class="selected-banner">${t('選択中：','Now showing: ')}${t(current,d.en)}</div><h2>${d.icon||'🚌'} ${t(current,d.en)}</h2><p class="lead">${t(d.leadJa,d.leadEn)}</p>${cards}${d.transferGood?transferBox():''}${d.loopHelp?loopHelp():''}${d.noticeJa?`<div class="warning danger"><strong>${t('⚠ 乗り間違い注意','⚠ Avoid boarding the wrong bus')}</strong>${t(d.noticeJa,d.noticeEn)}</div>`:''}<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べてください。','Compare the photos with the signs at the station.')}</li><li>${t('道路状況により遅延することがあります。','Buses may be delayed due to traffic.')}</li><li>${t('公式リンクはあとで追加予定です。','Official links can be added later.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div><div class="actions"><button class="action-btn">${t('公式時刻表リンクを追加予定','Official timetable link to be added')}</button></div><button class="back" onclick="window.scrollTo({top:0,behavior:'smooth'})">← ${t('行き先一覧に戻る','Back to destination list')}</button><div id="guideArea" class="guide"></div>`}
 function routeCard(r,i){const s=stopInfo[r.stop]; let photos=r.photos || stopPhotos[r.stop]||[];
   if(r.stop==='west' && !r.photos){
@@ -323,8 +365,15 @@ else{el.innerHTML=`<h3>🧳 ${t('ホテル玄関前（4階）への行き方','H
 
 <div class="point pink"><strong>${t('ポイント','Point')}</strong>${t('ホテル玄関前（4階）のりばは、1階ロータリーではありません。現地では「徳島方面」「関西空港方面」の表示を確認してください。','The hotel entrance / 4F bus stop is not the 1F rotary. At the site, check the signs for “Tokushima” or “Kansai Airport”.')}</div>
 <p><span class="tag">徳島</span><span class="tag">関空リムジン</span></p>`} el.classList.add('show'); el.scrollIntoView({behavior:'smooth',block:'start'});}
+function renderStopList(){
+  const page=document.getElementById('stopListPage');
+  const routes=tunnelStopRoutes.map((r,idx)=>`<details class="route-list" ${idx===0?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stops.map(x=>`<li>${x}</li>`).join('')}</ol></div></details>`).join('');
+  page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅1階案内へ戻る','Back to Shin-Kobe Station 1F Guide')}</a></div><h2>🚌 ${t('系統別・全バス停名一覧','All bus stops by route')}</h2><p class="stop-list-intro">${t('路線名を押すと、バス停名の一覧が開きます。','Select a route to open its stop list.')}</p><div class="stop-group"><h3>${t('トンネル入口発着','Departing from the Tunnel Entrance stop')}</h3>${routes}</div><p class="small-note">${t('※停留所名・停車順・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Stop names, order and service details may change. Please also check signs and the latest official information.')}</p>`;
+}
+const stopListView=new URLSearchParams(location.search).get('view')==='stops';
+
 function renderStaticText(){document.querySelectorAll('[data-ja]').forEach(e=>{e.textContent=t(e.dataset.ja,e.dataset.en)});document.getElementById('jaBtn').classList.toggle('active',lang==='ja');document.getElementById('enBtn').classList.toggle('active',lang==='en')}
-function render(){renderStaticText();renderDest();renderDetail()}
+function render(){renderStaticText();const layout=document.getElementById('mainLayout');const page=document.getElementById('stopListPage');if(stopListView){layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('系統別・全バス停名一覧','All bus stops by route');document.querySelector('.subtitle').textContent=t('新神戸駅発着路線','Routes serving Shin-Kobe Station');renderStopList()}else{layout.style.display='grid';page.classList.remove('show');renderDest();renderDetail()}}
 document.getElementById('jaBtn').onclick=()=>{lang='ja';render()};document.getElementById('enBtn').onclick=()=>{lang='en';render()};render();
 </script>
 </body>

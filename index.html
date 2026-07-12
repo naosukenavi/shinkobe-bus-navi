@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>新神戸駅前案内事典</title>
+  <title>新神戸駅１階案内</title>
   <style>
     :root{
       --blue:#0b7ff3;
@@ -60,13 +60,15 @@
     .page-nav{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
     .page-nav a{display:inline-block;border:1px solid var(--blue);border-radius:8px;padding:9px 14px;color:var(--blue-dark);text-decoration:none;font-weight:700;background:#fff}
 
+
+.stop-ja{display:block;font-weight:600}.stop-en{display:block;margin-top:2px;font-size:.88em;color:#555;line-height:1.35}
 </style>
 </head>
 <body>
 <div class="app">
   <div class="lang"><button id="jaBtn" class="active">日本語</button><button id="enBtn">English</button></div>
-  <h1><span class="gamepad">🎮</span><span data-ja="新神戸駅前案内事典" data-en="Shin-Kobe Station Area Guide">新神戸駅前案内事典</span></h1>
-  <p class="subtitle" data-ja="バス・鉄道・徒歩ルート" data-en="Bus, rail, and walking routes">バス・鉄道・徒歩ルート</p>
+  <h1><span class="gamepad">🎮</span><span data-ja="新神戸駅１階案内" data-en="Shin-Kobe Station 1F Guide">新神戸駅１階案内</span></h1>
+  <p class="subtitle" data-ja="バス・鉄道・徒歩で利用" data-en="For bus, rail, and walking access">バス・鉄道・徒歩で利用</p>
   <div class="layout" id="mainLayout">
     <aside class="panel destinations" id="destinations"></aside>
     <main class="panel detail" id="detail"></main>
@@ -289,16 +291,55 @@ const rotaryStopRoutes = [
   {
     titleJa:'神戸市バス18系統 摩耶ケーブル方面',
     titleEn:'Kobe City Bus Route 18: Maya Cable direction',
-    stops:['新神戸駅前','熊内6丁目','熊内5丁目','野崎通5丁目','野崎通3丁目','篠原通3丁目','青谷','青谷橋','神戸高校前','観音寺北','観音寺','摩耶ケーブル下','観音寺北','五毛天神','五毛','護国神社前','篠原本町3丁目','篠原本町2丁目','六甲登山口','阪急六甲','六甲口','JR六甲道'],
+    stops:[
+      ['新神戸駅前','Shin-Kobe Station'],['熊内6丁目','Kumochi 6-chome'],['熊内5丁目','Kumochi 5-chome'],['野崎通5丁目','Nozakidori 5-chome'],['野崎通3丁目','Nozakidori 3-chome'],['篠原通3丁目','Shinoharadori 3-chome'],['青谷','Aotani'],['青谷橋','Aotanibashi'],['神戸高校前','Kobe High School'],['観音寺北','Kannonji-kita'],['観音寺','Kannonji'],['摩耶ケーブル下','Maya Cable-shita'],['観音寺北','Kannonji-kita'],['五毛天神','Gomo Tenjin'],['五毛','Gomo'],['護国神社前','Gokoku Shrine'],['篠原本町3丁目','Shinohara-honmachi 3-chome'],['篠原本町2丁目','Shinohara-honmachi 2-chome'],['六甲登山口','Rokko Tozanguchi'],['阪急六甲','Hankyu Rokko'],['六甲口','Rokko-guchi'],['JR六甲道','JR Rokkomichi']
+    ],
     cautionJa:'※18系統は土日祝日のみ新神戸駅に参ります。平日は布引バス停からご利用ください。',
     cautionEn:'Route 18 serves Shin-Kobe Station only on Saturdays, Sundays and public holidays. On weekdays, please use the Nunobiki bus stop.'
   },
   {
     titleJa:'神戸市バス18系統 三宮方面',
     titleEn:'Kobe City Bus Route 18: Sannomiya direction',
-    stops:['新神戸駅前','布引','加納町2丁目','加納町3丁目','地下鉄三宮駅前','三宮駅ターミナル前'],
+    stops:[['新神戸駅前','Shin-Kobe Station'],['布引','Nunobiki'],['加納町2丁目','Kanocho 2-chome'],['加納町3丁目','Kanocho 3-chome'],['地下鉄三宮駅前','Subway Sannomiya Station'],['三宮駅ターミナル前','Sannomiya Station Terminal']],
     cautionJa:'※18系統は土日祝日のみ新神戸駅に参ります。平日は布引バス停からご利用ください。',
     cautionEn:'Route 18 serves Shin-Kobe Station only on Saturdays, Sundays and public holidays. On weekdays, please use the Nunobiki bus stop.'
+  },
+  {
+    titleJa:'みなと観光バス21系統',
+    titleEn:'Minato Kanko Bus Route 21',
+    stops:[['新神戸駅','Shin-Kobe Station'],['三宮山手','Sannomiya Yamate'],['神戸三宮','Kobe Sannomiya'],['ハーバーハイウェイ経由','via Harbor Highway'],['神戸ベイシェラトンホテル','Kobe Bay Sheraton Hotel'],['六甲アイランド病院前（RICふれあい会館前）','Rokko Island Hospital / RIC Fureai Hall'],['ウエストコート7（神戸女子学生会館前）','West Court 7 / Kobe Women’s Student Hall'],['神戸国際大学前','Kobe International University']]
+  },
+  {
+    titleJa:'みなと観光バス22系統',
+    titleEn:'Minato Kanko Bus Route 22',
+    stops:[['新神戸駅','Shin-Kobe Station'],['三宮山手','Sannomiya Yamate'],['三宮西口','Sannomiya West Exit'],['モザイク前（神戸ハーバーランドumie）','Mosaic / Kobe Harborland umie']]
+  },
+  {
+    titleJa:'みなと観光バス211系統',
+    titleEn:'Minato Kanko Bus Route 211',
+    stops:[['新神戸駅','Shin-Kobe Station'],['三宮山手','Sannomiya Yamate'],['新神戸トンネル経由','via Shin-Kobe Tunnel'],['やきもち地蔵','Yakimochi Jizo'],['筑紫が丘西','Tsukushigaoka Nishi'],['筑紫が丘東','Tsukushigaoka Higashi'],['桜森町BC','Sakuramorimachi Bus Center']]
+  },
+  {
+    titleJa:'神姫バス 神戸空港線',
+    titleEn:'Shinki Bus: Kobe Airport Line',
+    stops:[['新神戸駅','Shin-Kobe Station'],['地下鉄三宮駅前','Subway Sannomiya Station'],['北埠頭','Kita Futo'],['中埠頭','Naka Futo'],['港湾短大前','Port Junior College'],['物流センター（どうぶつ王国東）','Logistics Center / Kobe Animal Kingdom East'],['神戸空港','Kobe Airport'],['神戸空港第2ターミナル','Kobe Airport Terminal 2']]
+  },
+  {
+    titleJa:'シティループ',
+    titleEn:'City Loop',
+    stops:[['新神戸駅前','Shin-Kobe Station'],['地下鉄三宮駅前（南行）','Subway Sannomiya Station (southbound)'],['市役所前','City Hall'],['南京町東口（元町商店街）','Nankinmachi East / Motomachi Shopping Street'],['メリケンパーク','Meriken Park'],['ポートタワー前','Port Tower'],['かもめりあ（神戸港観光船のりば・ポートタワー西）','Kamomeria / Sightseeing Boat Pier / west of Port Tower'],['ハーバーランド（モザイク前）','Harborland / Mosaic'],['西元町','Nishi-Motomachi'],['みなと元町駅前','Minato Motomachi Station'],['南京町南口','Nankinmachi South'],['旧居留地（市立博物館）','Former Foreign Settlement / Kobe City Museum'],['京町筋','Kyomachi-suji'],['三宮センター街東口・地下鉄三宮駅前（北行）','Sannomiya Center Gai East / Subway Sannomiya Station (northbound)'],['北野坂','Kitanozaka'],['北野異人館','Kitano Ijinkan'],['神戸布引ハーブ園／ロープウェイ','Kobe Nunobiki Herb Gardens / Ropeway']]
+  },
+  {
+    titleJa:'ポートループ',
+    titleEn:'Port Loop',
+    stops:[['新神戸駅前','Shin-Kobe Station'],['三宮駅前','Sannomiya Station'],['市役所・東遊園地前','City Hall / Higashi Yuenchi Park'],['KIITO前（三宮図書館）','KIITO / Sannomiya Library'],['アリーナ前','Arena'],['新港町','Shinkocho'],['メリケンパーク','Meriken Park'],['かもめりあ（神戸港観光船のりば・ポートタワー西）','Kamomeria / Sightseeing Boat Pier / west of Port Tower'],['ハーバーランド（モザイク前）','Harborland / Mosaic'],['神戸駅南口','Kobe Station South Exit'],['ポートタワー','Port Tower'],['新港町','Shinkocho'],['アリーナ前','Arena'],['KIITO前','KIITO'],['センター街東口','Center Gai East']]
+  },
+  {
+    titleJa:'三宮方面行き',
+    titleEn:'For Sannomiya',
+    stops:[['地下鉄三宮駅前','Subway Sannomiya Station'],['三宮ターミナル（ミント神戸）','Sannomiya Terminal / Mint Kobe'],['神姫バスターミナル','Shinki Bus Terminal']],
+    cautionJa:'※到着場所は便によって異なります。運行状況により、途中で到着場所が変更される場合があります。乗車時または車内案内でご確認ください。',
+    cautionEn:'The arrival point varies by service and may change during operation. Please confirm when boarding or listen to the onboard announcement.'
   }
 ];
 
@@ -306,19 +347,19 @@ const tunnelStopRoutes = [
   {
     titleJa:'神戸市バス64系統',
     titleEn:'Kobe City Bus Route 64',
-    stops:['三宮駅ターミナル前','地下鉄三宮駅前','新神戸駅前','箕谷','松が枝町','箕谷駅前','松が枝町','日の峰1丁目','松が枝町2丁目','日の峰3丁目','日の峰2丁目','桂木3丁目','桂木2丁目','大原1丁目','大原3丁目','神戸北町'],
+    stops:[['三宮駅ターミナル前','Sannomiya Station Terminal'],['地下鉄三宮駅前','Subway Sannomiya Station'],['新神戸駅前','Shin-Kobe Station'],['箕谷','Minotani'],['松が枝町','Matsugaecho'],['箕谷駅前','Minotani Station'],['松が枝町','Matsugaecho'],['日の峰1丁目','Hinomine 1-chome'],['松が枝町2丁目','Matsugaecho 2-chome'],['日の峰3丁目','Hinomine 3-chome'],['日の峰2丁目','Hinomine 2-chome'],['桂木3丁目','Katsuragi 3-chome'],['桂木2丁目','Katsuragi 2-chome'],['大原1丁目','Ohara 1-chome'],['大原3丁目','Ohara 3-chome'],['神戸北町','Kobe Kitamachi']],
     cautionJa:'※2026年8月1日から、64系統は便によって運行ルートが異なります。ご利用のバスが目的の停留所に停車するか、乗車時に運転士へご確認ください。',
     cautionEn:'From August 1, 2026, Route 64 may use different routes depending on the service. Please ask the driver whether the bus stops at your destination.'
   },
   {
     titleJa:'特急 フラワータウン・関西学院方面',
     titleEn:'Express: Flower Town / Kwansei Gakuin',
-    stops:['神戸空港（T1）','神戸空港（T2）','三宮バスターミナル','新神戸駅','弥生が丘5丁目','狭間が丘県住前','フラワータウンセンター','えるむプラザ前','けやき台1丁目','センチュリープラザ前','あかしあ台ハイツ前','ゆりのき台中学校前','西陵高校前','ゆりのき台3丁目','ゆりのき台4丁目','関西学院前','関西学院大学','地区センター前','学園小学校前','学園7丁目']
+    stops:[['神戸空港（T1）','Kobe Airport (T1)'],['神戸空港（T2）','Kobe Airport (T2)'],['三宮バスターミナル','Sannomiya Bus Terminal'],['新神戸駅','Shin-Kobe Station'],['弥生が丘5丁目','Yayoigaoka 5-chome'],['狭間が丘県住前','Hazamagaoka Prefectural Housing'],['フラワータウンセンター','Flower Town Center'],['えるむプラザ前','Elm Plaza'],['けやき台1丁目','Keyakidai 1-chome'],['センチュリープラザ前','Century Plaza'],['あかしあ台ハイツ前','Akashia-dai Heights'],['ゆりのき台中学校前','Yurinokidai Junior High School'],['西陵高校前','Seiryo High School'],['ゆりのき台3丁目','Yurinokidai 3-chome'],['ゆりのき台4丁目','Yurinokidai 4-chome'],['関西学院前','Kwansei Gakuin'],['関西学院大学','Kwansei Gakuin University'],['地区センター前','District Center'],['学園小学校前','Gakuen Elementary School'],['学園7丁目','Gakuen 7-chome']]
   },
   {
     titleJa:'特急 有馬温泉・三田駅方面',
     titleEn:'Express: Arima Onsen / Sanda Station',
-    stops:['神戸空港（T1）','神戸空港（T2）','三宮バスターミナル','新神戸駅','有馬温泉（太閤橋）','藤原台北町4丁目','京地1丁目','京地2丁目','鹿の子台南町2丁目','掖谷公園前','掖谷大池','千代ヶ谷公園前','鹿の子台北町5丁目','吉尾インター','フルーツ・フラワーパーク','上津公園前','イオンモール神戸北','神戸三田プレミアム・アウトレット','上津台1丁目西','鹿の子台西口','キリンビール工場前（土休日のみ）','市立図書館前','三田本町','三田駅']
+    stops:[['神戸空港（T1）','Kobe Airport (T1)'],['神戸空港（T2）','Kobe Airport (T2)'],['三宮バスターミナル','Sannomiya Bus Terminal'],['新神戸駅','Shin-Kobe Station'],['有馬温泉（太閤橋）','Arima Onsen / Taikobashi'],['藤原台北町4丁目','Fujiwaradai Kitamachi 4-chome'],['京地1丁目','Kyoji 1-chome'],['京地2丁目','Kyoji 2-chome'],['鹿の子台南町2丁目','Kanokodai Minamimachi 2-chome'],['掖谷公園前','Nebutani Park'],['掖谷大池','Nebutani Oike'],['千代ヶ谷公園前','Chiyogadani Park'],['鹿の子台北町5丁目','Kanokodai Kitamachi 5-chome'],['吉尾インター','Yoshio Interchange'],['フルーツ・フラワーパーク','Fruit & Flower Park'],['上津公園前','Kozu Park'],['イオンモール神戸北','AEON Mall Kobe Kita'],['神戸三田プレミアム・アウトレット','Kobe-Sanda Premium Outlets'],['上津台1丁目西','Kozudai 1-chome West'],['鹿の子台西口','Kanokodai West Entrance'],['キリンビール工場前（土休日のみ）','Kirin Beer Factory (weekends and holidays only)'],['市立図書館前','Municipal Library'],['三田本町','Sanda Honmachi'],['三田駅','Sanda Station']]
   }
 ];
 
@@ -384,7 +425,7 @@ else{el.innerHTML=`<h3>🧳 ${t('ホテル玄関前（4階）への行き方','H
 <p><span class="tag">徳島</span><span class="tag">関空リムジン</span></p>`} el.classList.add('show'); el.scrollIntoView({behavior:'smooth',block:'start'});}
 function renderStopList(){
   const page=document.getElementById('stopListPage');
-  const routeDetails=(items,openFirst=false)=>items.map((r,idx)=>`<details class="route-list" ${(openFirst&&idx===0)?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stops.map(x=>`<li>${x}</li>`).join('')}</ol></div></details>`).join('');
+  const routeDetails=(items,openFirst=false)=>items.map((r,idx)=>`<details class="route-list" ${(openFirst&&idx===0)?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stops.map(x=>{const ja=Array.isArray(x)?x[0]:x;const en=Array.isArray(x)?x[1]:x;return `<li>${lang==='ja'?ja:`<span class="stop-ja">${ja}</span><span class="stop-en">${en}</span>`}</li>`}).join('')}</ol></div></details>`).join('');
   const rotaryRoutes=routeDetails(rotaryStopRoutes,true);
   const tunnelRoutes=routeDetails(tunnelStopRoutes,false);
   page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅1階案内へ戻る','Back to Shin-Kobe Station 1F Guide')}</a></div><h2>🚌 ${t('系統別・全バス停名一覧','All bus stops by route')}</h2><p class="stop-list-intro">${t('路線名を押すと、バス停名の一覧が開きます。','Select a route to open its stop list.')}</p><div class="stop-group"><h3>${t('1階ロータリー発着','Departing from the 1F rotary')}</h3>${rotaryRoutes}</div><div class="stop-group"><h3>${t('トンネル入口発着','Departing from the Tunnel Entrance stop')}</h3>${tunnelRoutes}</div><p class="small-note">${t('※停留所名・停車順・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Stop names, order and service details may change. Please also check signs and the latest official information.')}</p>`;

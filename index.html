@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>新神戸駅１階案内</title>
+  <title>新神戸駅前案内事典</title>
   <style>
     :root{
       --blue:#0b7ff3;
@@ -67,8 +67,8 @@
 <body>
 <div class="app">
   <div class="lang"><button id="jaBtn" class="active">日本語</button><button id="enBtn">English</button></div>
-  <h1><span class="gamepad">🎮</span><span data-ja="新神戸駅１階案内" data-en="Shin-Kobe Station 1F Guide">新神戸駅１階案内</span></h1>
-  <p class="subtitle" data-ja="バス・鉄道・徒歩で利用" data-en="For bus, rail, and walking access">バス・鉄道・徒歩で利用</p>
+  <h1><span class="gamepad">🎮</span><span data-ja="新神戸駅前案内事典" data-en="Shin-Kobe Station Area Guide">新神戸駅前案内事典</span></h1>
+  <p class="subtitle" data-ja="バス・鉄道・徒歩ルート案内" data-en="Bus, rail, and walking route guide">バス・鉄道・徒歩ルート案内</p>
   <div class="layout" id="mainLayout">
     <aside class="panel destinations" id="destinations"></aside>
     <main class="panel detail" id="detail"></main>
@@ -428,7 +428,7 @@ function renderStopList(){
   const routeDetails=(items,openFirst=false)=>items.map((r,idx)=>`<details class="route-list" ${(openFirst&&idx===0)?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stops.map(x=>{const ja=Array.isArray(x)?x[0]:x;const en=Array.isArray(x)?x[1]:x;return `<li>${lang==='ja'?ja:`<span class="stop-ja">${ja}</span><span class="stop-en">${en}</span>`}</li>`}).join('')}</ol></div></details>`).join('');
   const rotaryRoutes=routeDetails(rotaryStopRoutes,true);
   const tunnelRoutes=routeDetails(tunnelStopRoutes,false);
-  page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅1階案内へ戻る','Back to Shin-Kobe Station 1F Guide')}</a></div><h2>🚌 ${t('系統別・全バス停名一覧','All bus stops by route')}</h2><p class="stop-list-intro">${t('路線名を押すと、バス停名の一覧が開きます。','Select a route to open its stop list.')}</p><div class="stop-group"><h3>${t('1階ロータリー発着','Departing from the 1F rotary')}</h3>${rotaryRoutes}</div><div class="stop-group"><h3>${t('トンネル入口発着','Departing from the Tunnel Entrance stop')}</h3>${tunnelRoutes}</div><p class="small-note">${t('※停留所名・停車順・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Stop names, order and service details may change. Please also check signs and the latest official information.')}</p>`;
+  page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅前案内事典へ戻る','Back to Shin-Kobe Station Area Guide')}</a></div><h2>🚌 ${t('系統別・全バス停名一覧','All bus stops by route')}</h2><p class="stop-list-intro">${t('路線名を押すと、バス停名の一覧が開きます。','Select a route to open its stop list.')}</p><div class="stop-group"><h3>${t('1階ロータリー発着','Departing from the 1F rotary')}</h3>${rotaryRoutes}</div><div class="stop-group"><h3>${t('トンネル入口発着','Departing from the Tunnel Entrance stop')}</h3>${tunnelRoutes}</div><p class="small-note">${t('※停留所名・停車順・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Stop names, order and service details may change. Please also check signs and the latest official information.')}</p>`;
 }
 const stopListView=new URLSearchParams(location.search).get('view')==='stops';
 

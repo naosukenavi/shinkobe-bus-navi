@@ -121,7 +121,14 @@ const ASSETS = {
   arimaRail1:'assets/arima_subway_kobe_electric_1.png',
   arimaRail2:'assets/arima_subway_kobe_electric_2.png',
   arimaRail3:'assets/arima_subway_kobe_electric_3.png',
-  arimaRail4:'assets/arima_subway_kobe_electric_4.png'
+  arimaRail4:'assets/arima_subway_kobe_electric_4.png',
+  kobeAirportRail1:'assets/kobe_airport_rail_guide_1.png',
+  kobeAirportRail2:'assets/kobe_airport_rail_guide_2.png',
+  kobeAirportRail3:'assets/kobe_airport_rail_guide_3.png',
+  kobeAirportRail4:'assets/kobe_airport_rail_guide_4.png',
+  kobeAirportRail5:'assets/kobe_airport_rail_guide_5.png',
+  kobeAirportRail6:'assets/kobe_airport_rail_guide_6.png',
+  kobeAirportRail7:'assets/kobe_airport_rail_guide_7.png'
 };
 const stopPhotos = {
   east: [
@@ -159,7 +166,24 @@ const groups = [
 const data = {
   '有馬温泉へ地下鉄・神鉄で行く': {icon:'🚉', en:'To Arima Onsen by Subway and Kobe Electric Railway', leadJa:'地下鉄新神戸駅から谷上駅へ行き、神戸電鉄に乗り換えて有馬温泉へ向かう経路です。', leadEn:'Take the subway from Shin-Kobe to Tanigami, then transfer to Kobe Electric Railway for Arima Onsen.', routes:[{companyJa:'地下鉄＋神戸電鉄',companyEn:'Subway + Kobe Electric Railway',stop:'none',photos:[{src:ASSETS.arimaRail1, guidePage:true, ja:'有馬温泉へ地下鉄・神鉄で行く 1', en:'To Arima Onsen by subway and Kobe Electric Railway / page 1'},{src:ASSETS.arimaRail2, guidePage:true, ja:'有馬温泉へ地下鉄・神鉄で行く 2', en:'To Arima Onsen by subway and Kobe Electric Railway / page 2'},{src:ASSETS.arimaRail3, guidePage:true, ja:'有馬温泉へ地下鉄・神鉄で行く 3', en:'To Arima Onsen by subway and Kobe Electric Railway / page 3'},{src:ASSETS.arimaRail4, guidePage:true, ja:'有馬温泉へ地下鉄・神鉄で行く 4', en:'To Arima Onsen by subway and Kobe Electric Railway / page 4'}],pointJa:'写真の案内を上から順に見ながら、地下鉄新神戸駅から谷上駅へ進み、神戸電鉄に乗り換えてください。',pointEn:'Follow the photo guide in order, travel from Subway Shin-Kobe Station to Tanigami, and transfer to Kobe Electric Railway.',noteJa:'谷上駅では、行先表示を確認して有馬温泉方面の電車に乗ってください。新開地行きには乗らないでください。',noteEn:'At Tanigami, check the destination display and take a train toward Arima Onsen. Do not take a train for Shinkaichi.'}]},
 
-  '神戸空港へ地下鉄・ポートライナーで行く': {icon:'✈️', en:'To Kobe Airport by Subway and Port Liner', leadJa:'神戸空港へ急ぐ場合や、空港行きバスの時間が合わない場合の代替ルートです。', leadEn:'Alternative route to Kobe Airport when the bus schedule does not fit.', routes:[{companyJa:'地下鉄＋ポートライナー',companyEn:'Subway + Port Liner',stop:'none',photos:[],pointJa:'地下鉄新神戸駅から三宮方面へ行き、三宮でポートライナーに乗り換えて神戸空港へ向かいます。詳しい写真つき手順は次回追加予定です。',pointEn:'Take the subway toward Sannomiya, then transfer to the Port Liner for Kobe Airport. Detailed photo steps will be added soon.',noteJa:'空港へ急ぐ場合は、乗り換え時間も含めて確認してください。',noteEn:'Check transfer time if you are in a hurry.'}]},
+  '神戸空港へ地下鉄・ポートライナーで行く': {icon:'✈️', en:'To Kobe Airport by Subway and Port Liner', leadJa:'地下鉄新神戸駅から三宮へ行き、ポートライナーに乗り換えて神戸空港へ向かう経路です。', leadEn:'Take the subway from Shin-Kobe to Sannomiya, then transfer to the Port Liner for Kobe Airport.', routes:[{
+    companyJa:'地下鉄＋ポートライナー',
+    companyEn:'Subway + Port Liner',
+    stop:'none',
+    photos:[
+      {src:ASSETS.kobeAirportRail1, guidePage:true, ja:'神戸空港へ地下鉄・ポートライナーで行く 1', en:'To Kobe Airport by subway and Port Liner / page 1'},
+      {src:ASSETS.kobeAirportRail2, guidePage:true, ja:'神戸空港へ地下鉄・ポートライナーで行く 2', en:'To Kobe Airport by subway and Port Liner / page 2'},
+      {src:ASSETS.kobeAirportRail3, guidePage:true, ja:'神戸空港へ地下鉄・ポートライナーで行く 3', en:'To Kobe Airport by subway and Port Liner / page 3'},
+      {src:ASSETS.kobeAirportRail4, guidePage:true, ja:'神戸空港へ地下鉄・ポートライナーで行く 4', en:'To Kobe Airport by subway and Port Liner / page 4'},
+      {src:ASSETS.kobeAirportRail5, guidePage:true, ja:'神戸空港へ地下鉄・ポートライナーで行く 5', en:'To Kobe Airport by subway and Port Liner / page 5'},
+      {src:ASSETS.kobeAirportRail6, guidePage:true, ja:'神戸空港へ地下鉄・ポートライナーで行く 6', en:'To Kobe Airport by subway and Port Liner / page 6'},
+      {src:ASSETS.kobeAirportRail7, guidePage:true, ja:'神戸空港へ地下鉄・ポートライナーで行く 7', en:'To Kobe Airport by subway and Port Liner / page 7'}
+    ],
+    pointJa:'写真の案内を上から順に見ながら、地下鉄新神戸駅から三宮へ進み、ポートライナー三宮駅で乗り換えてください。',
+    pointEn:'Follow the photo guide in order, travel from Subway Shin-Kobe Station to Sannomiya, and transfer at Port Liner Sannomiya Station.',
+    noteJa:'発車案内で「神戸空港」行きを確認してから乗ってください。',
+    noteEn:'Check the departure display and board a train for Kobe Airport.'
+  }]},
 
   '六甲アイランドへ鉄道で行く': {icon:'🚉', en:'To Rokko Island by Rail', leadJa:'六甲アイランド方面のバスが少ない時間帯の代替ルートです。地下鉄・JR・六甲ライナーを乗り継ぎます。', leadEn:'Alternative route to Rokko Island when buses are infrequent.', routes:[{companyJa:'地下鉄＋JR＋六甲ライナー',companyEn:'Subway + JR + Rokko Liner',stop:'none',photos:[],pointJa:'地下鉄新神戸駅から三宮方面へ行き、JR三ノ宮・住吉方面を経由して、六甲ライナーに乗り換えます。詳しい写真つき手順は次回追加予定です。',pointEn:'Take the subway toward Sannomiya, continue via JR Sannomiya / Sumiyoshi, then transfer to the Rokko Liner. Detailed photo steps will be added soon.',noteJa:'バスの本数が少ない場合の代替ルートとして確認してください。',noteEn:'Use this as an alternative route when buses are infrequent.'}]},
 

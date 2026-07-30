@@ -128,7 +128,14 @@ const ASSETS = {
   kobeAirportRail4:'assets/kobe_airport_rail_guide_4.png',
   kobeAirportRail5:'assets/kobe_airport_rail_guide_5.png',
   kobeAirportRail6:'assets/kobe_airport_rail_guide_6.png',
-  kobeAirportRail7:'assets/kobe_airport_rail_guide_7.png'
+  kobeAirportRail7:'assets/kobe_airport_rail_guide_7.png',
+  nunobikiRopeway1:'assets/nunobiki_ropeway_guide_1.png',
+  nunobikiRopeway2:'assets/nunobiki_ropeway_guide_2.png',
+  nunobikiRopeway3:'assets/nunobiki_ropeway_guide_3.png',
+  nunobikiRopeway4:'assets/nunobiki_ropeway_guide_4.png',
+  nunobikiRopeway5:'assets/nunobiki_ropeway_guide_5.png',
+  nunobikiRopeway6:'assets/nunobiki_ropeway_guide_6.png',
+  nunobikiRopeway7:'assets/nunobiki_ropeway_guide_7.png'
 };
 const stopPhotos = {
   east: [
@@ -206,8 +213,16 @@ const data = {
 
   '地下鉄新神戸駅': {icon:'🚇', en:'Subway Shin-Kobe Station', leadJa:'バスが終わったあと、またはバスの本数が少ない行き先へ向かう場合は、地下鉄・鉄道への乗り継ぎも選択肢になります。', leadEn:'When buses have ended or are infrequent, subway and railway transfers may be useful options.', routes:[{companyJa:'地下鉄新神戸駅へ',companyEn:'To Subway Shin-Kobe Station',stop:'none',photos:[],pointJa:'新幹線・駅周辺から地下鉄新神戸駅へ向かう案内です。詳しい写真つき手順は次回追加予定です。',pointEn:'Guide from the Shinkansen / station area to Subway Shin-Kobe Station. Detailed photo steps will be added soon.',noteJa:'有馬温泉、神戸空港、六甲アイランド方面への代替ルートにも使えます。',noteEn:'This can also be used for alternative routes to Arima Onsen, Kobe Airport, and Rokko Island.'}]},
 
-  '布引ロープウェイ': {icon:'🚡', en:'Nunobiki Ropeway', leadJa:'有馬温泉方面へ向かう方法のひとつとして、布引ロープウェイへの案内を追加予定です。', leadEn:'Guide to Nunobiki Ropeway, one of the possible ways toward Arima Onsen, will be added.', routes:[
-    {companyJa:'徒歩・ロープウェイ',companyEn:'Walking / Ropeway',stop:'none',photos:[],pointJa:'新神戸駅から布引ロープウェイのりばへ向かう案内です。詳しい写真つき手順は次回追加予定です。',pointEn:'Guide from Shin-Kobe Station to the Nunobiki Ropeway station. Detailed photo steps will be added soon.',noteJa:'ロープウェイの運行状況・営業時間をご確認ください。',noteEn:'Please check the ropeway operating status and hours.'}
+  '布引ロープウェイ': {icon:'🚡', en:'Nunobiki Ropeway', leadJa:'新神戸駅から、神戸布引ハーブ園／ロープウェイ山麓駅へ歩いて向かう経路です。1階から行く方と、2階・新幹線改札口から行く方に分けて案内します。', leadEn:'Walking guide from Shin-Kobe Station to the Kobe Nunobiki Herb Gardens / Ropeway lower station. The guide covers routes from the 1F rotary and from the 2F Shinkansen gate.', routes:[
+    {companyJa:'徒歩・ロープウェイ',companyEn:'Walking / Ropeway',stop:'none',photos:[
+      {src:ASSETS.nunobikiRopeway1, guidePage:true, ja:'布引ハーブ園・ロープウェイへの行き方 1', en:'Guide to Nunobiki Herb Gardens / Ropeway, page 1'},
+      {src:ASSETS.nunobikiRopeway2, guidePage:true, ja:'布引ハーブ園・ロープウェイへの行き方 2', en:'Guide to Nunobiki Herb Gardens / Ropeway, page 2'},
+      {src:ASSETS.nunobikiRopeway3, guidePage:true, ja:'布引ハーブ園・ロープウェイへの行き方 3', en:'Guide to Nunobiki Herb Gardens / Ropeway, page 3'},
+      {src:ASSETS.nunobikiRopeway4, guidePage:true, ja:'布引ハーブ園・ロープウェイへの行き方 4', en:'Guide to Nunobiki Herb Gardens / Ropeway, page 4'},
+      {src:ASSETS.nunobikiRopeway5, guidePage:true, ja:'布引ハーブ園・ロープウェイへの行き方 5', en:'Guide to Nunobiki Herb Gardens / Ropeway, page 5'},
+      {src:ASSETS.nunobikiRopeway6, guidePage:true, ja:'布引ハーブ園・ロープウェイへの行き方 6', en:'Guide to Nunobiki Herb Gardens / Ropeway, page 6'},
+      {src:ASSETS.nunobikiRopeway7, guidePage:true, ja:'布引ハーブ園・ロープウェイへの行き方 7', en:'Guide to Nunobiki Herb Gardens / Ropeway, page 7'}
+    ],pointJa:'写真の案内を上から順に見ながら、床や現地の緑色の案内表示に沿って進んでください。',pointEn:'Follow the photo guide in order and use the green floor and on-site guidance signs.',noteJa:'最後に周辺案内図で現在地を確認し、「ハーブ園山麓駅」へ進んでください。ロープウェイの運行状況・営業時間はご利用前にご確認ください。',noteEn:'At the end, check your position on the area map and continue toward Herb Gardens Bottom Station. Please check operating status and hours before your visit.'}
   ]},
 
 

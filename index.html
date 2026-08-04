@@ -135,7 +135,15 @@ const ASSETS = {
   nunobikiRopeway4:'assets/nunobiki_ropeway_guide_4.png',
   nunobikiRopeway5:'assets/nunobiki_ropeway_guide_5.png',
   nunobikiRopeway6:'assets/nunobiki_ropeway_guide_6.png',
-  nunobikiRopeway7:'assets/nunobiki_ropeway_guide_7.png'
+  nunobikiRopeway7:'assets/nunobiki_ropeway_guide_7.png',
+  rokkoLinerRail1:'assets/rokko_liner_rail_guide_1.png',
+  rokkoLinerRail2:'assets/rokko_liner_rail_guide_2.png',
+  rokkoLinerRail3:'assets/rokko_liner_rail_guide_3.png',
+  rokkoLinerRail4:'assets/rokko_liner_rail_guide_4.png',
+  rokkoLinerRail5:'assets/rokko_liner_rail_guide_5.png',
+  rokkoLinerRail6:'assets/rokko_liner_rail_guide_6.png',
+  rokkoLinerRail7:'assets/rokko_liner_rail_guide_7.png',
+  rokkoLinerRail8:'assets/rokko_liner_rail_guide_8.png'
 };
 const stopPhotos = {
   east: [
@@ -192,7 +200,25 @@ const data = {
     noteEn:'Check the departure display and board a train for Kobe Airport.'
   }]},
 
-  '六甲アイランドへ鉄道で行く': {icon:'🚉', en:'To Rokko Island by Rail', leadJa:'六甲アイランド方面のバスが少ない時間帯の代替ルートです。地下鉄・JR・六甲ライナーを乗り継ぎます。', leadEn:'Alternative route to Rokko Island when buses are infrequent.', routes:[{companyJa:'地下鉄＋JR＋六甲ライナー',companyEn:'Subway + JR + Rokko Liner',stop:'none',photos:[],pointJa:'地下鉄新神戸駅から三宮方面へ行き、JR三ノ宮・住吉方面を経由して、六甲ライナーに乗り換えます。詳しい写真つき手順は次回追加予定です。',pointEn:'Take the subway toward Sannomiya, continue via JR Sannomiya / Sumiyoshi, then transfer to the Rokko Liner. Detailed photo steps will be added soon.',noteJa:'バスの本数が少ない場合の代替ルートとして確認してください。',noteEn:'Use this as an alternative route when buses are infrequent.'}]},
+  '六甲アイランドへ鉄道で行く': {icon:'🚉', en:'To Rokko Island by Rail', leadJa:'六甲アイランド方面のバスが少ない時間帯の代替ルートです。地下鉄・JR・六甲ライナーを乗り継ぎます。', leadEn:'Alternative route to Rokko Island when buses are infrequent. Take the subway, JR local train, and Rokko Liner.', routes:[{
+    companyJa:'地下鉄＋JR＋六甲ライナー',
+    companyEn:'Subway + JR + Rokko Liner',
+    stop:'none',
+    photos:[
+      {src:ASSETS.rokkoLinerRail1, guidePage:true, ja:'六甲アイランドへ鉄道で行く 1', en:'To Rokko Island by rail / page 1'},
+      {src:ASSETS.rokkoLinerRail2, guidePage:true, ja:'六甲アイランドへ鉄道で行く 2', en:'To Rokko Island by rail / page 2'},
+      {src:ASSETS.rokkoLinerRail3, guidePage:true, ja:'六甲アイランドへ鉄道で行く 3', en:'To Rokko Island by rail / page 3'},
+      {src:ASSETS.rokkoLinerRail4, guidePage:true, ja:'六甲アイランドへ鉄道で行く 4', en:'To Rokko Island by rail / page 4'},
+      {src:ASSETS.rokkoLinerRail5, guidePage:true, ja:'六甲アイランドへ鉄道で行く 5', en:'To Rokko Island by rail / page 5'},
+      {src:ASSETS.rokkoLinerRail6, guidePage:true, ja:'六甲アイランドへ鉄道で行く 6', en:'To Rokko Island by rail / page 6'},
+      {src:ASSETS.rokkoLinerRail7, guidePage:true, ja:'六甲アイランドへ鉄道で行く 7', en:'To Rokko Island by rail / page 7'},
+      {src:ASSETS.rokkoLinerRail8, guidePage:true, ja:'六甲アイランドへ鉄道で行く 8', en:'To Rokko Island by rail / page 8'}
+    ],
+    pointJa:'写真の案内を上から順に見ながら、地下鉄新神戸駅から三宮へ進み、JR三ノ宮駅から普通電車で住吉駅へ向かい、六甲ライナーに乗り換えてください。',
+    pointEn:'Follow the photo guide in order. Take the subway to Sannomiya, then a JR local train from Sannomiya to Sumiyoshi, and transfer to the Rokko Liner.',
+    noteJa:'JR三ノ宮駅では、1・2番線ホームの電光掲示板で「普通」を確認して乗車し、住吉駅で降りてください。六甲ライナーでは「マリンパーク行き」を確認してください。',
+    noteEn:'At JR Sannomiya Station, check the departure display and take a local train from platform 1 or 2. Get off at Sumiyoshi. For the Rokko Liner, check that the train is bound for Marine Park.'
+  }]},
 
   'シティーループ／ポートループ': {icon:'🚌', en:'City Loop / Port Loop', leadJa:'シティーループ（City Loop）とポートループ（Port Loop）の違いを確認します。車体表示と行き先を確認してください。', leadEn:'Check the difference between City Loop and Port Loop. Please confirm the bus display and destination.', loopHelp:true, routes:[
     {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',pointEn:'At Shin-Kobe Station, board near the west end of the 1F rotary.',noteJa:'車体表示「City Loop」を確認してください。',noteEn:'Check the bus display says City Loop.'},
@@ -241,7 +267,7 @@ const data = {
       noteEn:'<br><strong>Shinki Bus for Kobe Airport</strong><br>Main stops on the way include Subway Sannomiya Station, Kita-futo, Naka-futo, Port & Island College, Distribution Center (Kobe Animal Kingdom East), Kobe Airport, and Kobe Airport Terminal 2. Service details may change. Please check the latest information before use.'}
   ], guideJa:'どちらのバスも道路状況により遅れることがあります。', guideEn:'Both buses may be delayed depending on traffic.'},
 
-  '有馬温泉': {icon:'♨️', en:'Arima Onsen', leadJa:'有馬温泉へは、ここで案内するJRバス・神姫バスのほか、地下鉄新神戸駅から神戸電鉄を乗り継ぐ方法があります。', leadEn:'To reach Arima Onsen, you can use the JR Bus or Shinki Bus shown here, or take the subway from Shin-Kobe and transfer to Kobe Electric Railway.', routes:[
+  '有馬温泉': {icon:'♨️', en:'Arima Onsen', leadJa:'有馬温泉への行き方は4つあります。JRバス、神姫バス、地下鉄新神戸駅＋神鉄、布引ロープウェイ方面から選べます。', leadEn:'There are four ways to get to Arima Onsen: JR Bus, Shinki Bus, Nunobiki Ropeway, or Subway plus Kobe Electric Railway.', routes:[
     {companyJa:'JRバス',companyEn:'JR Bus',stop:'east',pointJa:'1階ロータリー東端の「JR高速バス②のりば」付近から乗車します。',pointEn:'Board near JR Express Bus stop 2 at the east end of the 1F rotary.',noteJa:'写真の目印を確認して乗り場へ向かってください。',noteEn:'Use the photo as a landmark and go to the boarding point.'},
     {companyJa:'神姫バス',companyEn:'Shinki Bus',stop:'tunnel',pointJa:'1階ロータリー内にはありません。駅西端から見える道路をはさんで向かいにある、緑色の屋根があるバス停へ向かいます。',pointEn:'This is not inside the 1F rotary. Go to the bus stop with the green roof across the road from the west end of the station.',noteJa:'トンネル入口バス停への行き方を確認してください。',noteEn:'Check how to get to the Tunnel Entrance bus stop.'}
   ]},

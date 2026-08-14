@@ -232,7 +232,12 @@ const ASSETS = {
   portLoopSannomiyaShinki4:'assets/portloop_sannomiya_shinki_4.png',
   portLoopSannomiyaShinki5:'assets/portloop_sannomiya_shinki_5.png',
   portLoopSannomiyaShinki6:'assets/portloop_sannomiya_shinki_6.png',
-  kitanoSannomiyaWalk:'assets/kitano_sannomiya_walk.png'
+  kitanoSannomiyaWalk:'assets/kitano_sannomiya_walk.png',
+  kitanoSannomiyaCommon2:'assets/kitano_sannomiya_common2.png'
+  kitanoSannomiyaGuide1:'assets/kitano_sannomiya_guide_1.png',
+  kitanoSannomiyaGuide2:'assets/kitano_sannomiya_guide_2.png',
+  kitanoSannomiyaGuide3:'assets/kitano_sannomiya_guide_3.png',
+  kitanoSannomiyaGuide4:'assets/kitano_sannomiya_guide_4.png',
 };
 const stopPhotos = {
   east: [
@@ -321,12 +326,13 @@ const data = {
     {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[{src:ASSETS.nunobikiFallsGuide, guidePage:true, ja:'布引の滝への行き方', en:'Guide to Nunobiki Falls'}],pointJa:'1階東端のドアから外へ出て、案内表示に従って山側へ進みます。',pointEn:'Exit from the door at the 1F East End and follow the signs toward the mountain side.',noteJa:'写真の案内を見ながら進んでください。',noteEn:'Please follow the photo guide.'}
   ]},
 
-  '北野・三宮方面': {icon:'🚶', en:'Kitano / Sannomiya on foot', leadJa:'新神戸駅から南出口を通り、北野・三宮方面へ歩く経路です。', leadEn:'Walking route from Shin-Kobe Station via the South Exit toward Kitano and Sannomiya.', routes:[
+  '北野・三宮方面': {icon:'🚶', en:'Kitano / Sannomiya on foot', leadJa:'南出口から外へ出て、北野方面・三宮方面へ歩く経路です。', leadEn:'Walking route from the South Exit toward Kitano or Sannomiya.', routes:[
     {companyJa:'徒歩ルート',companyEn:'Walking route',stop:'none',photos:[
-      {src:ASSETS.nunobiki218Page1, guidePage:true, ja:'北野・三宮方面への徒歩ルート 1', en:'Walking route toward Kitano / Sannomiya, page 1'},
-      {src:ASSETS.nunobiki218Page2, guidePage:true, ja:'北野・三宮方面への徒歩ルート 2', en:'Walking route toward Kitano / Sannomiya, page 2'},
-      {src:ASSETS.kitanoSannomiyaWalk, guidePage:true, ja:'北野・三宮方面への分岐', en:'Directions for Kitano and Sannomiya'}
-    ],pointJa:'右へ進み、坂道は北野方面、平地は三宮方面です。',pointEn:'Turn right. Follow the uphill path for Kitano, or continue on the level path for Sannomiya.',noteJa:'写真の案内を上から順に見ながら進んでください。',noteEn:'Please follow the photo guide in order.'}
+      {src:ASSETS.kitanoSannomiyaGuide1, guidePage:true, ja:'北野・三宮方面への徒歩ルート 1', en:'Walking route toward Kitano / Sannomiya, page 1'},
+      {src:ASSETS.kitanoSannomiyaGuide2, guidePage:true, ja:'北野・三宮方面への徒歩ルート 2', en:'Walking route toward Kitano / Sannomiya, page 2'},
+      {src:ASSETS.kitanoSannomiyaGuide3, guidePage:true, ja:'北野・三宮方面への徒歩ルート 3', en:'Walking route toward Kitano / Sannomiya, page 3'},
+      {src:ASSETS.kitanoSannomiyaGuide4, guidePage:true, ja:'北野・三宮方面への徒歩ルート 4', en:'Walking route toward Kitano / Sannomiya, page 4'}
+    ],pointJa:'南出口から外へ出て右へ進みます。坂道は北野方面、平地は三宮方面です。',pointEn:'Exit from the South Exit and turn right. Follow the uphill route for Kitano, or continue on the level route for Sannomiya.',noteJa:'写真の案内を上から順に見ながら進んでください。',noteEn:'Please follow the photo guide in order.'}
   ]},
 
   '2系統・18系統「布引」バス停': {icon:'🚏', en:'Nunobiki bus stop / Routes 2 and 18', leadJa:'南出口を出て、2系統・18系統「布引」バス停へ歩く経路です。', leadEn:'Walking route from the South Exit to the Nunobiki bus stop for routes 2 and 18.', routes:[

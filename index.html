@@ -276,7 +276,13 @@ const ASSETS = {
   takenakaGuide2:'assets/takenaka_daiku_guide_2.png',
   takenakaGuide3:'assets/takenaka_daiku_guide_3.png',
   takenakaGuide4:'assets/takenaka_daiku_guide_4.png',
-  takenakaGuide5:'assets/takenaka_daiku_guide_5.png'
+  takenakaGuide5:'assets/takenaka_daiku_guide_5.png',
+  subwayShinkobeGuide1:'assets/subway_shinkobe_guide_1.png',
+  subwayShinkobeGuide2:'assets/subway_shinkobe_guide_2.png',
+  subwayShinkobeGuide3:'assets/subway_shinkobe_guide_3.png',
+  subwayShinkobeGuide4:'assets/subway_shinkobe_guide_4.png',
+  subwayShinkobeGuide5:'assets/subway_shinkobe_guide_5.png',
+  subwayShinkobeGuide6:'assets/subway_shinkobe_guide_6.png'
 };
 const stopPhotos = {
   east: [
@@ -394,7 +400,14 @@ const data = {
     ],pointJa:'写真の案内を上から順に見ながら進んでください。',pointEn:'Follow the photo guide in order.',noteJa:'2系統・18系統の「布引」バス停とは場所が異なります。生田川沿いを進み、坂を下った先にある92系統の「布引」バス停へ向かいます。',noteEn:'This stop is different from the Nunobiki stop for Routes 2 and 18. Follow the route along the Ikuta River and go down the slope to reach the Route 92 Nunobiki bus stop.'}
   ]},
 
-  '地下鉄新神戸駅': {icon:'🚇', en:'Subway Shin-Kobe Station', leadJa:'バスが終わったあと、またはバスの本数が少ない行き先へ向かう場合は、地下鉄・鉄道への乗り継ぎも選択肢になります。', leadEn:'When buses have ended or are infrequent, subway and railway transfers may be useful options.', routes:[{companyJa:'地下鉄新神戸駅へ',companyEn:'To Subway Shin-Kobe Station',stop:'none',photos:[],pointJa:'新幹線・駅周辺から地下鉄新神戸駅へ向かう案内です。詳しい写真つき手順は次回追加予定です。',pointEn:'Guide from the Shinkansen / station area to Subway Shin-Kobe Station. Detailed photo steps will be added soon.',noteJa:'有馬温泉、神戸空港、六甲アイランド方面への代替ルートにも使えます。',noteEn:'This can also be used for alternative routes to Arima Onsen, Kobe Airport, and Rokko Island.'}]},
+  '地下鉄新神戸駅': {icon:'🚇', en:'Subway Shin-Kobe Station', leadJa:'新幹線新神戸駅から地下鉄新神戸駅へ進み、三宮方面へ向かう写真案内です。', leadEn:'Photo guide from the Shinkansen Shin-Kobe Station to Subway Shin-Kobe Station and onward toward Sannomiya.', routes:[{companyJa:'地下鉄新神戸駅へ',companyEn:'To Subway Shin-Kobe Station',stop:'none',photos:[
+      {src:ASSETS.subwayShinkobeGuide1, guidePage:true, ja:'地下鉄新神戸駅への行き方 1', en:'Guide to Subway Shin-Kobe Station / page 1'},
+      {src:ASSETS.subwayShinkobeGuide2, guidePage:true, ja:'地下鉄新神戸駅への行き方 2', en:'Guide to Subway Shin-Kobe Station / page 2'},
+      {src:ASSETS.subwayShinkobeGuide3, guidePage:true, ja:'地下鉄新神戸駅への行き方 3', en:'Guide to Subway Shin-Kobe Station / page 3'},
+      {src:ASSETS.subwayShinkobeGuide4, guidePage:true, ja:'地下鉄新神戸駅への行き方 4', en:'Guide to Subway Shin-Kobe Station / page 4'},
+      {src:ASSETS.subwayShinkobeGuide5, guidePage:true, ja:'地下鉄新神戸駅への行き方 5', en:'Guide to Subway Shin-Kobe Station / page 5'},
+      {src:ASSETS.subwayShinkobeGuide6, guidePage:true, ja:'地下鉄新神戸駅への行き方 6', en:'Guide to Subway Shin-Kobe Station / page 6'}
+    ],pointJa:'写真の案内を上から順に見ながら、地下鉄新神戸駅へ進んでください。',pointEn:'Follow the photo guide in order to reach Subway Shin-Kobe Station.',noteJa:'三宮方面へ行く方は、2番線または3番線へ進みます。JRの切符では地下鉄の改札を通れません。地下鉄のきっぷを購入するか、ICカードやクレジットカードなどをご利用ください。',noteEn:'For Sannomiya, proceed to Platform 2 or 3. JR tickets cannot be used at the subway ticket gates. Buy a subway ticket or use an IC card, credit card, or another accepted payment method.'}]},
 
   '布引ロープウェイ': {icon:'🚡', en:'Nunobiki Ropeway', leadJa:'新神戸駅から、神戸布引ハーブ園／ロープウェイ山麓駅へ歩いて向かう経路です。1階から行く方と、2階・新幹線改札口から行く方に分けて案内します。', leadEn:'Walking guide from Shin-Kobe Station to the Kobe Nunobiki Herb Gardens / Ropeway lower station. The guide covers routes from the 1F rotary and from the 2F Shinkansen gate.', routes:[
     {companyJa:'徒歩・ロープウェイ',companyEn:'Walking / Ropeway',stop:'none',photos:[

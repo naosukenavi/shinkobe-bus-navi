@@ -93,6 +93,15 @@
   color:#666;
   line-height:1.45;
 }
+.current-station{
+  display:inline-block;
+  border:2px solid var(--blue);
+  border-radius:5px;
+  padding:0 4px;
+  color:var(--blue-dark);
+  background:#fff;
+  font-weight:800;
+}
 
 
 
@@ -660,7 +669,7 @@ function railOverview(){
    ↑ 神戸電鉄
 谷上
    ↑ 地下鉄
-新神戸
+<span class="current-station">新神戸</span>（現在地）
    ↓ 地下鉄
 三宮
    ├─ ポートライナー → 神戸空港
@@ -674,7 +683,7 @@ function railOverview(){
    ↑ Kobe Electric Railway
 Tanigami
    ↑ Subway
-Shin-Kobe
+<span class="current-station">Shin-Kobe</span> (You are here)
    ↓ Subway
 Sannomiya
    ├─ Port Liner → Kobe Airport

@@ -305,7 +305,11 @@ const ASSETS = {
   hankyuSannomiyaGuide2:'assets/hankyu_kobe_sannomiya_guide_2.png',
   hankyuSannomiyaGuide3:'assets/hankyu_kobe_sannomiya_guide_3.png',
   hankyuSannomiyaGuide4:'assets/hankyu_kobe_sannomiya_guide_4.png',
-  hankyuSannomiyaGuide5:'assets/hankyu_kobe_sannomiya_guide_5.png'
+  hankyuSannomiyaGuide5:'assets/hankyu_kobe_sannomiya_guide_5.png',
+  hanshinSannomiyaGuide1:'assets/hanshin_kobe_sannomiya_guide_1.png',
+  hanshinSannomiyaGuide2:'assets/hanshin_kobe_sannomiya_guide_2.png',
+  hanshinSannomiyaGuide3:'assets/hanshin_kobe_sannomiya_guide_3.png',
+  hanshinSannomiyaGuide4:'assets/hanshin_kobe_sannomiya_guide_4.png'
 };
 const stopPhotos = {
   east: [
@@ -338,7 +342,7 @@ const groups = [
   {kana:'🚏 乗り場への行き方', items:['トンネル入口バス停への行き方','ホテル玄関前（4階）バス停への行き方']},
   {kana:'🚌 バスで行く', items:['有馬温泉','淡路島','アリーナ前','小野','かもめりあ','関空リムジン','KIITO前','北野異人館','神戸駅南口','神戸空港','シティーループ／ポートループ','新港町','三田関西学院','三田プレミアムアウトレット','高松','筑紫が丘','徳島','南京町','ハーバーランド・モザイク','ポートタワー','箕谷・神戸北町','三木','メリケンパーク','社','六甲アイランド','六甲道']},
   {kana:'🚶 徒歩で行く', items:['布引の滝','竹中大工道具館','2系統・18系統「布引」バス停','92系統「布引」バス停']},
-  {kana:'🚉 地下鉄・鉄道へ乗り継ぐ', items:['地下鉄（新神戸駅～三宮駅）','阪急 神戸三宮駅へ乗り継ぐ','有馬温泉へ地下鉄・神鉄で行く','神戸空港へ地下鉄・ポートライナーで行く','六甲アイランドへ鉄道で行く']},
+  {kana:'🚉 地下鉄・鉄道へ乗り継ぐ', items:['地下鉄（新神戸駅～三宮駅）','阪急 神戸三宮駅へ乗り継ぐ','阪神 神戸三宮駅へ乗り継ぐ','有馬温泉へ地下鉄・神鉄で行く','神戸空港へ地下鉄・ポートライナーで行く','六甲アイランドへ鉄道で行く']},
   {kana:'🚡 ロープウェイ・観光', items:['布引ロープウェイ']}
 ];
 const data = {
@@ -447,6 +451,22 @@ const data = {
     pointEn:'Follow the photo guide in order from the Subway Sannomiya ticket gate to Hankyu Kobe-Sannomiya Station.',
     noteJa:'現地の「阪急電車のりば」「阪急 神戸三宮駅」の案内表示も確認しながら進んでください。',
     noteEn:'Also follow the on-site signs for the Hankyu Railway entrance and Hankyu Kobe-Sannomiya Station.'
+  }]},
+
+  '阪神 神戸三宮駅へ乗り継ぐ': {icon:'🚉', en:'Transfer to Hanshin Kobe-Sannomiya Station', leadJa:'地下鉄三宮駅から阪神 神戸三宮駅へ乗り継ぐ写真案内です。', leadEn:'Photo guide for transferring from Subway Sannomiya Station to Hanshin Kobe-Sannomiya Station.', routes:[{
+    companyJa:'地下鉄＋阪神電車',
+    companyEn:'Subway + Hanshin Railway',
+    stop:'none',
+    photos:[
+      {src:ASSETS.hanshinSannomiyaGuide1, guidePage:true, ja:'地下鉄三宮駅から阪神 神戸三宮駅へ 1', en:'From Subway Sannomiya Station to Hanshin Kobe-Sannomiya Station / page 1'},
+      {src:ASSETS.hanshinSannomiyaGuide2, guidePage:true, ja:'地下鉄三宮駅から阪神 神戸三宮駅へ 2', en:'From Subway Sannomiya Station to Hanshin Kobe-Sannomiya Station / page 2'},
+      {src:ASSETS.hanshinSannomiyaGuide3, guidePage:true, ja:'地下鉄三宮駅から阪神 神戸三宮駅へ 3', en:'From Subway Sannomiya Station to Hanshin Kobe-Sannomiya Station / page 3'},
+      {src:ASSETS.hanshinSannomiyaGuide4, guidePage:true, ja:'地下鉄三宮駅から阪神 神戸三宮駅へ 4', en:'From Subway Sannomiya Station to Hanshin Kobe-Sannomiya Station / page 4'}
+    ],
+    pointJa:'写真の案内を上から順に見ながら、地下鉄三宮駅の改札から阪神 神戸三宮駅へ進んでください。',
+    pointEn:'Follow the photo guide in order from the Subway Sannomiya ticket gate to Hanshin Kobe-Sannomiya Station.',
+    noteJa:'現地の「阪神電車 神戸三宮駅（西口）」の案内表示も確認しながら進んでください。西口の向こう側に券売機があります。',
+    noteEn:'Also follow the on-site signs for Hanshin Kobe-Sannomiya Station (West Gate). Ticket machines are located beyond the west gate.'
   }]},
 
   '布引ロープウェイ': {icon:'🚡', en:'Nunobiki Ropeway', leadJa:'新神戸駅から、神戸布引ハーブ園／ロープウェイ山麓駅へ歩いて向かう経路です。1階から行く方と、2階・新幹線改札口から行く方に分けて案内します。', leadEn:'Walking guide from Shin-Kobe Station to the Kobe Nunobiki Herb Gardens / Ropeway lower station. The guide covers routes from the 1F rotary and from the 2F Shinkansen gate.', routes:[

@@ -309,7 +309,8 @@ const ASSETS = {
   hanshinSannomiyaGuide1:'assets/hanshin_kobe_sannomiya_guide_1.png',
   hanshinSannomiyaGuide2:'assets/hanshin_kobe_sannomiya_guide_2.png',
   hanshinSannomiyaGuide3:'assets/hanshin_kobe_sannomiya_guide_3.png',
-  hanshinSannomiyaGuide4:'assets/hanshin_kobe_sannomiya_guide_4.png'
+  hanshinSannomiyaGuide4:'assets/hanshin_kobe_sannomiya_guide_4.png',
+  cityLoopNyan:'assets/city_loop_nyan.png'
 };
 const stopPhotos = {
   east: [
@@ -340,7 +341,7 @@ const stopInfo = {
 };
 const groups = [
   {kana:'🚏 乗り場への行き方', items:['トンネル入口バス停への行き方','ホテル玄関前（4階）バス停への行き方']},
-  {kana:'🚌 バスで行く', items:['有馬温泉','淡路島','アリーナ前','小野','かもめりあ','関空リムジン','KIITO前','北野異人館','神戸駅南口','神戸空港','シティーループ／ポートループ','新港町','三田関西学院','三田プレミアムアウトレット','高松','筑紫が丘','徳島','南京町','ハーバーランド・モザイク','ポートタワー','箕谷・神戸北町','三木','メリケンパーク','社','六甲アイランド','六甲道']},
+  {kana:'🚌 バスで行く', items:['有馬温泉','淡路島','アリーナ前','小野','かもめりあ','関空リムジン','KIITO前','北野異人館','神戸駅南口','神戸空港','シティーループ','ポートループ','新港町','三田関西学院','三田プレミアムアウトレット','高松','筑紫が丘','徳島','南京町','ハーバーランド・モザイク','ポートタワー','箕谷・神戸北町','三木','メリケンパーク','社','六甲アイランド','六甲道']},
   {kana:'🚶 徒歩で行く', items:['布引の滝','竹中大工道具館','2系統・18系統「布引」バス停','92系統「布引」バス停']},
   {kana:'🚉 地下鉄・鉄道へ乗り継ぐ', items:['地下鉄（新神戸駅～三宮駅）','阪急 神戸三宮駅へ乗り継ぐ','阪神 神戸三宮駅へ乗り継ぐ','有馬温泉へ地下鉄・神鉄で行く','神戸空港へ地下鉄・ポートライナーで行く','六甲アイランドへ鉄道で行く']},
   {kana:'🚡 ロープウェイ・観光', items:['布引ロープウェイ']}
@@ -389,8 +390,11 @@ const data = {
     noteEn:'At JR Sannomiya Station, check the departure display and take a local train from platform 1 or 2. Get off at Sumiyoshi. For the Rokko Liner, check that the train is bound for Marine Park.'
   }]},
 
-  'シティーループ／ポートループ': {icon:'🚌', en:'City Loop / Port Loop', leadJa:'シティーループ（City Loop）とポートループ（Port Loop）の違いを確認します。車体表示と行き先を確認してください。', leadEn:'Check the difference between City Loop and Port Loop. Please confirm the bus display and destination.', loopHelp:true, portLoopSannomiyaGuide:true, routes:[
-    {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',pointEn:'At Shin-Kobe Station, board near the west end of the 1F rotary.',noteJa:'車体表示「City Loop」を確認してください。',noteEn:'Check the bus display says City Loop.'},
+  'シティーループ': {icon:'🟩', en:'City Loop', leadJa:'シティーループ（City Loop）に乗る方向けの案内です。車体表示と行き先を確認してください。', leadEn:'Guide for passengers taking the City Loop. Please check the bus display and destination.', loopHelp:true, routes:[
+    {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',photos:[{src:ASSETS.westCL, ja:'通常のシティーループ（City Loop）車両', en:'Regular City Loop bus'},{src:ASSETS.cityLoopNyan, ja:'応援車両「ループにゃん号」', en:'Support vehicle “Loop Nyan-go”'}],pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',pointEn:'At Shin-Kobe Station, board near the west end of the 1F rotary.',noteJa:'車体表示「City Loop」を確認してください。応援車両の「ループにゃん号」も、たまに登板します。',noteEn:'Check that the bus display says “City Loop.” The support vehicle “Loop Nyan-go” also appears from time to time.'}
+  ]},
+
+  'ポートループ': {icon:'🟦', en:'Port Loop', leadJa:'ポートループ（Port Loop）に乗る方向けの案内です。車体表示と行き先を確認してください。', leadEn:'Guide for passengers taking the Port Loop. Please check the bus display and destination.', loopHelp:true, portLoopSannomiyaGuide:true, routes:[
     {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',photos:[{src:ASSETS.westPL, ja:'通常のポートループ（連節バス）', en:'Regular Port Loop articulated bus'},{src:ASSETS.portLoopSubstitutePhoto, ja:'代車として来る場合がある神姫カラーのオレンジ色の路線バス', en:'Orange substitute bus that may operate as Port Loop'}],pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',pointEn:'At Shin-Kobe Station, board near the west end of the 1F rotary.',noteJa:'ポートループは、代車として神姫カラーのオレンジ色の路線バスが来る場合があります。車体の色だけで判断せず、前面や側面の「Port Loop」表示を確認してください。',noteEn:'Port Loop may sometimes use an orange substitute bus. Do not judge only by the bus color; check the Port Loop display on the front or side.'}
   ]},
 

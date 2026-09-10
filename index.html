@@ -314,7 +314,14 @@ const ASSETS = {
   hanshinSannomiyaGuide2:'assets/hanshin_kobe_sannomiya_guide_2.png',
   hanshinSannomiyaGuide3:'assets/hanshin_kobe_sannomiya_guide_3.png',
   hanshinSannomiyaGuide4:'assets/hanshin_kobe_sannomiya_guide_4.png',
-  cityLoopNyan:'assets/city_loop_nyan.png'
+  cityLoopNyan:'assets/city_loop_nyan.png',
+  portopiaShuttleTimetable:'assets/portopia_shuttle_timetable.png',
+  portopiaShuttleNotice:'assets/portopia_shuttle_notice.png',
+  portopiaShuttleBus:'assets/portopia_shuttle_bus.png',
+  portopiaShuttleSubstitute:'assets/portopia_shuttle_substitute.png',
+  pearlcityShuttleTimetable:'assets/pearlcity_shuttle_timetable.png',
+  harborlandShuttleTimetable:'assets/harborland_shuttle_timetable.png',
+  harborlandShuttleBus:'assets/harborland_shuttle_bus.png'
 };
 const stopPhotos = {
   east: [
@@ -345,6 +352,7 @@ const stopInfo = {
 };
 const groups = [
   {kana:'🚏 乗り場への行き方', items:['トンネル入口バス停への行き方','ホテル玄関前（4階）バス停への行き方']},
+  {kana:'🏨 ホテルシャトルバス', items:['ポートピアホテル','パールシティ神戸','メリケンパークオリエンタルホテル／ホテルオークラ神戸']},
   {kana:'🚌 バスで行く', items:['有馬温泉','淡路島','アリーナ前','小野','かもめりあ','関空リムジン','KIITO前','北野異人館','神戸駅南口','神戸空港','シティーループ','ポートループ','新港町','三田関西学院','三田プレミアムアウトレット','高松','筑紫が丘','徳島','南京町','ハーバーランド・モザイク','ポートタワー','箕谷・神戸北町','三木','メリケンパーク','社','六甲アイランド','六甲道']},
   {kana:'🚶 徒歩で行く', items:['布引の滝','竹中大工道具館','2系統・18系統「布引」バス停','92系統「布引」バス停']},
   {kana:'🚉 地下鉄・鉄道へ乗り継ぐ', items:['地下鉄（新神戸駅～三宮駅）','阪急 神戸三宮駅へ乗り継ぐ','阪神 神戸三宮駅へ乗り継ぐ','有馬温泉へ地下鉄・神鉄で行く','神戸空港へ地下鉄・ポートライナーで行く','六甲アイランドへ鉄道で行く']},
@@ -593,6 +601,28 @@ const data = {
     {companyJa:'みなと観光バス（本数少ない）',companyEn:'Minato Kanko Bus / limited service',stop:'middle', photos:[{src:ASSETS.tsukushigaokaMinatoStop, ja:'紺地に白いカモメのマークのバス停が目印', en:'Look for the navy stop sign with the white seagull mark.'}], pointJa:'紺地に白いカモメのマークのバス停が目印です。', pointEn:'Use the navy stop sign with the white seagull mark as your landmark.', noteJa:'本数が少ないため時刻表を確認してください。<br><span class="red">1日乗車券・2日乗車券はご利用になれません。</span>',noteEn:'Service is limited, so check the timetable. 1-day and 2-day sightseeing passes cannot be used.'},
     {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「City Loop」を確認してください。',noteEn:'Check the City Loop display.'},
     {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「Port Loop」を確認してください。',noteEn:'Check the Port Loop display.'}
+  ]},
+
+  'ポートピアホテル': {icon:'🏨', en:'Portopia Hotel', leadJa:'ポートアイランド方面のホテルシャトルバスです。公式の時刻表・案内を写真のまま掲載しています。', leadEn:'Hotel shuttle bus for Port Island. The official timetable and notices are shown as photographed.', routes:[
+    {companyJa:'ポートピアホテル シャトルバス',companyEn:'Portopia Hotel Shuttle Bus',stop:null,hideBoarding:true,photos:[
+      {src:ASSETS.portopiaShuttleTimetable,guidePage:true,ja:'ポートピアホテル シャトルバス時刻表',en:'Portopia Hotel shuttle bus timetable'},
+      {src:ASSETS.portopiaShuttleNotice,guidePage:true,ja:'ポートピアホテル シャトルバスの案内・注意書き',en:'Portopia Hotel shuttle bus notice'},
+      {src:ASSETS.portopiaShuttleBus,ja:'ポートピアホテル シャトルバス 通常車両',en:'Portopia Hotel shuttle bus / regular vehicle'},
+      {src:ASSETS.portopiaShuttleSubstitute,ja:'ポートピアホテル シャトルバス 代車（MK BUS）',en:'Portopia Hotel shuttle bus / substitute vehicle (MK BUS)'}
+    ],pointJa:'シャトルバスは道路事情などにより遅れる場合があります。ご利用の際は、写真の公式案内と現地表示をご確認ください。',pointEn:'The shuttle bus may be delayed due to traffic and other conditions. Please check the photographed official notice and on-site information before use.'}
+  ]},
+
+  'パールシティ神戸': {icon:'🏨', en:'Pearl City Kobe', leadJa:'ポートアイランド方面のホテルシャトルバスです。公式時刻表を写真のまま掲載しています。', leadEn:'Hotel shuttle bus for Port Island. The official timetable is shown as photographed.', routes:[
+    {companyJa:'パールシティ神戸 シャトルバス',companyEn:'Pearl City Kobe Shuttle Bus',stop:null,hideBoarding:true,photos:[
+      {src:ASSETS.pearlcityShuttleTimetable,guidePage:true,ja:'パールシティ神戸 シャトルバス時刻表',en:'Pearl City Kobe shuttle bus timetable'}
+    ],pointJa:'ご利用の際は、写真の公式時刻表と現地表示をご確認ください。',pointEn:'Please check the photographed official timetable and on-site information before use.'}
+  ]},
+
+  'メリケンパークオリエンタルホテル／ホテルオークラ神戸': {icon:'🏨', en:'Kobe Meriken Park Oriental Hotel / Hotel Okura Kobe', leadJa:'ハーバーランド方面の共用ホテルシャトルバスです。神戸メリケンパークオリエンタルホテルとホテルオークラ神戸の2施設で利用されるシャトルバスを、公式案内の写真で紹介します。', leadEn:'Shared hotel shuttle bus for the Harborland area. This shuttle serves Kobe Meriken Park Oriental Hotel and Hotel Okura Kobe; the official notice is shown as photographed.', routes:[
+    {companyJa:'神戸メリケンパークオリエンタルホテル／ホテルオークラ神戸 共用シャトルバス',companyEn:'Kobe Meriken Park Oriental Hotel / Hotel Okura Kobe Shared Shuttle Bus',stop:null,hideBoarding:true,photos:[
+      {src:ASSETS.harborlandShuttleTimetable,guidePage:true,ja:'ハーバーランド方面 共用シャトルバス時刻表・案内',en:'Harborland shared shuttle bus timetable and notice'},
+      {src:ASSETS.harborlandShuttleBus,ja:'ハーバーランド方面 共用シャトルバス 車両',en:'Harborland shared shuttle bus vehicle'}
+    ],pointJa:'2つのホテルで共用するシャトルバスです。<br><span class="red">土日祝日のみ運行</span><br>ご利用の際は、写真の公式案内と現地表示をご確認ください。',pointEn:'This shuttle is shared by the two hotels.<br><span class="red">Operates on Saturdays, Sundays and public holidays only.</span><br>Please check the photographed official notice and on-site information before use.'}
   ]}
 };
 const railStationRoutes = [
@@ -767,14 +797,14 @@ function renderDest(){const el=document.getElementById('destinations');el.innerH
   const note=document.createElement('div');note.className='small-note';note.textContent=t('※バスの運行状況は変更される場合があります。ご利用の際は最新情報をご確認ください。','Bus services may change. Please check the latest information before use.');el.appendChild(note);const link=document.createElement('a');link.className='stop-list-link';link.href=`?view=stops&lang=${lang}`;link.target='_blank';link.rel='noopener';link.textContent=t('系統別・全バス停名一覧','All bus stops by route');el.appendChild(link);const railLink=document.createElement('a');railLink.className='stop-list-link';railLink.href=`?view=stations&lang=${lang}`;railLink.target='_blank';railLink.rel='noopener';railLink.textContent=t('市営地下鉄・新交通 全駅名一覧','Municipal subway and new transit stations');el.appendChild(railLink)}
 const rotaryGuideDestinations=new Set(['アリーナ前','かもめりあ','KIITO前','北野異人館','神戸駅南口','神戸空港','シティーループ','ポートループ','新港町','筑紫が丘','南京町','ハーバーランド・モザイク','ポートタワー','メリケンパーク','六甲アイランド','六甲道']);
 function renderDetail(){const d=data[current]; const el=document.getElementById('detail'); if(!d){el.innerHTML='<div class="empty">データ準備中です。</div>';return} if(d.directGuide){el.innerHTML=`<div class="selected-banner">${t('選択中：','Now showing: ')}${t(current,d.en)}</div><h2>${d.icon||'🚏'} ${t(current,d.en)}</h2><p class="lead">${t(d.leadJa,d.leadEn)}</p><div class="guide show">${guideHtml(d.directGuide)}</div><button class="back" onclick="window.scrollTo({top:0,behavior:'smooth'})">← ${t('行き先一覧に戻る','Back to destination list')}</button>`;return} const cards=d.routes.map((r,i)=>routeCard(r,i)).join(''); const walkingItems=groups.find(g=>g.kana==='🚶 徒歩で行く').items; const railItems=groups.find(g=>g.kana==='🚉 地下鉄・鉄道へ乗り継ぐ').items; const isWalking=walkingItems.includes(current); const isRail=railItems.includes(current); const isRopeway=current==='布引ロープウェイ'; const walkingInfo=`<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べながら進んでください。','Follow the route while comparing the photos with the signs and surroundings.')}</li><li>${t('道路状況や工事などにより、案内時と現地の様子が異なる場合があります。','Road conditions or construction may cause the surroundings to differ from the photos.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div>`; const railInfo=`<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べながら進んでください。','Follow the route while comparing the photos with the signs at the station.')}</li><li>${t('運行状況・乗り場・乗換方法などは、現地表示や各交通事業者の最新情報もご確認ください。','Please also check on-site displays and the latest information from each transport operator for service status, platforms and transfers.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div>`; const ropewayInfo=`<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べながら進んでください。','Follow the route while comparing the photos with the signs and surroundings.')}</li><li>${t('天候や点検などにより、運行状況・営業時間が変更される場合があります。現地表示や最新の公式情報もご確認ください。','Service status and operating hours may change due to weather or maintenance. Please also check on-site displays and the latest official information.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div>`; const busInfo=rotaryGuideDestinations.has(current)?`<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('道路状況により遅延することがあります。','Buses may be delayed due to traffic.')}</li><li>${t('時刻表は目安、停車位置は状況により変動します。','Timetables are a guide, and stopping positions may vary depending on conditions.')}</li><li>${t('時刻が近づいたら、ロータリー全体を見て自分の乗るバスを確認してください。','As the departure time approaches, look around the entire rotary and confirm your bus.')}</li></ul></div>`:`<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べてください。','Compare the photos with the signs at the station.')}</li><li>${t('道路状況により遅延することがあります。','Buses may be delayed due to traffic.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div>`; const info=isWalking?walkingInfo:isRail?railInfo:isRopeway?ropewayInfo:busInfo; el.innerHTML=`<div class="selected-banner">${t('選択中：','Now showing: ')}${t(current,d.en)}</div><h2>${d.icon||'🚌'} ${t(current,d.en)}</h2><p class="lead">${t(d.leadJa,d.leadEn)}</p>${cards}${d.transferGood?transferBox():''}${d.portLoopSannomiyaGuide?portLoopSannomiyaGuide():''}${d.loopHelp?loopHelp():''}${d.noticeJa?`<div class="warning danger"><strong>${t('⚠ 乗り間違い注意','⚠ Avoid boarding the wrong bus')}</strong>${t(d.noticeJa,d.noticeEn)}</div>`:''}${info}<button class="back" onclick="window.scrollTo({top:0,behavior:'smooth'})">← ${t('行き先一覧に戻る','Back to destination list')}</button><div id="guideArea" class="guide"></div>`}
-function routeCard(r,i){const s=stopInfo[r.stop]; let photos=r.photos || stopPhotos[r.stop]||[];
+function routeCard(r,i){const s=stopInfo[r.stop]; let photos=r.photos || (s ? (stopPhotos[r.stop]||[]) : []);
   if(r.stop==='west' && !r.photos){
     if((r.companyJa||'').includes('シティーループ') || (r.companyEn||'').includes('City Loop')){
       photos=[{src:ASSETS.westCL, ja:'シティーループ（City Loop）停車中', en:'City Loop bus'}];
     }else if((r.companyJa||'').includes('ポートループ') || (r.companyEn||'').includes('Port Loop')){
       photos=[{src:ASSETS.westPL, ja:'ポートループ（Port Loop）停車中', en:'Port Loop bus'}];
     }
-  } const photoHtml=photos.map(p=>`<figure class="photo ${p.guideShot?'guide-shot':''} ${p.guidePage?'guide-page':''}"><img src="${p.src}" alt="${t(p.ja,p.en)}"><figcaption>${t(p.ja,p.en)}</figcaption></figure>`).join(''); const guideBtn=(r.stop==='tunnel'||r.stop==='hotel')?`<button class="action-btn ${r.stop==='hotel'?'pink':''}" onclick="showGuide('${r.stop}')">${t(s.ja+'への行き方を見る','How to get to '+s.en)}</button>`:''; const warn=r.warnJa?`<div class="warning ${r.danger?'danger':''}"><strong>${t(r.warnTitleJa||'⚠ 間違えやすいです',r.warnTitleEn||'⚠ Easy to mix up')}</strong>${t(r.warnJa,r.warnEn)}</div>`:''; const avoid=r.avoidJa?`<div class="warning danger"><strong>${t(r.avoidTitleJa||'乗らないでください',r.avoidTitleEn||'Do not take this bus')}</strong>${t(r.avoidJa,r.avoidEn)}</div>`:''; return `<section class="route-card"><div class="route-title">${r.icon|| (r.stop==='middle'?'🚌':r.stop==='hotel'?'🧳':'🚌')} ${t(r.companyJa,r.companyEn)}</div><div class="stop">${t('乗り場：','Boarding point: ')} <span class="place ${s.cls}">${t(s.ja,s.en)}</span></div>${warn}${avoid}<div class="photos">${photoHtml}</div><div class="point ${s.cls}"><strong>${t('ポイント','Point')}</strong>${t(r.pointJa||s.pointJa,r.pointEn||s.pointEn)}<br>${t(r.noteJa,r.noteEn)}</div><div class="actions">${guideBtn}</div></section>`}
+  } const photoHtml=photos.map(p=>`<figure class="photo ${p.guideShot?'guide-shot':''} ${p.guidePage?'guide-page':''}"><img src="${p.src}" alt="${t(p.ja,p.en)}"><figcaption>${t(p.ja,p.en)}</figcaption></figure>`).join(''); const guideBtn=(r.stop==='tunnel'||r.stop==='hotel')&&s?`<button class="action-btn ${r.stop==='hotel'?'pink':''}" onclick="showGuide('${r.stop}')">${t(s.ja+'への行き方を見る','How to get to '+s.en)}</button>`:''; const warn=r.warnJa?`<div class="warning ${r.danger?'danger':''}"><strong>${t(r.warnTitleJa||'⚠ 間違えやすいです',r.warnTitleEn||'⚠ Easy to mix up')}</strong>${t(r.warnJa,r.warnEn)}</div>`:''; const avoid=r.avoidJa?`<div class="warning danger"><strong>${t(r.avoidTitleJa||'乗らないでください',r.avoidTitleEn||'Do not take this bus')}</strong>${t(r.avoidJa,r.avoidEn)}</div>`:''; return `<section class="route-card"><div class="route-title">${r.icon|| (r.stop==='middle'?'🚌':r.stop==='hotel'?'🧳':'🚌')} ${t(r.companyJa,r.companyEn)}</div>${r.hideBoarding?'':`<div class="stop">${t('乗り場：','Boarding point: ')} <span class="place ${s?s.cls:''}">${r.boardingJa?t(r.boardingJa,r.boardingEn):s?t(s.ja,s.en):''}</span></div>`}${warn}${avoid}<div class="photos">${photoHtml}</div><div class="point ${s?s.cls:''}"><strong>${t('ポイント','Point')}</strong>${t(r.pointJa||(s?s.pointJa:''),r.pointEn||(s?s.pointEn:''))}<br>${t(r.noteJa||'',r.noteEn||'')}</div><div class="actions">${guideBtn}</div></section>`}
 
 function portLoopSannomiyaGuide(){
   const figure=(src,ja,en)=>`<figure class="transfer-guide-page"><img src="${src}" alt="${t(ja,en)}"><figcaption>${t(ja,en)}</figcaption></figure>`;

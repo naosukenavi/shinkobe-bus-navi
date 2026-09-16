@@ -18,7 +18,7 @@
     *{box-sizing:border-box}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:var(--text);background:white;line-height:1.65}
     .app{max-width:1240px;margin:0 auto;padding:18px 20px 32px}
-    .lang{display:flex;gap:12px;margin-bottom:14px}
+    .lang{display:flex;align-items:center;gap:12px;margin-bottom:14px}.lang-compass{font-size:22px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
     .lang button{border:0;border-radius:10px;padding:9px 22px;font-size:18px;color:#fff;background:var(--gray);cursor:pointer}
     .lang button.active{background:var(--blue)}
     h1{font-size:34px;margin:0 0 4px;letter-spacing:.02em}.subtitle{font-size:18px;margin:0 0 16px}.gamepad{font-size:34px;vertical-align:-4px;margin-right:10px}.title-icon{width:42px;height:42px;object-fit:contain;vertical-align:-10px;margin-right:8px}.red{color:#c40000;font-weight:800}
@@ -143,8 +143,8 @@ details.transfer-route[open] summary::after{content:'－'}
 </head>
 <body>
 <div class="app">
-  <div class="lang"><button id="jaBtn" class="active">日本語</button><button id="enBtn">English</button></div>
-  <h1><span data-ja="新神戸駅前案内事典" data-en="Shin-Kobe Station Area Guide">新神戸駅前案内事典</span></h1>
+  <div class="lang"><span class="lang-compass" aria-hidden="true">🧭</span><button id="jaBtn" class="active">日本語</button><button id="enBtn">English</button></div>
+  <h1><span class="gamepad">🧭</span><span data-ja="新神戸駅前案内事典" data-en="Shin-Kobe Station Area Guide">新神戸駅前案内事典</span></h1>
   <p class="subtitle" data-ja="🚌 バス・🚉 鉄道・🚶 徒歩ルート" data-en="🚌 Bus・🚉 Rail・🚶 Walking routes">🚌 バス・🚉 鉄道・🚶 徒歩ルート</p>
   <div class="refresh-box">
     <p class="refresh-text">

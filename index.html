@@ -936,20 +936,22 @@ function frontLocation(type){
   if(type==='tunnel') return frontPanel(`
     <h3>🟢 地階・トンネル入口</h3>
     <p><strong>ここが「トンネル入口バス停」なら、1階ロータリーへ戻る必要はありません。</strong></p>
-    <img src="${ASSETS.tunnelMainStop}" alt="トンネル入口バス停">
-    <p class="front-photo-caption">トンネル入口バス停</p>
+    <img src="${ASSETS.tunnelOverview}" alt="トンネル入口バス停への簡略案内">
+    <p class="front-photo-caption">トンネル入口バス停への簡略案内</p>
+    <p class="mini-note">この図で行き方が分かれば、ここで案内は終了です。分からない場合は写真で詳しい道順を確認できます。</p>
     <div class="front-actions">
-      <button class="front-action green" onclick="showGuideFromFront('tunnel')">📷 トンネル入口までの道順を写真で見る</button>
+      <button class="front-action green" onclick="showGuideFromFront('tunnel')">📷 写真で詳しい道順を見る</button>
       <button class="front-action light" onclick="showEncyclopedia('tunnel')">📚 詳しいバス情報を見る</button>
       <button class="front-action front-back" onclick="frontHome()">← 最初の4つの選択に戻る</button>
     </div>`);
   if(type==='hotel') return frontPanel(`
     <h3>🏨 4階・ホテル玄関前</h3>
     <p><strong>ここは1階ロータリーではありません。</strong> 徳島方面・関西空港方面などの一部の高速バスは、ホテル玄関前（4階）から乗車します。</p>
-    <img src="${ASSETS.hotelStep6}" alt="ホテル玄関前">
-    <p class="front-photo-caption">ホテル玄関前（4階）</p>
+    <img src="${ASSETS.hotelGuideSteps12}" alt="ホテル玄関前への簡略案内">
+    <p class="front-photo-caption">ホテル玄関前（4階）への簡略案内</p>
+    <p class="mini-note">この図で行き方が分かれば、ここで案内は終了です。分からない場合は写真で詳しい道順を確認できます。</p>
     <div class="front-actions">
-      <button class="front-action yellow" onclick="showGuideFromFront('hotel')">📷 ホテル玄関前までの道順を写真で見る</button>
+      <button class="front-action yellow" onclick="showGuideFromFront('hotel')">📷 写真で詳しい道順を見る</button>
       <button class="front-action light" onclick="showEncyclopedia('hotel')">📚 詳しいバス情報を見る</button>
       <button class="front-action front-back" onclick="frontHome()">← 最初の4つの選択に戻る</button>
     </div>`);
@@ -957,13 +959,13 @@ function frontLocation(type){
 function frontRotary(){
   frontPanel(`
     <h3>🚌 1階・ロータリー</h3>
-    <p>まず下の略図を見て、行きたい<strong>のりばの位置</strong>を選んでください。</p>
+    <p>まずこの略図で、行きたい<strong>のりばの位置</strong>を確認してください。</p>
     <div class="rotary-map"><img src="${ASSETS.westOverview}" alt="1階ロータリー略図"></div>
-    <p class="mini-note">略図の位置を押すと、その場所の具体的な写真が1枚ずつ表示されます。</p>
+    <p class="mini-note">この略図で分かれば、ここで案内は終了です。分からない場合は、下のボタンから写真で具体的なのりばを確認できます。</p>
     <div class="front-actions">
-      <button class="front-action" onclick="frontStop('east')">① ロータリー東端・JRバス</button>
-      <button class="front-action" onclick="frontStop('middle')">② ロータリー中央付近</button>
-      <button class="front-action" onclick="frontStop('west')">③ ロータリー西端・観光バス</button>
+      <button class="front-action" onclick="frontStop('east')">① 写真で見る：ロータリー東端・JRバス</button>
+      <button class="front-action" onclick="frontStop('middle')">② 写真で見る：ロータリー中央付近</button>
+      <button class="front-action" onclick="frontStop('west')">③ 写真で見る：ロータリー西端・観光バス</button>
       <button class="front-action green" onclick="frontLocation('tunnel')">🟢 トンネル入口はこちら</button>
       <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ホテル玄関前はこちら</button>
     </div>

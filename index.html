@@ -879,11 +879,11 @@ function loopHelp(){
 function guideHtml(type){
   if(type==='tunnel'){return `<h3>🚶 ${t('トンネル入口バス停への行き方','How to get to the Tunnel Entrance bus stop')}</h3>
 <p>${t('有馬温泉・三田プレミアムアウトレット・三木・小野方面などの神姫バスは、1階ロータリーではなく「トンネル入口バス停」から乗車します。','For Arima Onsen, Sanda Premium Outlets, Miki, Ono and other Shinki Bus destinations, board at the Tunnel Entrance bus stop, not the 1F rotary.')}</p>
+<figure class="guide-step"><img src="${ASSETS.tunnelOverview}" alt="トンネル入口への簡略案内図"><figcaption>${t('トンネル入口への簡略案内図','Simplified guide to the Tunnel Entrance bus stop')}</figcaption></figure>
 <figure class="guide-step"><img src="${ASSETS.tunnelStep2}" alt="Tunnel step 1"><figcaption>${t('① ホテルへの渡り廊下へ進みます。','① Go to the walkway to the hotel.')}</figcaption></figure>
 <figure class="guide-step"><img src="${ASSETS.tunnelStep3}" alt="Tunnel step 2"><figcaption>${t('② 渡り廊下を進みながら、左側を確認します。','② Walk along the walkway and check the left side.')}</figcaption></figure>
 <figure class="guide-step"><img src="${ASSETS.tunnelStep4}" alt="Tunnel step 3"><figcaption>${t('③ 左側の白い階段を下ります。','③ Go down the white stairs on your left.')}</figcaption></figure>
 <figure class="guide-step"><img src="${ASSETS.tunnelMainStop}" alt="Tunnel step 4"><figcaption>${t('④ 階段を下りると、新神戸駅（トンネル入口）バスのりばに到着します。','④ After going down the stairs, you arrive at the Shin-Kobe Station Tunnel Entrance bus stop.')}</figcaption></figure>
-<figure class="guide-step"><img src="${ASSETS.tunnelOverview}" alt="Tunnel overview"><figcaption>${t('補足：JR新神戸駅とトンネル入口バス停の位置関係です。','Extra: This shows the positional relationship between JR Shin-Kobe Station and the Tunnel Entrance bus stop.')}</figcaption></figure>
 <div class="point"><strong>${t('ポイント','Point')}</strong>${t('ここは1階ロータリー内ではありません。バス停表示で目的地を確認してください。','This is not inside the 1F rotary. Check the destination on the bus-stop sign.')}</div>
 <p><span class="tag">有馬温泉</span><span class="tag">三田プレミアムアウトレット</span><span class="tag">三木</span><span class="tag">小野</span><span class="tag">64系統</span></p>`}
   return `<h3>🧳 ${t('ホテル玄関前（4階）への行き方','How to get to the hotel entrance / 4F')}</h3>

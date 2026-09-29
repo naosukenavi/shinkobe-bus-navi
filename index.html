@@ -1034,7 +1034,16 @@ function frontLostResult(type){
     </div>`);
 }
 function frontHome(){document.getElementById('frontPanel').classList.remove('show');document.getElementById('frontPanel').innerHTML='';document.getElementById('frontGuide').scrollIntoView({behavior:'smooth',block:'start'});}
-function showGuideFromFront(type){showGuide(type);document.getElementById('frontPanel').classList.add('show');}
+function showGuideFromFront(type){
+  const el=document.getElementById('frontPanel');
+  el.innerHTML=`<div class="guide show">${guideHtml(type)}</div>
+    <div class="front-actions">
+      <button class="front-action light" onclick="frontLocation('${type}')">← 簡略案内図に戻る</button>
+      <button class="front-action front-back" onclick="frontHome()">← 最初の4つの選択に戻る</button>
+    </div>`;
+  el.classList.add('show');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
 function showEncyclopedia(){
   const layout=document.getElementById('mainLayout');
   document.getElementById('frontGuide').style.display='none';

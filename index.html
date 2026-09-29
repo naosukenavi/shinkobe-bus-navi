@@ -143,6 +143,9 @@ details.transfer-route[open] summary::after{content:'－'}
 .transfer-guide-page img{width:100%;height:auto;display:block;border:1px solid #ddd;border-radius:8px;background:#fff}
 .transfer-guide-page figcaption{font-size:14px;color:#444;margin-top:5px;text-align:center}
 
+
+/* 2026 renovation: simple first-step guide */
+.front-guide{margin-top:18px}.front-title{border:2px solid #0b7ff3;border-radius:14px;padding:18px 16px;background:#f7fbff;text-align:center}.front-title h2{margin:0;font-size:30px}.front-title p{margin:4px 0 0;font-size:21px;font-weight:800}.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.location-btn,.lost-btn,.encyclopedia-btn,.front-action{width:100%;border:0;border-radius:12px;padding:15px 14px;font-size:19px;font-weight:800;cursor:pointer}.location-btn{background:#0b7ff3;color:#fff;min-height:66px}.location-btn.tunnel{background:#66cdb6;color:#083b35}.location-btn.hotel{background:#f4cf4a;color:#4d3a00}.location-btn:active,.lost-btn:active,.encyclopedia-btn:active,.front-action:active{transform:translateY(1px)}.lost-btn{background:#fff7d8;border:2px solid #ffcc33;color:#5a4700;margin-bottom:14px}.front-panel{border:1px solid #d9dde5;border-radius:14px;background:#fff;padding:16px;display:none}.front-panel.show{display:block}.front-panel h3{font-size:25px;margin:0 0 8px}.front-panel p{font-size:17px}.front-panel img{width:100%;height:auto;border:1px solid #ddd;border-radius:10px;display:block;margin:12px 0}.front-actions{display:grid;gap:10px;margin-top:14px}.front-action{background:#0b7ff3;color:#fff}.front-action.green{background:#66cdb6;color:#083b35}.front-action.yellow{background:#f4cf4a;color:#4d3a00}.front-action.light{background:#f1f8ff;color:#075db3;border:1px solid #b7d8ff}.front-back{margin-top:12px;background:#eee;color:#333}.selected-front{outline:4px solid #ffcc33;box-shadow:0 0 0 2px rgba(255,204,51,.35)}.front-photo-caption{text-align:center;font-weight:700;color:#444}.rotary-map{background:#f8fbff;border:1px solid #cfd8e6;border-radius:12px;padding:10px}.rotary-map img{margin:0}.mini-note{font-size:14px!important;color:#555}.detail-entry{margin-top:14px}@media(max-width:640px){.location-grid{grid-template-columns:1fr}.location-btn{min-height:58px}.front-title h2{font-size:26px}}
 </style>
 </head>
 <body>
@@ -160,6 +163,21 @@ details.transfer-route[open] summary::after{content:'－'}
     <span class="multilingual-link-title">🌏 <span data-ja="Multilingual Guide" data-en="Multilingual Guide">Multilingual Guide</span></span>
     <span class="multilingual-link-sub" data-ja="外国語での案内はこちら" data-en="View this guide in other languages">外国語での案内はこちら</span>
   </a>
+  <section id="frontGuide" class="front-guide" aria-label="新神戸駅かんたん案内">
+  <div class="front-title">
+    <h2>新神戸駅 バス案内</h2>
+    <p>まず「今どこにいる？」</p>
+  </div>
+  <div class="location-grid">
+    <button class="location-btn" onclick="frontLocation('station')">🚄 新幹線改札・駅構内</button>
+    <button class="location-btn" onclick="frontLocation('rotary')">🚌 1階・ロータリー</button>
+    <button class="location-btn tunnel" onclick="frontLocation('tunnel')">🟢 地階・トンネル入口</button>
+    <button class="location-btn hotel" onclick="frontLocation('hotel')">🏨 4階・ホテル玄関前</button>
+  </div>
+  <button class="lost-btn" onclick="frontLost()">📍 どこにいるか分からない方はこちら</button>
+  <div id="frontPanel" class="front-panel" aria-live="polite"></div>
+  <button class="encyclopedia-btn" onclick="showEncyclopedia()">📚 詳しい「案内事典」を見る</button>
+</section>
   <div class="layout" id="mainLayout">
     <aside class="panel destinations" id="destinations"></aside>
     <main class="panel detail" id="detail"></main>
@@ -895,8 +913,134 @@ const listView=new URLSearchParams(location.search).get('view');
 const stopListView=listView==='stops';
 const stationListView=listView==='stations';
 
+
+// ===== 2026 renovation: front guide =====
+function frontPanel(html){
+  const el=document.getElementById('frontPanel');
+  el.innerHTML=html;
+  el.classList.add('show');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function frontLocation(type){
+  if(type==='station') return frontPanel(`
+    <h3>🚄 新幹線改札・駅構内</h3>
+    <p>駅構内にいる場合は、まず「どの階にいるか」を確認します。</p>
+    <div class="front-actions">
+      <button class="front-action" onclick="frontLocation('rotary')">🚌 1階ロータリーへ向かう</button>
+      <button class="front-action green" onclick="frontLocation('tunnel')">🟢 トンネル入口バス停へ向かう</button>
+      <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ホテル玄関前（4階）へ向かう</button>
+    </div>
+    <p class="mini-note">目的地が分からない場合は、下の「どこにいるか分からない方はこちら」を使ってください。</p>
+    <button class="front-action front-back" onclick="frontHome()">← 最初の4つの選択に戻る</button>`);
+  if(type==='rotary') return frontRotary();
+  if(type==='tunnel') return frontPanel(`
+    <h3>🟢 地階・トンネル入口</h3>
+    <p><strong>ここが「トンネル入口バス停」なら、1階ロータリーへ戻る必要はありません。</strong></p>
+    <img src="${ASSETS.tunnelMainStop}" alt="トンネル入口バス停">
+    <p class="front-photo-caption">トンネル入口バス停</p>
+    <div class="front-actions">
+      <button class="front-action green" onclick="showGuideFromFront('tunnel')">📷 トンネル入口までの道順を写真で見る</button>
+      <button class="front-action light" onclick="showEncyclopedia('tunnel')">📚 詳しいバス情報を見る</button>
+      <button class="front-action front-back" onclick="frontHome()">← 最初の4つの選択に戻る</button>
+    </div>`);
+  if(type==='hotel') return frontPanel(`
+    <h3>🏨 4階・ホテル玄関前</h3>
+    <p><strong>ここは1階ロータリーではありません。</strong> 徳島方面・関西空港方面などの一部の高速バスは、ホテル玄関前（4階）から乗車します。</p>
+    <img src="${ASSETS.hotelStep6}" alt="ホテル玄関前">
+    <p class="front-photo-caption">ホテル玄関前（4階）</p>
+    <div class="front-actions">
+      <button class="front-action yellow" onclick="showGuideFromFront('hotel')">📷 ホテル玄関前までの道順を写真で見る</button>
+      <button class="front-action light" onclick="showEncyclopedia('hotel')">📚 詳しいバス情報を見る</button>
+      <button class="front-action front-back" onclick="frontHome()">← 最初の4つの選択に戻る</button>
+    </div>`);
+}
+function frontRotary(){
+  frontPanel(`
+    <h3>🚌 1階・ロータリー</h3>
+    <p>まず下の略図を見て、行きたい<strong>のりばの位置</strong>を選んでください。</p>
+    <div class="rotary-map"><img src="${ASSETS.westOverview}" alt="1階ロータリー略図"></div>
+    <p class="mini-note">略図の位置を押すと、その場所の具体的な写真が1枚ずつ表示されます。</p>
+    <div class="front-actions">
+      <button class="front-action" onclick="frontStop('east')">① ロータリー東端・JRバス</button>
+      <button class="front-action" onclick="frontStop('middle')">② ロータリー中央付近</button>
+      <button class="front-action" onclick="frontStop('west')">③ ロータリー西端・観光バス</button>
+      <button class="front-action green" onclick="frontLocation('tunnel')">🟢 トンネル入口はこちら</button>
+      <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ホテル玄関前はこちら</button>
+    </div>
+    <button class="front-action front-back" onclick="frontHome()">← 最初の4つの選択に戻る</button>`);
+}
+function frontStop(stop){
+  const info=stopInfo[stop];
+  const photo=stop==='east'?ASSETS.east:stop==='middle'?ASSETS.middle:ASSETS.westOverview;
+  const label=info?info.ja:'ロータリー';
+  const next=stop==='east'?'JRバス・高速バス':stop==='middle'?'神姫バス・神戸市バス18系統など':'シティーループ・ポートループ';
+  frontPanel(`
+    <h3>📍 ${label}</h3>
+    <img src="${photo}" alt="${label}">
+    <p class="front-photo-caption">${label}</p>
+    <p><strong>この位置の主なバス：</strong>${next}</p>
+    <div class="front-actions">
+      ${stop==='west'?'<button class="front-action" onclick="frontOperator(\'city\')">🟩 シティーループ</button><button class="front-action" onclick="frontOperator(\'port\')">🟦 ポートループ</button>':''}
+      ${stop==='east'?'<button class="front-action" onclick="showEncyclopedia(\'east\')">📚 JRバス・高速バスの詳しい案内</button>':''}
+      ${stop==='middle'?'<button class="front-action" onclick="showEncyclopedia(\'middle\')">📚 神姫バス・18系統の詳しい案内</button>':''}
+      <button class="front-action light" onclick="frontRotary()">← ロータリー略図に戻る</button>
+      <button class="front-action front-back" onclick="frontHome()">← 最初の4つの選択に戻る</button>
+    </div>`);
+}
+function frontOperator(type){
+  const isCity=type==='city';
+  const photo=isCity?ASSETS.westCL:ASSETS.westPL;
+  const name=isCity?'シティーループ（City Loop）':'ポートループ（Port Loop）';
+  frontPanel(`
+    <h3>${isCity?'🟩':'🟦'} ${name}</h3>
+    <img src="${photo}" alt="${name}">
+    <p class="front-photo-caption">${name} のりば付近</p>
+    <p>車体表示「${isCity?'City Loop':'Port Loop'}」を確認してから乗車してください。</p>
+    <div class="front-actions">
+      <button class="front-action" onclick="showEncyclopedia('west')">📚 詳しいのりば・行き先を見る</button>
+      <button class="front-action light" onclick="frontStop('west')">← ロータリー西端に戻る</button>
+      <button class="front-action front-back" onclick="frontHome()">← 最初の4つの選択に戻る</button>
+    </div>`);
+}
+function frontLost(){
+  frontPanel(`
+    <h3>📍 どこにいるか分からない方へ</h3>
+    <p>周りに見えるものを1つ選んでください。</p>
+    <div class="front-actions">
+      <button class="front-action" onclick="frontLostResult('gate')">🚄 新幹線の改札が見える</button>
+      <button class="front-action" onclick="frontLostResult('rotary')">🚌 大きなロータリーが見える</button>
+      <button class="front-action green" onclick="frontLostResult('tunnel')">🟢 トンネル入口・地下にいる</button>
+      <button class="front-action yellow" onclick="frontLostResult('hotel')">🏨 ホテルへの渡り廊下が見える</button>
+      <button class="front-action light" onclick="frontLostResult('unknown')">❓ どれも分からない</button>
+    </div>`);
+}
+function frontLostResult(type){
+  if(type==='gate') return frontLocation('station');
+  if(type==='rotary') return frontLocation('rotary');
+  if(type==='tunnel') return frontLocation('tunnel');
+  if(type==='hotel') return frontLocation('hotel');
+  frontPanel(`
+    <h3>❓ まずは安全な場所で確認</h3>
+    <p>無理に移動せず、近くの案内表示や係員に「新神戸駅のどの階にいるか」を確認してください。</p>
+    <div class="front-actions">
+      <button class="front-action" onclick="frontLocation('station')">🚄 駅構内の案内を見る</button>
+      <button class="front-action light" onclick="frontHome()">← 最初の4つの選択に戻る</button>
+    </div>`);
+}
+function frontHome(){document.getElementById('frontPanel').classList.remove('show');document.getElementById('frontPanel').innerHTML='';document.getElementById('frontGuide').scrollIntoView({behavior:'smooth',block:'start'});}
+function showGuideFromFront(type){showGuide(type);document.getElementById('frontPanel').classList.add('show');}
+function showEncyclopedia(){
+  const layout=document.getElementById('mainLayout');
+  document.getElementById('frontGuide').style.display='none';
+  layout.style.display='grid';
+  renderDest();
+  renderDetail();
+  layout.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function renderFront(){document.getElementById('frontGuide').style.display='block';document.getElementById('frontPanel').classList.remove('show');document.getElementById('frontPanel').innerHTML='';}
 function renderStaticText(){document.querySelectorAll('[data-ja]').forEach(e=>{e.textContent=t(e.dataset.ja,e.dataset.en)});document.getElementById('jaBtn').classList.toggle('active',lang==='ja');document.getElementById('enBtn').classList.toggle('active',lang==='en')}
-function render(){renderStaticText();const layout=document.getElementById('mainLayout');const page=document.getElementById('stopListPage');if(stopListView){layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('系統別・全バス停名一覧','All bus stops by route');document.querySelector('.subtitle').textContent=t('新神戸駅発着路線','Routes serving Shin-Kobe Station');renderStopList()}else if(stationListView){layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('市営地下鉄・新交通 全駅名一覧','Municipal subway and new transit stations');document.querySelector('.subtitle').textContent=t('地下鉄・ポートライナー・六甲ライナー','Subway, Port Liner and Rokko Liner');renderRailStationList()}else{layout.style.display='grid';page.classList.remove('show');renderDest();renderDetail()}}
+function render(){renderStaticText();const layout=document.getElementById('mainLayout');const page=document.getElementById('stopListPage');if(stopListView){layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('系統別・全バス停名一覧','All bus stops by route');document.querySelector('.subtitle').textContent=t('新神戸駅発着路線','Routes serving Shin-Kobe Station');renderStopList()}else if(stationListView){layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('市営地下鉄・新交通 全駅名一覧','Municipal subway and new transit stations');document.querySelector('.subtitle').textContent=t('地下鉄・ポートライナー・六甲ライナー','Subway, Port Liner and Rokko Liner');renderRailStationList()}else{layout.style.display='none';page.classList.remove('show');renderFront()} }
 document.getElementById('jaBtn').onclick=()=>{lang='ja';render()};document.getElementById('enBtn').onclick=()=>{lang='en';render()};render();
 </script>
 </body>

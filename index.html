@@ -959,13 +959,13 @@ function frontLocation(type){
 function frontRotary(){
   frontPanel(`
     <h3>🚌 1階・ロータリー</h3>
-    <p>まず下の略図を見て、行きたい<strong>のりばの位置</strong>を選んでください。</p>
+    <p>まずこの略図で、行きたい<strong>のりばの位置</strong>を確認してください。</p>
     <div class="rotary-map"><img src="${ASSETS.westOverview}" alt="1階ロータリー略図"></div>
-    <p class="mini-note">略図の位置を押すと、その場所の具体的な写真が1枚ずつ表示されます。</p>
+    <p class="mini-note">この略図で分かれば、ここで案内は終了です。分からない場合は、下のボタンから写真で具体的なのりばを確認できます。</p>
     <div class="front-actions">
-      <button class="front-action" onclick="frontStop('east')">① ロータリー東端・JRバス</button>
-      <button class="front-action" onclick="frontStop('middle')">② ロータリー中央付近</button>
-      <button class="front-action" onclick="frontStop('west')">③ ロータリー西端・観光バス</button>
+      <button class="front-action" onclick="frontStop('east')">① 写真で見る：ロータリー東端・JRバス</button>
+      <button class="front-action" onclick="frontStop('middle')">② 写真で見る：ロータリー中央付近</button>
+      <button class="front-action" onclick="frontStop('west')">③ 写真で見る：ロータリー西端・観光バス</button>
       <button class="front-action green" onclick="frontLocation('tunnel')">🟢 トンネル入口はこちら</button>
       <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ホテル玄関前はこちら</button>
     </div>

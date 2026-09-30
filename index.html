@@ -157,7 +157,7 @@ details.transfer-route[open] summary::after{content:'－'}
     <p class="refresh-text">
       <span data-ja="ご利用前にページを再読み込みし、最新の情報をご確認ください。" data-en="Please reload this page before use to view the latest information.">ご利用前にページを再読み込みし、最新の情報をご確認ください。</span>
     </p>
-    <button class="refresh-btn" type="button" onclick="window.location.reload()" data-ja="🔄 最新の情報に更新" data-en="🔄 Reload latest information">🔄 最新の情報に更新</button>
+    <button class="refresh-btn" type="button" onclick="reloadLatest()" data-ja="🔄 最新の情報に更新" data-en="🔄 Reload latest information">🔄 最新の情報に更新</button>
   </div>
   <a class="multilingual-link" href="https://naosukenavi.github.io/multilingual-shinkobe-guide/" target="_blank" rel="noopener noreferrer">
     <span class="multilingual-link-title">🌏 <span data-ja="Multilingual Guide" data-en="Multilingual Guide">Multilingual Guide</span></span>
@@ -165,27 +165,31 @@ details.transfer-route[open] summary::after{content:'－'}
   </a>
   <section class="front-guide" id="frontGuide">
     <div class="front-title">
-      <h2>新神戸駅 バス案内</h2>
-      <p>まず、新神戸駅の「地形」を見てみましょう</p>
+      <h2 data-ja="新神戸駅 バス案内" data-en="Shin-Kobe Station Bus Guide">新神戸駅 バス案内</h2>
+      <p data-ja="まず、新神戸駅の「地形」を見てみましょう" data-en="First, let's look at the terrain around Shin-Kobe Station.">まず、新神戸駅の「地形」を見てみましょう</p>
     </div>
     <div class="simple-guide-card station-overview-card">
-      <img src="assets/shinkobe_bus_locations.jpg" alt="新神戸駅の高低差と3か所のバス乗り場">
+      <img id="stationOverviewImg" src="assets/shinkobe_bus_locations.png" alt="新神戸駅の高低差と3か所のバス乗り場">
     </div>
-    <p class="front-intro"><strong>新神戸駅は六甲山の山裾にあり、駅周辺は高低差があります。</strong><br>そのため、バス乗り場は1か所ではなく、3か所に分かれています。</p>
+    <p class="front-intro">
+      <strong data-ja="新神戸駅は六甲山の山裾にあり、駅周辺は高低差があります。" data-en="Shin-Kobe Station is located at the foot of Mt. Rokko, so there are differences in elevation around the station.">新神戸駅は六甲山の山裾にあり、駅周辺は高低差があります。</strong><br>
+      <span data-ja="狭い土地に造られているため、バスのりばは3か所に分散しています。" data-en="Because the station is built on a narrow site, the bus stops are divided among three locations.">狭い土地に造られているため、バスのりばは3か所に分散しています。</span>
+    </p>
     <div class="step-card">
       <div class="step-label">STEP 1</div>
-      <h3>今、どこにいる？</h3>
-      <p>見えているものから選んでください。</p>
+      <h3 data-ja="今、どこにいる？" data-en="Where are you now?">今、どこにいる？</h3>
+      <p data-ja="見えているものから選んでください。" data-en="Choose what you can see around you.">見えているものから選んでください。</p>
       <div class="location-grid">
-        <button class="location-btn" onclick="frontWhere('station')">🚄 新幹線の改札が見える</button>
-        <button class="location-btn" onclick="frontWhere('rotary')">🚌 大きなロータリーが見える</button>
-        <button class="location-btn tunnel" onclick="frontWhere('tunnel')">🟢 トンネル入口・地下にいる</button>
-        <button class="location-btn hotel" onclick="frontWhere('hotel')">🏨 ホテルへの渡り廊下が見える</button>
+        <button class="location-btn" onclick="frontWhere('station')" data-ja="🚄 新幹線の改札が見える" data-en="🚄 I can see the Shinkansen ticket gates">🚄 新幹線の改札が見える</button>
+        <button class="location-btn" onclick="frontWhere('rotary')" data-ja="🚌 大きなロータリーが見える" data-en="🚌 I can see a large rotary">🚌 大きなロータリーが見える</button>
+        <button class="location-btn tunnel" onclick="frontWhere('tunnel')" data-ja="🟢 トンネル入口・地下にいる" data-en="🟢 I am at the Tunnel Entrance / basement level">🟢 トンネル入口・地下にいる</button>
+        <button class="location-btn hotel" onclick="frontWhere('hotel')" data-ja="🏨 ホテルへの渡り廊下が見える" data-en="🏨 I can see the walkway to the hotel">🏨 ホテルへの渡り廊下が見える</button>
       </div>
-      <button class="lost-btn" onclick="frontLost()">📍 どれも分からない</button>
+      <button class="lost-btn" onclick="frontLost()" data-ja="📍 どれも分からない" data-en="📍 I don't recognize any of these">📍 どれも分からない</button>
     </div>
     <div id="frontPanel" class="front-panel" aria-live="polite"></div>
   </section>
+</section>
   <div class="layout" id="mainLayout" style="display:none">
     <aside class="panel destinations" id="destinations"></aside>
     <main class="panel detail" id="detail"></main>
@@ -260,6 +264,7 @@ const ASSETS = {
   tunnelStep4:'assets/tunnel_step4.jpg',
   tunnelOverview:'assets/tunnel_overview.jpg',
   tunnelSimple:'assets/tunnel-simple.png',
+  tunnelSimpleEn:'assets/tunnel-simple-en.png',
   stationOverview:'assets/shinkobe_bus_locations.png',
   weathercock:'assets/weathercock.png',
   nankinmachiGate:'assets/nankinmachi_gate.png',
@@ -781,7 +786,8 @@ function routeSimple(icon,en,cja,cen,stop){return {icon,en,leadJa:'乗り場を�
 function multiSimple(icon,en,arr){return {icon,en,leadJa:'複数のバスで行ける場合があります。乗り場を確認してください。',leadEn:'Several buses may be available. Please check the boarding points.',routes:arr.map(a=>({companyJa:a[0],companyEn:a[1],stop:a[2],noteJa:'車体表示と行き先を確認してください。',noteEn:'Check the bus display and destination.'}))}}
 const pageParams=new URLSearchParams(location.search);
 const requestedDestination=pageParams.get('destination');
-let lang=pageParams.get('lang')==='en'?'en':'ja', current=(requestedDestination && data[requestedDestination])?requestedDestination:'神戸空港';
+const savedLang=localStorage.getItem('shinkobeLang');
+let lang=pageParams.get('lang')==='en'?'en':(savedLang==='en'?'en':'ja'), current=(requestedDestination && data[requestedDestination])?requestedDestination:'神戸空港';
 function t(ja,en){return lang==='ja'?ja:en}
 function scrollToDetail(){
   const el=document.getElementById('detail');
@@ -935,15 +941,15 @@ function frontWhere(type){
     return frontPanel(`
       <div class="step-card">
         <div class="step-label">STEP 2</div>
-        <h3>どの乗り場へ行きますか？</h3>
-        <p>新幹線改札付近にいる方は、目的の乗り場を選んでください。</p>
+        <h3>${t('どの乗り場へ行きますか？','Which boarding area do you need?')}</h3>
+        <p>${t('新幹線改札付近にいる方は、目的の乗り場を選んでください。','If you are near the Shinkansen ticket gates, choose your destination boarding area.')}</p>
         <div class="front-actions">
-          <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 4階・ホテル玄関前</button>
-          <button class="front-action green" onclick="frontLocation('tunnel')">🟢 地階・トンネル入口</button>
-          <button class="front-action" onclick="frontLocation('rotary')">🚌 1階・ロータリー</button>
+          <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ${t('4階・ホテル玄関前','4F Hotel Entrance')}</button>
+          <button class="front-action green" onclick="frontLocation('tunnel')">🟢 ${t('地階・トンネル入口','Basement / Tunnel Entrance')}</button>
+          <button class="front-action" onclick="frontLocation('rotary')">🚌 ${t('1階・ロータリー','1F Rotary')}</button>
         </div>
       </div>
-      <button class="front-action front-back" onclick="frontHome()">← 最初に戻る</button>`);
+      <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
   }
   if(type==='rotary') return frontLocation('rotary');
   if(type==='tunnel') return frontLocation('tunnel');
@@ -954,84 +960,84 @@ function frontLocation(type){
   if(type==='tunnel') return frontPanel(`
     <div class="step-card">
       <div class="step-label">STEP 2</div>
-      <h3>地階・トンネル入口です</h3>
-      <div class="simple-guide-card"><img src="${ASSETS.tunnelSimple}" alt="トンネル入口バス停への簡略案内"></div>
+      <h3>${t('地階・トンネル入口です','Basement / Tunnel Entrance')}</h3>
+      <div class="simple-guide-card"><img src="${lang==='en'?ASSETS.tunnelSimpleEn:ASSETS.tunnelSimple}" alt="${t('トンネル入口バス停への簡略案内','Simplified guide to the Tunnel Entrance bus stop')}"></div>
       <div class="step-card step3">
         <div class="step-label">STEP 3</div>
-        <h3>バスを確認する</h3>
-        <p>有馬温泉・三田・三木・小野方面などのバスは、こちらの乗り場です。</p>
+        <h3>${t('バスを確認する','Check your bus')}</h3>
+        <p>${t('有馬温泉・三田・三木・小野方面などのバスは、こちらの乗り場です。','Buses for Arima Onsen, Sanda, Miki, Ono and nearby destinations use this boarding area.')}</p>
         <div class="front-actions">
-          <button class="front-action green" onclick="showGuideFromFront('tunnel')">📷 写真で詳しく見る</button>
-          <button class="front-action light" onclick="showEncyclopedia('tunnel')">📚 詳しいバス情報を見る</button>
+          <button class="front-action green" onclick="showGuideFromFront('tunnel')">📷 ${t('写真で詳しく見る','See detailed photo guide')}</button>
+          <button class="front-action light" onclick="showEncyclopedia('tunnel')">📚 ${t('詳しいバス情報を見る','See detailed bus information')}</button>
         </div>
       </div>
     </div>
-    <button class="front-action front-back" onclick="frontHome()">← 最初に戻る</button>`);
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
   if(type==='hotel') return frontPanel(`
     <div class="step-card">
       <div class="step-label">STEP 2</div>
-      <h3>4階・ホテル玄関前です</h3>
-      <div class="simple-guide-card"><img src="${ASSETS.hotelGuideSteps12}" alt="ホテル玄関前への簡略案内"></div>
+      <h3>${t('4階・ホテル玄関前です','4F Hotel Entrance')}</h3>
+      <div class="simple-guide-card"><img src="${ASSETS.hotelGuideSteps12}" alt="${t('ホテル玄関前への簡略案内','Simplified guide to the hotel entrance')}"></div>
       <div class="step-card step3">
         <div class="step-label">STEP 3</div>
-        <h3>バスを確認する</h3>
-        <p>徳島方面・関西空港方面などのバスは、こちらの乗り場です。</p>
+        <h3>${t('バスを確認する','Check your bus')}</h3>
+        <p>${t('徳島方面・関西空港方面などのバスは、こちらの乗り場です。','Buses for Tokushima and Kansai Airport use this boarding area.')}</p>
         <div class="front-actions">
-          <button class="front-action yellow" onclick="showGuideFromFront('hotel')">📷 写真で詳しく見る</button>
-          <button class="front-action light" onclick="showEncyclopedia('hotel')">📚 詳しいバス情報を見る</button>
+          <button class="front-action yellow" onclick="showGuideFromFront('hotel')">📷 ${t('写真で詳しく見る','See detailed photo guide')}</button>
+          <button class="front-action light" onclick="showEncyclopedia('hotel')">📚 ${t('詳しいバス情報を見る','See detailed bus information')}</button>
         </div>
       </div>
     </div>
-    <button class="front-action front-back" onclick="frontHome()">← 最初に戻る</button>`);
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
 function frontRotary(){
   frontPanel(`
     <div class="step-card">
       <div class="step-label">STEP 2</div>
-      <h3>1階・ロータリーです</h3>
-      <div class="simple-guide-card"><div class="rotary-map"><img src="${ASSETS.westOverview}" alt="1階ロータリー略図"></div></div>
+      <h3>${t('1階・ロータリーです','1F Rotary')}</h3>
+      <div class="simple-guide-card"><div class="rotary-map"><img src="${ASSETS.westOverview}" alt="${t('1階ロータリー略図','Simplified 1F rotary map')}"></div></div>
       <div class="step-card step3">
         <div class="step-label">STEP 3</div>
-        <h3>乗り場を確認する</h3>
-        <p>ロータリー内にも複数の乗り場があります。地図から選んでください。</p>
+        <h3>${t('乗り場を確認する','Choose your boarding point')}</h3>
+        <p>${t('ロータリー内にも複数の乗り場があります。地図から選んでください。','There are several boarding points within the rotary. Choose one from the map.')}</p>
         <div class="front-actions">
-          <button class="front-action" onclick="frontStop('east')">📷 東端・JRバス</button>
-          <button class="front-action" onclick="frontStop('middle')">📷 中央付近・神姫バスなど</button>
-          <button class="front-action" onclick="frontStop('west')">📷 西端・観光バス</button>
+          <button class="front-action" onclick="frontStop('east')">📷 ${t('東端・JRバス','East end · JR Bus')}</button>
+          <button class="front-action" onclick="frontStop('middle')">📷 ${t('中央付近・神姫バスなど','Center · Shinki Bus etc.')}</button>
+          <button class="front-action" onclick="frontStop('west')">📷 ${t('西端・観光バス','West end · Sightseeing buses')}</button>
         </div>
       </div>
       <div class="front-actions">
-        <button class="front-action green" onclick="frontLocation('tunnel')">🟢 トンネル入口はこちら</button>
-        <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ホテル玄関前はこちら</button>
+        <button class="front-action green" onclick="frontLocation('tunnel')">🟢 ${t('トンネル入口はこちら','Tunnel Entrance')}</button>
+        <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ${t('ホテル玄関前はこちら','Hotel Entrance')}</button>
       </div>
     </div>
-    <button class="front-action front-back" onclick="frontHome()">← 最初に戻る</button>`);
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
 function frontStop(stop){
   const info=stopInfo[stop];
   const photo=stop==='east'?ASSETS.east:stop==='middle'?ASSETS.middle:ASSETS.westOverview;
-  const label=info?info.ja:'ロータリー';
-  const next=stop==='east'?'JRバス・高速バス':stop==='middle'?'神姫バス・神戸市バス18系統など':'シティーループ・ポートループ';
-  frontPanel(`<div class="step-card"><div class="step-label">STEP 3</div><h3>📍 ${label}</h3><img src="${photo}" alt="${label}"><p><strong>この位置の主なバス：</strong>${next}</p>
-  <div class="front-actions">${stop==='west'?'<button class="front-action" onclick="showEncyclopedia(\'west\')">📚 シティーループ・ポートループの詳しい案内</button>':''}
-  ${stop==='east'?'<button class="front-action" onclick="showEncyclopedia(\'east\')">📚 JRバス・高速バスの詳しい案内</button>':''}
-  ${stop==='middle'?'<button class="front-action" onclick="showEncyclopedia(\'middle\')">📚 神姫バス・18系統の詳しい案内</button>':''}
-  <button class="front-action light" onclick="frontRotary()">← ロータリー略図に戻る</button></div></div>`);
+  const label=info?(lang==='ja'?info.ja:info.en):t('ロータリー','Rotary');
+  const next=stop==='east'?t('JRバス・高速バス','JR Bus · Highway buses'):stop==='middle'?t('神姫バス・神戸市バス18系統など','Shinki Bus · Kobe City Bus 18 etc.'):t('シティーループ・ポートループ','City Loop · Port Loop');
+  frontPanel(`<div class="step-card"><div class="step-label">STEP 3</div><h3>📍 ${label}</h3><img src="${photo}" alt="${label}"><p><strong>${t('この位置の主なバス：','Main buses at this point:')}</strong>${next}</p>
+  <div class="front-actions">${stop==='west'?'<button class="front-action" onclick="showEncyclopedia(\'west\')">📚 '+t('シティーループ・ポートループの詳しい案内','Detailed City Loop / Port Loop guide')+'</button>':''}
+  ${stop==='east'?'<button class="front-action" onclick="showEncyclopedia(\'east\')">📚 '+t('JRバス・高速バスの詳しい案内','Detailed JR Bus / highway bus guide')+'</button>':''}
+  ${stop==='middle'?'<button class="front-action" onclick="showEncyclopedia(\'middle\')">📚 '+t('神姫バス・18系統の詳しい案内','Detailed Shinki Bus / Route 18 guide')+'</button>':''}
+  <button class="front-action light" onclick="frontRotary()">← ${t('ロータリー略図に戻る','Back to rotary map')}</button></div></div>`);
 }
 function frontLost(){
   frontPanel(`
     <div class="step-card">
       <div class="step-label">STEP 1</div>
-      <h3>どこにいるか分からない方へ</h3>
-      <p>周りに見えるものを1つ選んでください。</p>
+      <h3>${t('どこにいるか分からない方へ','If you are not sure where you are')}</h3>
+      <p>${t('周りに見えるものを1つ選んでください。','Choose one thing you can see around you.')}</p>
       <div class="front-actions">
-        <button class="front-action" onclick="frontWhere('station')">🚄 新幹線の改札が見える</button>
-        <button class="front-action" onclick="frontWhere('rotary')">🚌 大きなロータリーが見える</button>
-        <button class="front-action green" onclick="frontWhere('tunnel')">🟢 トンネル入口・地下にいる</button>
-        <button class="front-action yellow" onclick="frontWhere('hotel')">🏨 ホテルへの渡り廊下が見える</button>
+        <button class="front-action" onclick="frontWhere('station')">🚄 ${t('新幹線の改札が見える','I can see the Shinkansen ticket gates')}</button>
+        <button class="front-action" onclick="frontWhere('rotary')">🚌 ${t('大きなロータリーが見える','I can see a large rotary')}</button>
+        <button class="front-action green" onclick="frontWhere('tunnel')">🟢 ${t('トンネル入口・地下にいる','I am at the Tunnel Entrance / basement level')}</button>
+        <button class="front-action yellow" onclick="frontWhere('hotel')">🏨 ${t('ホテルへの渡り廊下が見える','I can see the walkway to the hotel')}</button>
       </div>
     </div>
-    <button class="front-action front-back" onclick="frontHome()">← 最初に戻る</button>`);
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
 function frontHome(){
   const el=document.getElementById('frontPanel');
@@ -1046,9 +1052,20 @@ function showGuideFromFront(type){
   el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function renderStaticText(){document.querySelectorAll('[data-ja]').forEach(e=>{e.textContent=t(e.dataset.ja,e.dataset.en)});document.getElementById('jaBtn').classList.toggle('active',lang==='ja');document.getElementById('enBtn').classList.toggle('active',lang==='en')}
+function renderStaticText(){
+  document.querySelectorAll('[data-ja]').forEach(e=>{e.textContent=t(e.dataset.ja,e.dataset.en)});
+  const overview=document.getElementById('stationOverviewImg');
+  if(overview){
+    overview.src=ASSETS.stationOverview;
+    overview.alt=t('新神戸駅の高低差と3か所のバス乗り場','Elevation differences and three bus boarding areas at Shin-Kobe Station');
+  }
+  document.getElementById('jaBtn').classList.toggle('active',lang==='ja');
+  document.getElementById('enBtn').classList.toggle('active',lang==='en');
+}
+function setLanguage(next){lang=next;localStorage.setItem('shinkobeLang',lang);render()}
+function reloadLatest(){window.location.reload()}
 function render(){renderStaticText();const layout=document.getElementById('mainLayout');const page=document.getElementById('stopListPage');if(stopListView){document.getElementById('frontGuide').style.display='none';layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('系統別・全バス停名一覧','All bus stops by route');document.querySelector('.subtitle').textContent=t('新神戸駅発着路線','Routes serving Shin-Kobe Station');renderStopList()}else if(stationListView){document.getElementById('frontGuide').style.display='none';layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('市営地下鉄・新交通 全駅名一覧','Municipal subway and new transit stations');document.querySelector('.subtitle').textContent=t('地下鉄・ポートライナー・六甲ライナー','Subway, Port Liner and Rokko Liner');renderRailStationList()}else{layout.style.display='none';page.classList.remove('show');document.getElementById('frontGuide').style.display='block';}}
-document.getElementById('jaBtn').onclick=()=>{lang='ja';render()};document.getElementById('enBtn').onclick=()=>{lang='en';render()};render();
+document.getElementById('jaBtn').onclick=()=>setLanguage('ja');document.getElementById('enBtn').onclick=()=>setLanguage('en');render();
 </script>
 </body>
 </html>

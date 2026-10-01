@@ -941,8 +941,38 @@ function frontPanel(html){
   el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function frontWhere(type){
-  if(type==='subway' || type==='shinkansen'){
+  if(type==='subway' || type==='shinkansen' || type==='rotary'){
+    const info = {
+      subway: {
+        ja:'地下鉄改札口付近',
+        en:'Near the subway ticket gates',
+        src:'assets/subway_station_area.jpg',
+        altJa:'地下鉄改札口付近の様子',
+        altEn:'Near the subway ticket gates'
+      },
+      rotary: {
+        ja:'1階バスロータリー',
+        en:'1F bus rotary',
+        src:ASSETS.westOverview,
+        altJa:'1階バスロータリーの様子',
+        altEn:'1F bus rotary'
+      },
+      shinkansen: {
+        ja:'2階新幹線改札口近くのお店等',
+        en:'Shops near the 2F Shinkansen ticket gates',
+        src:'assets/shinkansen_shop_area.jpg',
+        altJa:'2階新幹線改札口近くのお店等',
+        altEn:'Shops near the 2F Shinkansen ticket gates'
+      }
+    }[type];
     return frontPanel(`
+      <div class="step-card">
+        <div class="step-label">STEP 1</div>
+        <h3>${t(info.ja,info.en)}</h3>
+        <div class="simple-guide-card">
+          <img src="${info.src}" alt="${t(info.altJa,info.altEn)}">
+        </div>
+      </div>
       <div class="step-card">
         <div class="step-label">STEP 2</div>
         <h3>${t('行きたい場所を選ぶ','Choose where you want to go')}</h3>
@@ -952,7 +982,6 @@ function frontWhere(type){
       </div>
       <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
   }
-  if(type==='rotary') return frontLocation('rotary');
   if(type==='tunnel') return frontLocation('tunnel');
   if(type==='hotel') return frontLocation('hotel');
 }

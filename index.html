@@ -276,6 +276,8 @@ const ASSETS = {
   tunnelSimple:'assets/tunnel-simple.png',
   tunnelSimpleEn:'assets/tunnel-simple-en.png',
   stationOverview:'assets/shinkobe_bus_locations.png',
+  tunnelGuideNorthJa:'assets/tunnel_guide_north_ja.png',
+  tunnelGuideNorthEn:'assets/tunnel_guide_north_en.png',
   weathercock:'assets/weathercock.png',
   nankinmachiGate:'assets/nankinmachi_gate.png',
   kobeAirportShinkiStop:'assets/kobe_airport_shinki_stop.png',
@@ -984,6 +986,7 @@ function frontWhere(type){
         <h3>${t('行きたい場所を選ぶ','Choose where you want to go')}</h3>
         <div class="front-actions">
           <button class="front-action" onclick="frontDestination('A')">A ― ${t('県外・島へ行く','Outside Hyogo / Islands')}</button>
+          <button class="front-action" onclick="frontB()">🔴 B ― ${t('神戸市バス64系統・北部／近郊方面','Kobe City Bus Route 64 · Northern / Nearby Areas')}</button>
         </div>
       </div>
       <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
@@ -1023,6 +1026,49 @@ function frontDestination(type){
       <button class="front-action front-back" onclick="frontWhere('subway')">← ${t('STEP 2に戻る','Back to STEP 2')}</button>
       <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
   }
+}
+function frontB(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">STEP 2</div>
+      <h3>🔴 B ― ${t('神戸市バス64系統・北部／近郊方面','Kobe City Bus Route 64 · Northern / Nearby Areas')}</h3>
+      <p><strong>${t('神戸北町・有馬温泉・三田・三木・小野・社 など','Kobe Kitamachi, Arima Onsen, Sanda, Miki, Ono, Yashiro, etc.')}</strong></p>
+      <div class="point pink">
+        <strong>${t('地階トンネル入口のりば','Basement Tunnel Entrance bus stop')}</strong>
+        <button class="front-action" onclick="frontTunnelB()">${t('のりばへの行き方を見る','See how to get to the bus stop')}</button>
+      </div>
+    </div>
+    <button class="front-action front-back" onclick="frontWhere('subway')">← ${t('STEP 2に戻る','Back to STEP 2')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
+}
+function frontTunnelB(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">STEP 3 🚌</div>
+      <h3>${t('のりばへの行き方・簡易版','How to get to the bus stop · Quick guide')}</h3>
+      <div class="simple-guide-card">
+        <img src="${lang==='en'?ASSETS.tunnelGuideNorthEn:ASSETS.tunnelGuideNorthJa}" alt="${t('北部・近郊方面のトンネル入口のりばへの簡易案内','Quick guide to the Tunnel Entrance bus stop for northern and nearby areas')}">
+      </div>
+      <div class="notice">
+        <strong>${t('トンネル入口に着いたら','When you arrive at the Tunnel Entrance')}</strong>
+        <div>${t('トンネル入口には、異なる行き先のバスが着車します。必ず各バスの行き先表示を確認してください。','Buses for different destinations arrive at the Tunnel Entrance. Always check the destination display on each bus.')}</div>
+      </div>
+      <div class="step-card step3">
+        <div class="step-label">STEP 4</div>
+        <h3>${t('簡易版でわからない場合','If the quick guide is not enough')}</h3>
+        <div class="front-actions">
+          <button class="front-action light" onclick="showTunnelDetailFromB()">📷 ${t('写真で詳細説明を見る','See the detailed photo guide')}</button>
+        </div>
+      </div>
+    </div>
+    <button class="front-action front-back" onclick="frontB()">← ${t('Bに戻る','Back to B')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
+}
+function showTunnelDetailFromB(){
+  const el=document.getElementById('frontPanel');
+  el.innerHTML=`<div class="guide show">${guideHtml('tunnel')}</div><div class="front-actions"><button class="front-action light" onclick="frontTunnelB()">← ${t('簡易版に戻る','Back to the quick guide')}</button><button class="front-action front-back" onclick="frontB()">← ${t('Bに戻る','Back to B')}</button><button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button></div>`;
+  el.classList.add('show');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function frontTokushima(){
   return frontPanel(`

@@ -941,23 +941,37 @@ function frontPanel(html){
   el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function frontWhere(type){
-  if(type==='station'){
-    return frontPanel(`
+  if(type==='subway' || type==='shinkansen'){
+    return frontPanel(\`
       <div class="step-card">
         <div class="step-label">STEP 2</div>
-        <h3>${t('どの乗り場へ行きますか？','Which boarding area do you need?')}</h3>
-        <p>${t('新幹線改札付近にいる方は、目的の乗り場を選んでください。','If you are near the Shinkansen ticket gates, choose your destination boarding area.')}</p>
+        <h3>\${t('行きたい場所を選ぶ','Choose where you want to go')}</h3>
         <div class="front-actions">
-          <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ${t('4階・ホテル玄関前','4F Hotel Entrance')}</button>
-          <button class="front-action green" onclick="frontLocation('tunnel')">🟢 ${t('地階・トンネル入口','Basement / Tunnel Entrance')}</button>
-          <button class="front-action" onclick="frontLocation('rotary')">🚌 ${t('1階・ロータリー','1F Rotary')}</button>
+          <button class="front-action" onclick="frontDestination('A')">A ― \${t('県外・島へ行く','Outside Hyogo / Islands')}</button>
         </div>
       </div>
-      <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
+      <button class="front-action front-back" onclick="frontHome()">← \${t('最初に戻る','Back to the beginning')}</button>\`);
   }
   if(type==='rotary') return frontLocation('rotary');
   if(type==='tunnel') return frontLocation('tunnel');
   if(type==='hotel') return frontLocation('hotel');
+}
+function frontDestination(type){
+  if(type==='A'){
+    return frontPanel(\`
+      <div class="step-card">
+        <div class="step-label">STEP 2</div>
+        <h3>A ― \${t('県外・島へ行く','Outside Hyogo / Islands')}</h3>
+        <div class="front-actions" style="text-align:left">
+          <div class="point pink"><strong>🔴 \${t('徳島','Tokushima')}</strong>\${t('4階ホテル玄関前／1階ロータリー①のりば','4F Hotel Entrance / 1F Rotary boarding point ①')}</div>
+          <div class="point pink"><strong>🔴 \${t('関西空港','Kansai International Airport')}</strong>\${t('4階ホテル玄関前','4F Hotel Entrance')}</div>
+          <div class="point"><strong>\${t('高松','Takamatsu')}</strong>\${t('1階ロータリー①のりば','1F Rotary boarding point ①')}</div>
+          <div class="point"><strong>\${t('淡路島','Awaji Island')}</strong>\${t('1階ロータリー①のりば','1F Rotary boarding point ①')}</div>
+        </div>
+      </div>
+      <button class="front-action front-back" onclick="frontWhere('subway')">← \${t('STEP 2に戻る','Back to STEP 2')}</button>
+      <button class="front-action front-back" onclick="frontHome()">← \${t('最初に戻る','Back to the beginning')}</button>\`);
+  }
 }
 function frontLocation(type){
   if(type==='rotary') return frontRotary();

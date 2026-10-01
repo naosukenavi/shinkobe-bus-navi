@@ -182,13 +182,12 @@ details.transfer-route[open] summary::after{content:'－'}
     </p>
     <div class="step-card">
       <div class="step-label">STEP 1</div>
-      <h3 data-ja="今、どこにいる？" data-en="Where are you now?">今、どこにいる？</h3>
-      <p data-ja="見えているものから選んでください。" data-en="Choose what you can see around you.">見えているものから選んでください。</p>
+      <h3 data-ja="今いる場所を確認する" data-en="Confirm your current location">今いる場所を確認する</h3>
+      <p data-ja="現在地に近い場所を選んでください。" data-en="Choose the location closest to where you are now.">現在地に近い場所を選んでください。</p>
       <div class="location-grid">
-        <button class="location-btn" onclick="frontWhere('station')" data-ja="🚄 新幹線の改札が見える" data-en="🚄 I can see the Shinkansen ticket gates">🚄 新幹線の改札が見える</button>
-        <button class="location-btn" onclick="frontWhere('rotary')" data-ja="🚌 大きなロータリーが見える" data-en="🚌 I can see a large rotary">🚌 大きなロータリーが見える</button>
-        <button class="location-btn tunnel" onclick="frontWhere('tunnel')" data-ja="🟢 トンネル入口・地下にいる" data-en="🟢 I am at the Tunnel Entrance / basement level">🟢 トンネル入口・地下にいる</button>
-        <button class="location-btn hotel" onclick="frontWhere('hotel')" data-ja="🏨 ホテルへの渡り廊下が見える" data-en="🏨 I can see the walkway to the hotel">🏨 ホテルへの渡り廊下が見える</button>
+        <button class="location-btn" onclick="frontWhere('subway')" data-ja="🚇 地下鉄改札口付近" data-en="🚇 Near the subway ticket gates">🚇 地下鉄改札口付近</button>
+        <button class="location-btn" onclick="frontWhere('rotary')" data-ja="🚌 1階バスロータリー" data-en="🚌 1F bus rotary">🚌 1階バスロータリー</button>
+        <button class="location-btn" onclick="frontWhere('shinkansen')" data-ja="🚄 2階新幹線改札口近くのお店等" data-en="🚄 Shops near the 2F Shinkansen ticket gates">🚄 2階新幹線改札口近くのお店等</button>
       </div>
       <button class="lost-btn" onclick="frontLost()" data-ja="📍 どれも分からない" data-en="📍 I don't recognize any of these">📍 どれも分からない</button>
     </div>

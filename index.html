@@ -254,6 +254,10 @@ const ASSETS = {
   hotelPlaceholder:'assets/hotel_placeholder.svg',
   hotelArrivalPlaceholder:'assets/hotel_arrival_placeholder.svg',
   hotelGuideSteps12:'assets/hotel_guide_steps12.png',
+  hotelEntranceBus:'assets/hotel_entrance_bus.png',
+  hotelEntranceSimpleJa:'assets/hotel_entrance_simple_ja.png',
+  hotelEntranceSimpleEn:'assets/hotel_entrance_simple_en.png',
+  rotary1TokushimaAwaji:'assets/rotary_1_tokushima_awaji.png',
   hotelMainStop:'assets/hotel_main_stop.jpg',
   hotelStep1:'assets/hotel_step1.jpg',
   hotelStep2:'assets/hotel_step2.jpg',
@@ -992,7 +996,11 @@ function frontDestination(type){
         <div class="step-label">STEP 2</div>
         <h3>A ― ${t('県外・島へ行く','Outside Hyogo / Islands')}</h3>
         <div class="front-actions" style="text-align:left">
-          <div class="point pink"><strong>🔴 ${t('徳島','Tokushima')}</strong>${t('4階ホテル玄関前／1階ロータリー①のりば','4F Hotel Entrance / 1F Rotary boarding point ①')}</div>
+          <div class="point pink">
+            <strong>🔴 ${t('徳島','Tokushima')}</strong>
+            <div>${t('4階ホテル玄関前／1階ロータリー①のりば','4F Hotel Entrance / 1F Rotary boarding point ①')}</div>
+            <button class="front-action" onclick="frontTokushima()">${t('徳島の行き方を見る','See how to get to Tokushima')}</button>
+          </div>
           <div class="point pink"><strong>🔴 ${t('関西空港','Kansai International Airport')}</strong>${t('4階ホテル玄関前','4F Hotel Entrance')}</div>
           <div class="point"><strong>${t('高松','Takamatsu')}</strong>${t('1階ロータリー①のりば','1F Rotary boarding point ①')}</div>
           <div class="point"><strong>${t('淡路島','Awaji Island')}</strong>${t('1階ロータリー①のりば','1F Rotary boarding point ①')}</div>
@@ -1001,6 +1009,38 @@ function frontDestination(type){
       <button class="front-action front-back" onclick="frontWhere('subway')">← ${t('STEP 2に戻る','Back to STEP 2')}</button>
       <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
   }
+}
+function frontTokushima(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">STEP 3 🚌</div>
+      <h3>${t('バスで行く・簡易版','By bus · Quick guide')}</h3>
+
+      <div class="simple-guide-card">
+        <h4>${t('4階ホテル玄関前','4F Hotel Entrance')}</h4>
+        <img src="${ASSETS.hotelEntranceBus}" alt="${t('4階ホテル玄関前の様子','4F Hotel Entrance')}">
+      </div>
+
+      <div class="simple-guide-card">
+        <h4>${t('1階ロータリー①のりば','1F Rotary boarding point ①')}</h4>
+        <img src="${ASSETS.rotary1TokushimaAwaji}" alt="${t('1階ロータリー① 淡路島・徳島方面のりば','1F Rotary boarding point ① for Awajishima and Tokushima')}">
+      </div>
+
+      <div class="simple-guide-card">
+        <h4>${t('4階ホテル玄関前への行き方・簡易版','Quick guide to the 4F Hotel Entrance')}</h4>
+        <img src="${lang==='en'?ASSETS.hotelEntranceSimpleEn:ASSETS.hotelEntranceSimpleJa}" alt="${t('4階ホテル玄関前への行き方・簡易版','Quick guide to the 4F Hotel Entrance')}">
+      </div>
+
+      <div class="step-card step3">
+        <div class="step-label">STEP 4</div>
+        <h3>${t('簡易版でわからない場合','If the quick guide is not enough')}</h3>
+        <div class="front-actions">
+          <button class="front-action light" onclick="showGuideFromFront('hotel')">📷 ${t('写真つき詳細説明を見る','See the detailed photo guide')}</button>
+        </div>
+      </div>
+    </div>
+    <button class="front-action front-back" onclick="frontDestination('A')">← ${t('Aに戻る','Back to A')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
 function frontLocation(type){
   if(type==='rotary') return frontRotary();

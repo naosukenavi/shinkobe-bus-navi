@@ -258,6 +258,7 @@ const ASSETS = {
   hotelEntranceSimpleJa:'assets/hotel_entrance_simple_ja.png',
   hotelEntranceSimpleEn:'assets/hotel_entrance_simple_en.png',
   hotelEntranceKansaiAirport:'assets/hotel_entrance_kansai_airport.png',
+  rotary2Takamatsu:'assets/rotary_2_takamatsu.png',
   rotary1TokushimaAwaji:'assets/rotary_1_tokushima_awaji.png',
   hotelMainStop:'assets/hotel_main_stop.jpg',
   hotelStep1:'assets/hotel_step1.jpg',
@@ -1007,8 +1008,16 @@ function frontDestination(type){
             <div>${t('4階ホテル玄関前','4F Hotel Entrance')}</div>
             <button class="front-action" onclick="frontKansaiAirport()">${t('関西空港の行き方を見る','See how to get to Kansai Airport')}</button>
           </div>
-          <div class="point"><strong>${t('高松','Takamatsu')}</strong>${t('1階ロータリー①のりば','1F Rotary boarding point ①')}</div>
-          <div class="point"><strong>${t('淡路島','Awaji Island')}</strong>${t('1階ロータリー①のりば','1F Rotary boarding point ①')}</div>
+          <div class="point">
+            <strong>${t('高松','Takamatsu')}</strong>
+            <div>${t('1階ロータリー②のりば','1F Rotary boarding point ②')}</div>
+            <button class="front-action" onclick="frontTakamatsu()">${t('高松の行き方を見る','See how to get to Takamatsu')}</button>
+          </div>
+          <div class="point">
+            <strong>${t('淡路島','Awaji Island')}</strong>
+            <div>${t('1階ロータリー①のりば','1F Rotary boarding point ①')}</div>
+            <button class="front-action" onclick="frontAwaji()">${t('淡路島の行き方を見る','See how to get to Awajishima')}</button>
+          </div>
         </div>
       </div>
       <button class="front-action front-back" onclick="frontWhere('subway')">← ${t('STEP 2に戻る','Back to STEP 2')}</button>
@@ -1074,6 +1083,48 @@ function frontKansaiAirport(){
     <button class="front-action front-back" onclick="frontDestination('A')">← ${t('Aに戻る','Back to A')}</button>
     <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
+function frontTakamatsu(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">STEP 3 🚌</div>
+      <h3>${t('バスで行く・簡易版','By bus · Quick guide')}</h3>
+      <div class="simple-guide-card">
+        <h4>${t('1階ロータリー②・高松方面','1F Rotary ② · Takamatsu')}</h4>
+        <img src="${ASSETS.rotary2Takamatsu}" alt="${t('1階ロータリー② 高松方面のりば','1F Rotary boarding point ② for Takamatsu')}">
+      </div>
+      <div class="step-card step3">
+        <div class="step-label">STEP 4</div>
+        <h3>${t('簡易版でわからない場合','If the quick guide is not enough')}</h3>
+        <div class="front-actions">
+          <button class="front-action light" onclick="showGuideFromFront('hotel')">📷 ${t('写真つき詳細説明を見る','See the detailed photo guide')}</button>
+        </div>
+      </div>
+    </div>
+    <button class="front-action front-back" onclick="frontDestination('A')">← ${t('Aに戻る','Back to A')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
+}
+
+function frontAwaji(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">STEP 3 🚌</div>
+      <h3>${t('バスで行く・簡易版','By bus · Quick guide')}</h3>
+      <div class="simple-guide-card">
+        <h4>${t('1階ロータリー①・淡路島方面','1F Rotary ① · Awajishima')}</h4>
+        <img src="${ASSETS.rotary1TokushimaAwaji}" alt="${t('1階ロータリー① 淡路島・徳島方面のりば','1F Rotary boarding point ① for Awajishima and Tokushima')}">
+      </div>
+      <div class="step-card step3">
+        <div class="step-label">STEP 4</div>
+        <h3>${t('簡易版でわからない場合','If the quick guide is not enough')}</h3>
+        <div class="front-actions">
+          <button class="front-action light" onclick="showGuideFromFront('hotel')">📷 ${t('写真つき詳細説明を見る','See the detailed photo guide')}</button>
+        </div>
+      </div>
+    </div>
+    <button class="front-action front-back" onclick="frontDestination('A')">← ${t('Aに戻る','Back to A')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
+}
+
 function frontLocation(type){
   if(type==='rotary') return frontRotary();
   if(type==='tunnel') return frontPanel(`

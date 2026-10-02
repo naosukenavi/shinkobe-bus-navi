@@ -987,6 +987,7 @@ function frontWhere(type){
         <div class="front-actions">
           <button class="front-action" onclick="frontDestination('A')">A ― ${t('県外・島へ行く','Outside Hyogo / Islands')}</button>
           <button class="front-action" onclick="frontB()">🔴 B ― ${t('神戸市バス64系統・北部／近郊方面','Kobe City Bus Route 64 · Northern / Nearby Areas')}</button>
+          ${type==='rotary'?`<button class="front-action" onclick="frontC()">C ― ${t('ロータリー','Rotary')}</button>`:''}
         </div>
       </div>
       <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
@@ -1026,6 +1027,33 @@ function frontDestination(type){
       <button class="front-action front-back" onclick="frontWhere('subway')">← ${t('STEP 2に戻る','Back to STEP 2')}</button>
       <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
   }
+}
+function frontC(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">C</div>
+      <h3>C ― ${t('ロータリー','Rotary')}</h3>
+      <div class="point">
+        <strong>🚌 ${t('バスの名称から探す','Find by bus name')}</strong>
+        <div class="front-actions">
+          <div class="simple-guide-card">✈️ ${t('神戸空港','Kobe Airport')}</div>
+          <div class="simple-guide-card">🚌 ${t('ポートループ','Port Loop')}</div>
+          <div class="simple-guide-card">🚌 ${t('シティーループ','City Loop')}</div>
+          <div class="simple-guide-card">🚌 ${t('みなと観光バス','Minato Kanko Bus')}</div>
+          <div class="simple-guide-card">🚌 ${t('神戸市バス18系統','Kobe City Bus Route 18')}</div>
+        </div>
+      </div>
+      <div class="point">
+        <strong>🎯 ${t('目的地から探す','Find by destination')}</strong>
+        <div class="front-actions">
+          <div class="simple-guide-card">♨️ ${t('有馬温泉','Arima Onsen')}</div>
+          <div class="simple-guide-card">🚌 ${t('高松','Takamatsu')}</div>
+          <div class="simple-guide-card">🏝️ ${t('淡路島','Awaji Island')}</div>
+        </div>
+      </div>
+    </div>
+    <button class="front-action front-back" onclick="frontWhere('rotary')">← ${t('STEP 2に戻る','Back to STEP 2')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
 function frontB(){
   return frontPanel(`

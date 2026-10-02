@@ -1098,7 +1098,7 @@ function frontC(){
       <div class="point">
         <strong>🎯 ${t('目的地から探す','Find by destination')}</strong>
         <div class="front-actions">
-          <div class="simple-guide-card">♨️ ${t('有馬温泉','Arima Onsen')}</div>
+          <button type="button" class="simple-guide-card front-destination-link" onclick="frontArima()">♨️ ${t('有馬温泉','Arima Onsen')}</button>
           <button type="button" class="simple-guide-card front-destination-link" onclick="frontDestination('A')">🚌 ${t('高松','Takamatsu')}</button>
           <button type="button" class="simple-guide-card front-destination-link" onclick="frontDestination('A')">🏝️ ${t('淡路島','Awaji Island')}</button>
         </div>
@@ -1156,6 +1156,82 @@ function frontCityBus18(){
       <div class="notice"><strong>🕐 ${t('時刻表について','Timetable')}</strong><div>${t('運行日・時刻・のりばは変更される場合があります。ご利用前に最新の時刻表をご確認ください。','Operating days, times and boarding points may change. Please check the latest timetable before use.')}</div></div>
       <button class="front-action front-back" onclick="frontC()">← ${t('C ― ロータリーに戻る','Back to C — Rotary')}</button>
     </div>`);
+}
+
+function frontArima(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">STEP 3 ♨️</div>
+      <h3>${t('有馬温泉へ','To Arima Onsen')}</h3>
+      <p><strong>${t('有馬温泉へは、利用する人の状況によって選択肢が変わります。','The best option for Arima Onsen depends on your situation.')}</strong></p>
+      <div class="point">
+        <strong>🚌 ${t('神姫バス','Shinki Bus')}</strong>
+        <ul>
+          <li>${t('地階・トンネル入口から乗車','Board at the Basement Tunnel Entrance')}</li>
+          <li>${t('三宮 → 新神戸 → 有馬温泉の順に運行','Via Sannomiya → Shin-Kobe → Arima Onsen')}</li>
+          <li>${t('約30分に1本','About once every 30 minutes')}</li>
+          <li>${t('JRバスより所要時間・料金を抑えやすい','Generally shorter and less expensive than JR Bus')}</li>
+          <li>${t('トンネル入口まで階段を下りるなどの移動があります。','Getting there requires going down stairs and walking.')}</li>
+          <li><strong>${t('のりばへ向かうエレベーターやエスカレーターはありません。','There is no elevator or escalator to the boarding area.')}</strong></li>
+        </ul>
+        <button class="front-action green" onclick="frontArimaShinki()">🟢 ${t('神姫バス・トンネル入口への行き方を見る','See how to get to the Shinki Bus / Tunnel Entrance')}</button>
+      </div>
+      <div class="point">
+        <strong>🚌 ${t('JRバス','JR Bus')}</strong>
+        <ul>
+          <li>${t('1階ロータリー東端から乗車','Board at the east end of the 1F rotary')}</li>
+          <li><strong>${t('平地にのりばがあります。','The boarding point is on level ground.')}</strong></li>
+          <li>${t('階段の昇り降りがつらい方や、荷物が多い方にも選択肢になります。','This can be an option for people who have difficulty with stairs or have a lot of luggage.')}</li>
+          <li>${t('約1時間に1本','About once an hour')}</li>
+          <li>${t('南にある三宮を経由してから北にある有馬温泉に向かうため、所要時間が長くなります。','It takes longer because the bus goes south to Sannomiya before heading north to Arima Onsen.')}</li>
+        </ul>
+        <button class="front-action" onclick="frontArimaJr()">🔵 ${t('JRバス・ロータリー東端への行き方を見る','See how to get to the JR Bus / east end of the rotary')}</button>
+      </div>
+      <div class="point">
+        <strong>🔄 ${t('その他の選択肢','Other options')}</strong>
+        <ul>
+          <li>${t('神姫バスの優待券・家族券などを利用したい','You want to use a Shinki Bus discount or family ticket.')}</li>
+          <li>${t('その他の事情で、どうしても神姫バスを利用したい','You have another reason to use Shinki Bus.')}</li>
+        </ul>
+        <p>${t('その場合は、いったん別のバスで三宮へ移動し、三宮から神姫バスの有馬温泉行きを利用する方法もあります。','In that case, you can first take another bus to Sannomiya, then take a Shinki Bus bound for Arima Onsen from Sannomiya.')}</p>
+      </div>
+    </div>
+    <button class="front-action front-back" onclick="frontC()">← ${t('C ― ロータリーに戻る','Back to C — Rotary')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
+}
+function frontArimaShinki(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">STEP 4 🚌</div>
+      <h3>${t('神姫バス・トンネル入口への行き方','How to get to the Shinki Bus / Tunnel Entrance')}</h3>
+      <div class="simple-guide-card">
+        <img src="${lang==='en'?ASSETS.tunnelSimpleEn:ASSETS.tunnelSimple" alt="${t('トンネル入口バス停への簡略案内','Simplified guide to the Tunnel Entrance bus stop')}">
+      </div>
+      <button class="front-action light" onclick="showTunnelDetailFromArima()">📷 ${t('写真で詳しく見る','See the detailed photo guide')}</button>
+    </div>
+    <button class="front-action front-back" onclick="frontArima()">← ${t('有馬温泉の選択肢に戻る','Back to Arima Onsen options')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
+}
+function showTunnelDetailFromArima(){
+  const el=document.getElementById('frontPanel');
+  el.innerHTML=`<div class="guide show">${guideHtml('tunnel')}</div><div class="front-actions"><button class="front-action light" onclick="frontArimaShinki()">← ${t('簡略案内に戻る','Back to the quick guide')}</button><button class="front-action front-back" onclick="frontArima()">← ${t('有馬温泉に戻る','Back to Arima Onsen')}</button><button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button></div>`;
+  el.classList.add('show');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function frontArimaJr(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">STEP 4 🚌</div>
+      <h3>${t('JRバス・ロータリー東端への行き方','How to get to the JR Bus / east end of the rotary')}</h3>
+      <div class="simple-guide-card">
+        <img src="${ASSETS.westOverview" alt="${t('1階ロータリー略図','Simplified 1F rotary map')}">
+      </div>
+      <div class="simple-guide-card">
+        <img src="${ASSETS.east" alt="${t('ロータリー東端・JRバスのりば','JR Bus boarding point at the east end of the rotary')}">
+      </div>
+    </div>
+    <button class="front-action front-back" onclick="frontArima()">← ${t('有馬温泉の選択肢に戻る','Back to Arima Onsen options')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
 function frontKobeAirport(){
   return frontPanel(`

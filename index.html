@@ -200,6 +200,7 @@ details.transfer-route[open] summary::after{content:'－'}
           <button class="walking-route-btn" onclick="selectWalkingRoute('dougukan')" data-ja="2. 竹中大工道具館" data-en="2. Takenaka Carpentry Tools Museum">2. 竹中大工道具館</button>
           <button class="walking-route-btn" onclick="selectWalkingRoute('bus218')" data-ja="3. 2系統・18系統「布引」バス停" data-en="3. Route 2 / 18 “Nunobiki” bus stop">3. 2系統・18系統「布引」バス停</button>
           <button class="walking-route-btn" onclick="selectWalkingRoute('bus92')" data-ja="4. 92系統「布引」バス停" data-en="4. Route 92 “Nunobiki” bus stop">4. 92系統「布引」バス停</button>
+          <button class="walking-route-btn" onclick="selectWalkingRoute('kitanoSannomiya')" data-ja="5. 北野・三宮方面" data-en="5. Kitano / Sannomiya area">5. 北野・三宮方面</button>
         </div>
         <div id="walkingRouteDetail" class="walking-route-detail" aria-live="polite"></div>
       </div>
@@ -462,7 +463,7 @@ const groups = [
   {kana:'🚏 乗り場への行き方', items:['トンネル入口バス停への行き方','ホテル玄関前（4階）バス停への行き方']},
   {kana:'🏨 ホテルシャトルバス', items:['ポートピアホテル','パールシティ神戸','メリケンパークオリエンタルホテル／ホテルオークラ神戸']},
   {kana:'🚌 バスで行く', items:['有馬温泉','淡路島','アリーナ前','小野','かもめりあ','関空リムジン','KIITO前','北野異人館','神戸駅南口','神戸空港','シティーループ','ポートループ','新港町','三田関西学院','三田プレミアムアウトレット','高松','筑紫が丘','徳島','南京町','ハーバーランド・モザイク','ポートタワー','箕谷・神戸北町','三木','メリケンパーク','社','六甲アイランド','六甲道']},
-  {kana:'🚶 徒歩で行く', items:['布引の滝','竹中大工道具館','2系統・18系統「布引」バス停','92系統「布引」バス停']},
+  {kana:'🚶 徒歩で行く', items:['布引の滝','竹中大工道具館','2系統・18系統「布引」バス停','92系統「布引」バス停','北野・三宮方面']},
   {kana:'🚉 地下鉄・鉄道へ乗り継ぐ', items:['地下鉄（新神戸駅～三宮駅）','阪急 神戸三宮駅へ乗り継ぐ','阪神 神戸三宮駅へ乗り継ぐ','有馬温泉へ地下鉄・神鉄で行く','神戸空港へ地下鉄・ポートライナーで行く','六甲アイランドへ鉄道で行く']},
   {kana:'🚡 ロープウェイ・観光', items:['布引ロープウェイ']}
 ];
@@ -1077,6 +1078,9 @@ function selectWalkingRoute(type){
       d.routes.map((r,i)=>routeCard(r,i)).join('')+
       '<div class="walking-route-note"><strong>'+t('⚠️ ご注意','⚠️ Caution')+'</strong><br>'+t(d.routes[0].noteJa,d.routes[0].noteEn)+'</div>'+
       '<button class="front-action front-back" onclick="toggleWalkingEntry()">← '+t('徒歩ルート一覧に戻る','Back to walking routes')+'</button>';
+    detail.classList.add('show');
+  }else if(type==='kitanoSannomiya'){
+    detail.innerHTML='<div class="step-card"><div class="step-label">🚶 '+t('徒歩ルート','Walking route')+'</div><h3>📍 '+t('北野・三宮方面','Kitano / Sannomiya area')+'</h3><p>'+t('新神戸駅から北野・三宮方面へ歩いて向かう際の案内です。','Walking guide from Shin-Kobe Station toward the Kitano and Sannomiya areas.')+'</p><figure class="guide-step"><img src="kitano_sannomiya_walk.png" alt="'+t('北野・三宮方面への徒歩案内図','Walking guide to the Kitano / Sannomiya area')+'"><figcaption>'+t('北野・三宮方面への徒歩案内図','Walking guide to the Kitano / Sannomiya area')+'</figcaption></figure><div class="walking-route-note"><strong>'+t('ポイント','Point')+'</strong><br>'+t('案内図を確認しながら、目的地の方向へ進んでください。','Follow the guide map and continue toward your destination.')+'</div><button class="front-action front-back" onclick="toggleWalkingEntry()">← '+t('徒歩ルート一覧に戻る','Back to walking routes')+'</button>';
     detail.classList.add('show');
   }else{
     return;

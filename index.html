@@ -146,6 +146,7 @@ details.transfer-route[open] summary::after{content:'－'}
 
 /* 2026-09-29 clean front guide */
 .front-guide{margin-top:18px}.front-title{border:2px solid #0b7ff3;border-radius:14px;padding:18px 16px;background:#f7fbff;text-align:center}.front-title h2{margin:0;font-size:30px}.front-title p{margin:4px 0 0;font-size:21px;font-weight:800}.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.location-btn,.lost-btn,.front-action{width:100%;border:0;border-radius:12px;padding:15px 14px;font-size:19px;font-weight:800;cursor:pointer}.location-btn{background:#0b7ff3;color:#fff;min-height:66px}.location-btn.tunnel{background:#66cdb6;color:#083b35}.location-btn.hotel{background:#f4cf4a;color:#4d3a00}.lost-btn{background:#fff7d8;border:2px solid #ffcc33;color:#5a4700;margin-bottom:14px}.front-panel{border:1px solid #d9dde5;border-radius:14px;background:#fff;padding:16px;display:none}.front-panel.show{display:block}.front-panel h3{font-size:25px;margin:0 0 8px}.front-panel img{width:100%;height:auto;border:1px solid #ddd;border-radius:10px;display:block;margin:12px 0}.front-actions{display:grid;gap:10px;margin-top:14px}.front-action{background:#0b7ff3;color:#fff}.front-action.green{background:#66cdb6;color:#083b35}.front-action.yellow{background:#f4cf4a;color:#4d3a00}.front-action.light{background:#f1f8ff;color:#075db3;border:1px solid #b7d8ff}.front-back{margin-top:12px;background:#eee;color:#333}.selected-front{outline:4px solid #ffcc33}.front-photo-caption{text-align:center;font-weight:700;color:#444}.simple-guide-card{margin:12px 0;padding:10px;background:#fff;border:1px solid #d8d8d8;border-radius:8px}
+.front-category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.front-category-btn{width:100%;border:0;border-radius:12px;padding:16px 10px;font-size:20px;font-weight:900;cursor:pointer}.front-category-btn.bus{background:#0b7ff3;color:#fff}.front-category-btn.walking{background:#66cdb6;color:#083b35}.front-category-btn.rail{background:#f4cf4a;color:#4d3a00}.front-category-panel{margin:14px 0}.front-category-panel h3{margin:0 0 10px;font-size:23px}.front-category-item{width:100%;text-align:left;border:1px solid #d8e0ea;border-radius:10px;background:#fff;padding:12px 14px;margin:7px 0;font-size:18px;font-weight:800;cursor:pointer}.front-category-item:hover{background:#f7fbff}@media(max-width:700px){.front-category-grid{grid-template-columns:1fr}}
 .front-destination-link{width:100%;text-align:left;cursor:pointer;font:inherit} .station-overview-card{padding:6px}.station-overview-card img{width:100%;height:auto;display:block}.front-intro{margin:10px 0 16px;text-align:center;font-size:16px}.step-card{border:1px solid #d8e0ea;border-radius:12px;background:#fbfdff;padding:14px;margin:14px 0}.step-card h3{margin:0 0 6px;font-size:23px}.step-card p{margin:4px 0 10px}.step-label{display:inline-block;background:#0b7ff3;color:#fff;border-radius:999px;padding:3px 12px;font-weight:900;font-size:14px;margin-bottom:5px}.step3{background:#fff}.step3 .step-label{background:#555}.simple-guide-card img{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:4px}
 .front-bus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
 .front-bus-card{border:1px solid #d8e0ea;border-radius:12px;background:#fff;padding:12px}
@@ -192,6 +193,16 @@ details.transfer-route[open] summary::after{content:'－'}
       <strong data-ja="目的地によって、移動する方向や階が変わります。" data-en="The direction and floor you need to use depend on your destination.">目的地によって、移動する方向や階が変わります。</strong>
     </p>
     <div class="step-card">
+      <div class="step-label">MENU</div>
+      <h3 data-ja="案内の種類を選ぶ" data-en="Choose a guide category">案内の種類を選ぶ</h3>
+      <div class="front-category-grid">
+        <button class="front-category-btn bus" onclick="frontCategory('bus')">🚌 ${t('バス','Bus')}</button>
+        <button class="front-category-btn walking" onclick="frontCategory('walking')">🚶 ${t('徒歩ルート','Walking routes')}</button>
+        <button class="front-category-btn rail" onclick="frontCategory('rail')">🚉 ${t('鉄道・乗換','Rail & transfers')}</button>
+      </div>
+    </div>
+    <div id="busGuideSection">
+    <div class="step-card">
       <div class="step-label">STEP 1</div>
       <h3 data-ja="今いる場所を確認する" data-en="Confirm your current location">今いる場所を確認する</h3>
       <p data-ja="現在地に近い場所を選んでください。" data-en="Choose the location closest to where you are now.">現在地に近い場所を選んでください。</p>
@@ -201,6 +212,7 @@ details.transfer-route[open] summary::after{content:'－'}
         <button class="location-btn" onclick="frontWhere('shinkansen')" data-ja="🚄 2階新幹線改札口近くのお店等" data-en="🚄 Shops near the 2F Shinkansen ticket gates">🚄 2階新幹線改札口近くのお店等</button>
       </div>
       <button class="lost-btn" onclick="frontLost()" data-ja="📍 どれも分からない" data-en="📍 I don't recognize any of these">📍 どれも分からない</button>
+    </div>
     </div>
     <div id="frontPanel" class="front-panel" aria-live="polite"></div>
   </section>
@@ -961,6 +973,34 @@ const stationListView=listView==='stations';
 
 
 // ===== Front guide: terrain overview -> STEP 1 -> STEP 2 -> STEP 3 =====
+function frontCategory(type){
+  const bus=document.getElementById('busGuideSection');
+  const panel=document.getElementById('frontPanel');
+  if(type==='bus'){
+    bus.style.display='block';
+    panel.classList.remove('show');
+    panel.innerHTML='';
+    document.getElementById('frontGuide').scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
+  bus.style.display='none';
+  const items=type==='walking' ? ['布引の滝','竹中大工道具館','2系統・18系統「布引」バス停','92系統「布引」バス停'] : ['地下鉄（新神戸駅～三宮駅）','阪急 神戸三宮駅へ乗り継ぐ','阪神 神戸三宮駅へ乗り継ぐ','有馬温泉へ地下鉄・神鉄で行く','神戸空港へ地下鉄・ポートライナーで行く','六甲アイランドへ鉄道で行く'];
+  const icon=type==='walking'?'🚶':'🚉';
+  const title=type==='walking'?t('徒歩ルート','Walking routes'):t('鉄道・乗換','Rail & transfers');
+  panel.innerHTML='`<div class="front-category-panel"><h3>'+icon+' '+title+'</h3><p>'+t('既存の詳細説明をご覧いただけます。簡易版は後日追加します。','Existing detailed guides are available here. Quick guides will be added later.')+'</p><div class="front-actions">'+items.map(name=>'`<button class="front-category-item" onclick="openExistingDetail(\''+name.replace(/'/g,"\\'")+'\')">📖 '+t(name,data[name]?.en||name)+'</button>`').join('')+'</div></div><button class="front-action front-back" onclick="frontCategory(\'bus\')">← '+t('バス案内に戻る','Back to bus guide')+'</button>`';
+  panel.innerHTML=panel.innerHTML.replaceAll('`','`');
+  panel.classList.add('show');
+  panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function openExistingDetail(name){
+  if(!data[name]) return;
+  document.getElementById('frontGuide').style.display='none';
+  document.getElementById('mainLayout').style.display='grid';
+  document.getElementById('stopListPage').classList.remove('show');
+  current=name;
+  renderDetail();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 function frontPanel(html){
   const el=document.getElementById('frontPanel');
   el.innerHTML=html;

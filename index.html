@@ -1004,7 +1004,7 @@ function frontCategory(type){
     const name=item.name;
     const en=data[name]&&data[name].en?data[name].en:name;
     const labelJa=item.labelJa||name;
-    return '<button class="front-category-item" onclick="openExistingDetail(\''+name.replace(/'/g,"\'")+'\')">📖 '+t(labelJa,en)+'</button>';
+    return '<button class="front-category-item" data-destination="'+name.replace(/"/g,'&quot;')+'" onclick="openExistingDetail(this.dataset.destination)">📖 '+t(labelJa,en)+'</button>';
   }).join('');
   panel.innerHTML='<div class="front-category-panel"><h3>'+icon+' '+title+'</h3><p>'+intro+'</p><div class="front-actions">'+buttons+'</div></div><button class="front-action front-back" onclick="frontCategory(\'bus\')">← '+t('バス案内に戻る','Back to bus guide')+'</button>';
   panel.classList.add('show');

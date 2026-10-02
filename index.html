@@ -204,6 +204,20 @@ details.transfer-route[open] summary::after{content:'－'}
         <div id="walkingRouteDetail" class="walking-route-detail" aria-live="polite"></div>
       </div>
     </div>
+    <div class="walking-entry rail-entry">
+      <button class="walking-entry-btn" onclick="toggleRailEntry()" data-ja="🚉 電車・鉄道乗継" data-en="🚉 Rail transfers">🚉 電車・鉄道乗継</button>
+      <div id="railEntryPanel" class="walking-entry-panel" aria-live="polite">
+        <div class="walking-route-list">
+          <button class="walking-route-btn" onclick="selectRailRoute('subway')" data-ja="1. 地下鉄（新神戸駅～三宮駅）" data-en="1. Subway (Shin-Kobe–Sannomiya)">1. 地下鉄（新神戸駅～三宮駅）</button>
+          <button class="walking-route-btn" onclick="selectRailRoute('hankyu')" data-ja="2. 阪急 神戸三宮駅へ乗り継ぐ" data-en="2. Transfer to Hankyu Kobe-Sannomiya Station">2. 阪急 神戸三宮駅へ乗り継ぐ</button>
+          <button class="walking-route-btn" onclick="selectRailRoute('hanshin')" data-ja="3. 阪神 神戸三宮駅へ乗り継ぐ" data-en="3. Transfer to Hanshin Kobe-Sannomiya Station">3. 阪神 神戸三宮駅へ乗り継ぐ</button>
+          <button class="walking-route-btn" onclick="selectRailRoute('arimaRail')" data-ja="4. 有馬温泉へ地下鉄・神鉄で行く" data-en="4. To Arima Onsen by Subway and Kobe Electric Railway">4. 有馬温泉へ地下鉄・神鉄で行く</button>
+          <button class="walking-route-btn" onclick="selectRailRoute('airportRail')" data-ja="5. 神戸空港へ地下鉄・ポートライナーで行く" data-en="5. To Kobe Airport by Subway and Port Liner">5. 神戸空港へ地下鉄・ポートライナーで行く</button>
+          <button class="walking-route-btn" onclick="selectRailRoute('rokkoRail')" data-ja="6. 六甲アイランドへ鉄道で行く" data-en="6. To Rokko Island by Rail">6. 六甲アイランドへ鉄道で行く</button>
+        </div>
+        <div id="railRouteDetail" class="walking-route-detail" aria-live="polite"></div>
+      </div>
+    </div>
     <div class="step-card">
       <div class="step-label">STEP 1</div>
       <h3 data-ja="今いる場所を確認する" data-en="Confirm your current location">今いる場所を確認する</h3>
@@ -972,6 +986,32 @@ const listView=new URLSearchParams(location.search).get('view');
 const stopListView=listView==='stops';
 const stationListView=listView==='stations';
 
+
+function toggleRailEntry(){
+  const panel=document.getElementById('railEntryPanel');
+  panel.classList.toggle('show');
+}
+function selectRailRoute(type){
+  const detail=document.getElementById('railRouteDetail');
+  const map={
+    subway:'地下鉄（新神戸駅～三宮駅）',
+    hankyu:'阪急 神戸三宮駅へ乗り継ぐ',
+    hanshin:'阪神 神戸三宮駅へ乗り継ぐ',
+    arimaRail:'有馬温泉へ地下鉄・神鉄で行く',
+    airportRail:'神戸空港へ地下鉄・ポートライナーで行く',
+    rokkoRail:'六甲アイランドへ鉄道で行く'
+  };
+  const d=data[map[type]];
+  if(!d) return;
+  const cards=d.routes.map((r,i)=>routeCard(r,i)).join('');
+  detail.innerHTML='<div class="step-card"><div class="step-label">🚉 '+t('電車・鉄道乗継','Rail transfer')+'</div><h3>'+d.icon+' '+t(map[type],d.en)+'</h3><p>'+t(d.leadJa,d.leadEn)+'</p></div>'+
+    cards+
+    '<div class="walking-route-note"><strong>'+t('ポイント','Point')+'</strong><br>'+t(d.routes[0].pointJa,d.routes[0].pointEn)+'</div>'+
+    '<div class="walking-route-note"><strong>'+t('ご注意','Caution')+'</strong><br>'+t(d.routes[0].noteJa,d.routes[0].noteEn)+'</div>'+
+    '<button class="front-action front-back" onclick="toggleRailEntry()">← '+t('電車・鉄道乗継一覧に戻る','Back to rail transfers')+'</button>';
+  detail.classList.add('show');
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
 
 function toggleWalkingEntry(){
   const panel=document.getElementById('walkingEntryPanel');

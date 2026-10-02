@@ -990,7 +990,10 @@ function selectWalkingRoute(type){
     '<button class="front-action front-back" onclick="toggleWalkingEntry()">← '+t('徒歩ルート一覧に戻る','Back to walking routes')+'</button>';
     detail.classList.add('show');
   }else if(type==='dougukan'){
-    detail.innerHTML='<div class="guide show">'+guideHtml('竹中大工道具館')+'</div>'+
+    const d=data['竹中大工道具館'];
+    detail.innerHTML='<div class="step-card"><div class="step-label">🚶 '+t('徒歩ルート','Walking route')+'</div><h3>🛠️ '+t('竹中大工道具館','Takenaka Carpentry Tools Museum')+'</h3><p>'+t(d.leadJa,d.leadEn)+'</p></div>'+
+      d.routes.map((r,i)=>routeCard(r,i)).join('')+
+      '<div class="walking-route-note"><strong>'+t('ご注意','Caution')+'</strong><br>'+t(d.routes[0].noteJa,d.routes[0].noteEn)+'</div>'+
       '<button class="front-action front-back" onclick="toggleWalkingEntry()">← '+t('徒歩ルート一覧に戻る','Back to walking routes')+'</button>';
     detail.classList.add('show');
   }else{

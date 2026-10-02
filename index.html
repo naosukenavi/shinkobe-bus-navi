@@ -984,13 +984,27 @@ function frontCategory(type){
     return;
   }
   bus.style.display='none';
-  const items=type==='walking' ? ['布引の滝','竹中大工道具館','2系統・18系統「布引」バス停','92系統「布引」バス停'] : ['地下鉄（新神戸駅～三宮駅）','阪急 神戸三宮駅へ乗り継ぐ','阪神 神戸三宮駅へ乗り継ぐ','有馬温泉へ地下鉄・神鉄で行く','神戸空港へ地下鉄・ポートライナーで行く','六甲アイランドへ鉄道で行く'];
+  const items=type==='walking' ? [
+    {name:'布引の滝',labelJa:'布引の滝'},
+    {name:'竹中大工道具館',labelJa:'竹中大工道具館'},
+    {name:'2系統・18系統「布引」バス停',labelJa:'2系統・18系統「布引」バス停'},
+    {name:'92系統「布引」バス停',labelJa:'92系統「布引」バス停'}
+  ] : [
+    {name:'地下鉄（新神戸駅～三宮駅）',labelJa:'地下鉄 新神戸駅 → 三宮駅'},
+    {name:'阪急 神戸三宮駅へ乗り継ぐ',labelJa:'阪急 神戸三宮駅への乗継'},
+    {name:'阪神 神戸三宮駅へ乗り継ぐ',labelJa:'阪神 神戸三宮駅への乗継'},
+    {name:'有馬温泉へ地下鉄・神鉄で行く',labelJa:'有馬温泉へ地下鉄・神鉄'},
+    {name:'神戸空港へ地下鉄・ポートライナーで行く',labelJa:'神戸空港へ地下鉄・ポートライナー'},
+    {name:'六甲アイランドへ鉄道で行く',labelJa:'六甲アイランドへ鉄道'}
+  ];
   const icon=type==='walking'?'🚶':'🚉';
   const title=type==='walking'?t('徒歩ルート','Walking routes'):t('鉄道・乗換','Rail & transfers');
   const intro=t('既存の詳細説明をご覧いただけます。簡易版は後日追加します。','Existing detailed guides are available here. Quick guides will be added later.');
-  const buttons=items.map(name=>{
+  const buttons=items.map(item=>{
+    const name=item.name;
     const en=data[name]&&data[name].en?data[name].en:name;
-    return '<button class="front-category-item" onclick="openExistingDetail(\\''+name.replace(/'/g,"\\'")+'\\')">📖 '+t(name,en)+'</button>';
+    const labelJa=item.labelJa||name;
+    return '<button class="front-category-item" onclick="openExistingDetail(\\''+name.replace(/'/g,"\\'")+'\\')">📖 '+t(labelJa,en)+'</button>';
   }).join('');
   panel.innerHTML='<div class="front-category-panel"><h3>'+icon+' '+title+'</h3><p>'+intro+'</p><div class="front-actions">'+buttons+'</div></div><button class="front-action front-back" onclick="frontCategory(\\'bus\\')">← '+t('バス案内に戻る','Back to bus guide')+'</button>';
   panel.classList.add('show');
@@ -1498,80 +1512,3 @@ function frontLocation(type){
 }
 function frontRotary(){
   frontPanel(`
-    <div class="step-card">
-      <div class="step-label">STEP 2</div>
-      <h3>${t('1階・ロータリーです','1F Rotary')}</h3>
-      <div class="simple-guide-card"><div class="rotary-map"><img src="${ASSETS.westOverview}" alt="${t('1階ロータリー略図','Simplified 1F rotary map')}"></div></div>
-      <div class="step-card step3">
-        <div class="step-label">STEP 3</div>
-        <h3>${t('乗り場を確認する','Choose your boarding point')}</h3>
-        <p>${t('ロータリー内にも複数の乗り場があります。地図から選んでください。','There are several boarding points within the rotary. Choose one from the map.')}</p>
-        <div class="front-actions">
-          <button class="front-action" onclick="frontStop('east')">📷 ${t('東端・JRバス','East end · JR Bus')}</button>
-          <button class="front-action" onclick="frontStop('middle')">📷 ${t('中央付近・神姫バスなど','Center · Shinki Bus etc.')}</button>
-          <button class="front-action" onclick="frontStop('west')">📷 ${t('西端・観光バス','West end · Sightseeing buses')}</button>
-        </div>
-      </div>
-      <div class="front-actions">
-        <button class="front-action green" onclick="frontLocation('tunnel')">🟢 ${t('トンネル入口はこちら','Tunnel Entrance')}</button>
-        <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ${t('ホテル玄関前はこちら','Hotel Entrance')}</button>
-      </div>
-    </div>
-    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
-}
-function frontStop(stop){
-  const info=stopInfo[stop];
-  const photo=stop==='east'?ASSETS.east:stop==='middle'?ASSETS.middle:ASSETS.westOverview;
-  const label=info?(lang==='ja'?info.ja:info.en):t('ロータリー','Rotary');
-  const next=stop==='east'?t('JRバス・高速バス','JR Bus · Highway buses'):stop==='middle'?t('神姫バス・神戸市バス18系統など','Shinki Bus · Kobe City Bus 18 etc.'):t('シティーループ・ポートループ','City Loop · Port Loop');
-  frontPanel(`<div class="step-card"><div class="step-label">STEP 3</div><h3>📍 ${label}</h3><img src="${photo}" alt="${label}"><p><strong>${t('この位置の主なバス：','Main buses at this point:')}</strong>${next}</p>
-  <div class="front-actions">${stop==='west'?'<button class="front-action" onclick="showEncyclopedia(\'west\')">📚 '+t('シティーループ・ポートループの詳しい案内','Detailed City Loop / Port Loop guide')+'</button>':''}
-  ${stop==='east'?'<button class="front-action" onclick="showEncyclopedia(\'east\')">📚 '+t('JRバス・高速バスの詳しい案内','Detailed JR Bus / highway bus guide')+'</button>':''}
-  ${stop==='middle'?'<button class="front-action" onclick="showEncyclopedia(\'middle\')">📚 '+t('神姫バス・18系統の詳しい案内','Detailed Shinki Bus / Route 18 guide')+'</button>':''}
-  <button class="front-action light" onclick="frontRotary()">← ${t('ロータリー略図に戻る','Back to rotary map')}</button></div></div>`);
-}
-function frontLost(){
-  frontPanel(`
-    <div class="step-card">
-      <div class="step-label">STEP 1</div>
-      <h3>${t('どこにいるか分からない方へ','If you are not sure where you are')}</h3>
-      <p>${t('周りに見えるものを1つ選んでください。','Choose one thing you can see around you.')}</p>
-      <div class="front-actions">
-        <button class="front-action" onclick="frontWhere('station')">🚄 ${t('新幹線の改札が見える','I can see the Shinkansen ticket gates')}</button>
-        <button class="front-action" onclick="frontWhere('rotary')">🚌 ${t('大きなロータリーが見える','I can see a large rotary')}</button>
-        <button class="front-action green" onclick="frontWhere('tunnel')">🟢 ${t('トンネル入口・地下にいる','I am at the Tunnel Entrance / basement level')}</button>
-        <button class="front-action yellow" onclick="frontWhere('hotel')">🏨 ${t('ホテルへの渡り廊下が見える','I can see the walkway to the hotel')}</button>
-      </div>
-    </div>
-    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
-}
-function frontHome(){
-  const el=document.getElementById('frontPanel');
-  el.classList.remove('show');
-  el.innerHTML='';
-  document.getElementById('frontGuide').scrollIntoView({behavior:'smooth',block:'start'});
-}
-function showGuideFromFront(type){
-  const el=document.getElementById('frontPanel');
-  el.innerHTML=`<div class="guide show">${guideHtml(type)}</div><div class="front-actions"><button class="front-action light" onclick="frontLocation('${type}')">← 簡略案内図に戻る</button><button class="front-action front-back" onclick="frontHome()">← 最初に戻る</button></div>`;
-  el.classList.add('show');
-  el.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function renderStaticText(){
-  document.querySelectorAll('[data-ja]').forEach(e=>{e.textContent=t(e.dataset.ja,e.dataset.en)});
-  const overview=document.getElementById('stationOverviewImg');
-  if(overview){
-    overview.src=ASSETS.stationOverview;
-    overview.alt=t('新神戸駅の高低差と3か所のバス乗り場','Elevation differences and three bus boarding areas at Shin-Kobe Station');
-  }
-  document.getElementById('jaBtn').classList.toggle('active',lang==='ja');
-  document.getElementById('enBtn').classList.toggle('active',lang==='en');
-}
-function setLanguage(next){lang=next;localStorage.setItem('shinkobeLang',lang);render()}
-function reloadLatest(){window.location.reload()}
-function render(){renderStaticText();const layout=document.getElementById('mainLayout');const page=document.getElementById('stopListPage');if(stopListView){document.getElementById('frontGuide').style.display='none';layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('系統別・全バス停名一覧','All bus stops by route');document.querySelector('.subtitle').textContent=t('新神戸駅発着路線','Routes serving Shin-Kobe Station');renderStopList()}else if(stationListView){document.getElementById('frontGuide').style.display='none';layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('市営地下鉄・新交通 全駅名一覧','Municipal subway and new transit stations');document.querySelector('.subtitle').textContent=t('地下鉄・ポートライナー・六甲ライナー','Subway, Port Liner and Rokko Liner');renderRailStationList()}else{layout.style.display='none';page.classList.remove('show');document.getElementById('frontGuide').style.display='block';}}
-document.getElementById('jaBtn').onclick=()=>setLanguage('ja');document.getElementById('enBtn').onclick=()=>setLanguage('en');render();
-</script>
-</body>
-</html>

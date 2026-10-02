@@ -1003,11 +1003,15 @@ function selectWalkingRoute(type){
       '<div class="walking-route-note"><strong>'+t('ポイント','Point')+'</strong><br>'+t(d.routes[0].noteJa,d.routes[0].noteEn)+'</div>'+
       '<button class="front-action front-back" onclick="toggleWalkingEntry()">← '+t('徒歩ルート一覧に戻る','Back to walking routes')+'</button>';
     detail.classList.add('show');
-  }else{
-    const texts={bus92:['92系統「布引」バス停','Route 92 “Nunobiki” bus stop']};
-    const item=texts[type]; if(!item) return;
-    detail.innerHTML='<div class="walking-route-note"><strong>'+t(item[0],item[1])+'</strong><br>'+t('詳しい徒歩ルートを順次追加します。','The detailed walking route will be added step by step.')+'</div>';
+  }else if(type==='bus92'){
+    const d=data['92系統「布引」バス停'];
+    detail.innerHTML='<div class="step-card"><div class="step-label">🚶 '+t('徒歩ルート','Walking route')+'</div><h3>🚏 '+t('92系統「布引」バス停','Nunobiki bus stop / Route 92')+'</h3><p>'+t(d.leadJa,d.leadEn)+'</p></div>'+
+      d.routes.map((r,i)=>routeCard(r,i)).join('')+
+      '<div class="walking-route-note"><strong>'+t('⚠️ ご注意','⚠️ Caution')+'</strong><br>'+t(d.routes[0].noteJa,d.routes[0].noteEn)+'</div>'+
+      '<button class="front-action front-back" onclick="toggleWalkingEntry()">← '+t('徒歩ルート一覧に戻る','Back to walking routes')+'</button>';
     detail.classList.add('show');
+  }else{
+    return;
   }
   detail.scrollIntoView({behavior:'smooth',block:'nearest'});
 }

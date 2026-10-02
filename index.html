@@ -989,8 +989,12 @@ function selectWalkingRoute(type){
     '<div class="step-card"><div class="step-label">STEP 6</div><h3>'+t('雌滝 → 鼓ヶ滝 → 夫婦滝 → 雄滝','Men Falls → Tsutsumigataki → Meotodaki → On Falls')+'</h3><p>'+t('どこまで行くかは、時間と足元の状態に合わせて決めましょう。','Choose how far to go based on your time and footing.')+'</p></div>'+
     '<button class="front-action front-back" onclick="toggleWalkingEntry()">← '+t('徒歩ルート一覧に戻る','Back to walking routes')+'</button>';
     detail.classList.add('show');
+  }else if(type==='dougukan'){
+    detail.innerHTML='<div class="guide show">'+guideHtml('竹中大工道具館')+'</div>'+
+      '<button class="front-action front-back" onclick="toggleWalkingEntry()">← '+t('徒歩ルート一覧に戻る','Back to walking routes')+'</button>';
+    detail.classList.add('show');
   }else{
-    const texts={dougukan:['竹中大工道具館','Takenaka Carpentry Tools Museum'],bus218:['2系統・18系統「布引」バス停','Route 2 / 18 “Nunobiki” bus stop'],bus92:['92系統「布引」バス停','Route 92 “Nunobiki” bus stop']};
+    const texts={bus218:['2系統・18系統「布引」バス停','Route 2 / 18 “Nunobiki” bus stop'],bus92:['92系統「布引」バス停','Route 92 “Nunobiki” bus stop']};
     const item=texts[type]; if(!item) return;
     detail.innerHTML='<div class="walking-route-note"><strong>'+t(item[0],item[1])+'</strong><br>'+t('詳しい徒歩ルートを順次追加します。','The detailed walking route will be added step by step.')+'</div>';
     detail.classList.add('show');

@@ -415,7 +415,7 @@ const stopPhotos = {
 };
 const stopInfo = {
   east:{ja:'1階ロータリー東端', en:'1F rotary east end', cls:'', pointJa:'1階ロータリー東端の「JR高速バス②のりば」付近から乗車します。', pointEn:'Board near JR Express Bus stop 2 at the east end of the 1F rotary.'},
-  middle:{ja:'1階ロータリー中ほど', en:'1F rotary middle', cls:'pink', pointJa:'ロータリー中央付近寄りの乗り場です。神姫バスや一部路線バスはこのあたりから乗車します。', pointEn:'This is around the middle of the rotary. Shinki Bus and some local buses board here.'},
+  middle:{ja:'1階ロータリー中ほど', en:'1F rotary middle', cls:'pink', pointJa:'ロータリー中央付近寄りの乗り場です。神姫バスや一部神姫バスはこのあたりから乗車します。', pointEn:'This is around the middle of the rotary. Shinki Bus and some local buses board here.'},
   west:{ja:'1階ロータリー西端', en:'1F rotary west end', cls:'', pointJa:'ロータリー西端の観光系バス乗り場です。シティーループ、ポートループなどはこの付近から乗車します。', pointEn:'This is the west-end sightseeing bus area. City Loop and Port Loop board here.'},
   tunnel:{ja:'トンネル入口バス停', en:'Tunnel Entrance bus stop', cls:'', pointJa:'1階ロータリー内にはありません。駅西端から見える道路をはさんで向かいにある、緑色の屋根があるバス停へ向かいます。', pointEn:'This is not inside the 1F rotary. Go to the bus stop with the green roof across the road from the west end of the station.'},
   hotel:{ja:'ホテル玄関前（4階）', en:'Hotel entrance / 4F', cls:'pink', pointJa:'1階ロータリー内ではありません。渡り廊下をそのまま進み、ホテル入口・玄関前（4階）のりばへ向かいます。', pointEn:'This is not inside the 1F rotary. Continue along the walkway toward the hotel entrance / 4F.'},
@@ -478,7 +478,7 @@ const data = {
   ]},
 
   'ポートループ': {icon:'🟦', en:'Port Loop', leadJa:'ポートループ（Port Loop）に乗る方向けの案内です。車体表示と行き先を確認してください。', leadEn:'Guide for passengers taking the Port Loop. Please check the bus display and destination.', loopHelp:true, portLoopSannomiyaGuide:true, routes:[
-    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',photos:[{src:ASSETS.westPL, ja:'通常のポートループ（連節バス）', en:'Regular Port Loop articulated bus'},{src:ASSETS.portLoopSubstitutePhoto, ja:'代車として来る場合がある神姫カラーのオレンジ色の路線バス', en:'Orange substitute bus that may operate as Port Loop'}],pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',pointEn:'At Shin-Kobe Station, board near the west end of the 1F rotary.',noteJa:'ポートループは、代車として神姫カラーのオレンジ色の路線バスが来る場合があります。車体の色だけで判断せず、前面や側面の「Port Loop」表示を確認してください。',noteEn:'Port Loop may sometimes use an orange substitute bus. Do not judge only by the bus color; check the Port Loop display on the front or side.'}
+    {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',photos:[{src:ASSETS.westPL, ja:'通常のポートループ（連節バス）', en:'Regular Port Loop articulated bus'},{src:ASSETS.portLoopSubstitutePhoto, ja:'代車として来る場合がある神姫カラーのオレンジ色の神姫バス', en:'Orange substitute bus that may operate as Port Loop'}],pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',pointEn:'At Shin-Kobe Station, board near the west end of the 1F rotary.',noteJa:'ポートループは、代車として神姫カラーのオレンジ色の神姫バスが来る場合があります。車体の色だけで判断せず、前面や側面の「Port Loop」表示を確認してください。',noteEn:'Port Loop may sometimes use an orange substitute bus. Do not judge only by the bus color; check the Port Loop display on the front or side.'}
   ]},
 
   '布引の滝': {icon:'🥾', en:'Nunobiki Falls', leadJa:'布引の滝へ行く場合は、1階東端のドアから外へ出ます。外に出たら、案内表示に従って山側へ進みます。', leadEn:'To Nunobiki Falls, exit from the door at the 1F East End. After going outside, follow the signs toward the mountain side.', routes:[
@@ -665,7 +665,7 @@ const data = {
   ]},
 
   '六甲道': {icon:'🚏', en:'Rokkomichi', leadJa:'神戸市バス18系統は土日限定で新神戸駅を通ります。', leadEn:'Kobe City Bus 18 serves Shin-Kobe only on weekends/holidays.', routes:[
-    {companyJa:'神戸市バス18系統（土日限定）',companyEn:'Kobe City Bus 18 / weekends only',stop:'middle', photos:[{src:ASSETS.rokkomichi18Stop, ja:'神戸市バス18系統（土日限定）のバス停', en:'Kobe City Bus 18 weekend-only stop'}], pointJa:'ロータリー中央付近寄りの乗り場です。神姫バスや一部路線バスはこのあたりから乗車します。', pointEn:'This is near the middle of the rotary. Shinki Bus and some local buses board around here.', noteJa:'写真の目印を確認して乗り場へ向かってください。<br>平日は徒歩で布引バス停まで移動して、18系統をご利用ください。新神戸駅から歩いて行く経路はこちら。', noteEn:'Use the photo as a landmark and go to the boarding point. On weekdays, walk to Nunobiki bus stop and use bus route 18.'}
+    {companyJa:'神戸市バス18系統（土日限定）',companyEn:'Kobe City Bus 18 / weekends only',stop:'middle', photos:[{src:ASSETS.rokkomichi18Stop, ja:'神戸市バス18系統（土日限定）のバス停', en:'Kobe City Bus 18 weekend-only stop'}], pointJa:'ロータリー中央付近寄りの乗り場です。神姫バスや一部神姫バスはこのあたりから乗車します。', pointEn:'This is near the middle of the rotary. Shinki Bus and some local buses board around here.', noteJa:'写真の目印を確認して乗り場へ向かってください。<br>平日は徒歩で布引バス停まで移動して、18系統をご利用ください。新神戸駅から歩いて行く経路はこちら。', noteEn:'Use the photo as a landmark and go to the boarding point. On weekdays, walk to Nunobiki bus stop and use bus route 18.'}
   ]},
 
   'ハーバーランド・モザイク': {icon:'🎡', en:'Harborland / Mosaic', leadJa:'複数ルートがあります。観光系バスはシティーループ（City Loop）／ポートループ（Port Loop）の違いに注意してください。', leadEn:'Several routes are possible. For sightseeing buses, pay attention to the difference between City Loop and Port Loop.', loopHelp:true, routes:[
@@ -1057,8 +1057,8 @@ function frontC(){
           <div class="front-bus-card">
             <div class="front-bus-title">✈️ ${t('神戸空港','Kobe Airport')}</div>
             <div class="front-bus-photos">
-              <figure><img src="${ASSETS.frontKobeAirportHighway}" alt="${t('神戸空港行き 神姫高速バス','Shinki highway bus for Kobe Airport')}"><figcaption>${t('神姫高速バス','Shinki highway bus')}</figcaption></figure>
-              <figure><img src="${ASSETS.frontKobeAirportLocal}" alt="${t('神戸空港行き 路線バス','Local bus for Kobe Airport')}"><figcaption>${t('路線バス','Local bus')}</figcaption></figure>
+              <figure><img src="${ASSETS.frontKobeAirportHighway}" alt="${t('神戸空港行き JRバス','Shinki highway bus for Kobe Airport')}"><figcaption>${t('JRバス','Shinki highway bus')}</figcaption></figure>
+              <figure><img src="${ASSETS.frontKobeAirportLocal}" alt="${t('神戸空港行き 神姫バス','Local bus for Kobe Airport')}"><figcaption>${t('神姫バス','Local bus')}</figcaption></figure>
             </div>
             <button class="front-action" onclick="frontKobeAirport()">${t('詳しい案内を見る','See details')}</button>
           </div>

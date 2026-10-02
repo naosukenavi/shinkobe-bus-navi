@@ -218,6 +218,15 @@ details.transfer-route[open] summary::after{content:'－'}
         <div id="railRouteDetail" class="walking-route-detail" aria-live="polite"></div>
       </div>
     </div>
+    <div class="walking-entry ropeway-entry">
+      <button class="walking-entry-btn" onclick="toggleRopewayEntry()" data-ja="🚡 ロープウェイ・観光" data-en="🚡 Ropeway & sightseeing">🚡 ロープウェイ・観光</button>
+      <div id="ropewayEntryPanel" class="walking-entry-panel" aria-live="polite">
+        <div class="walking-route-list">
+          <button class="walking-route-btn" onclick="selectRopewayRoute()" data-ja="布引ハーブ園・ロープウェイ" data-en="Nunobiki Herb Gardens / Ropeway">🚡 布引ハーブ園・ロープウェイ</button>
+        </div>
+        <div id="ropewayRouteDetail" class="walking-route-detail" aria-live="polite"></div>
+      </div>
+    </div>
     <div class="step-card">
       <div class="step-label">STEP 1</div>
       <h3 data-ja="今いる場所を確認する" data-en="Confirm your current location">今いる場所を確認する</h3>
@@ -1010,6 +1019,24 @@ function selectRailRoute(type){
     '<div class="walking-route-note"><strong>'+t('ポイント','Point')+'</strong><br>'+t(d.routes[0].pointJa,d.routes[0].pointEn)+'</div>'+
     '<div class="walking-route-note"><strong>'+t('ご注意','Caution')+'</strong><br>'+t(d.routes[0].noteJa,d.routes[0].noteEn)+'</div>'+
     '<button class="front-action front-back" onclick="toggleRailEntry()">← '+t('電車・鉄道乗継一覧に戻る','Back to rail transfers')+'</button>';
+  detail.classList.add('show');
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function toggleRopewayEntry(){
+  const panel=document.getElementById('ropewayEntryPanel');
+  panel.classList.toggle('show');
+}
+function selectRopewayRoute(){
+  const detail=document.getElementById('ropewayRouteDetail');
+  const d=data['布引ロープウェイ'];
+  if(!d) return;
+  const cards=d.routes.map((r,i)=>routeCard(r,i)).join('');
+  detail.innerHTML='<div class="step-card"><div class="step-label">🚡 '+t('ロープウェイ・観光','Ropeway & sightseeing')+'</div><h3>'+d.icon+' '+t('布引ハーブ園・ロープウェイ','Nunobiki Herb Gardens / Ropeway')+'</h3><p>'+t(d.leadJa,d.leadEn)+'</p></div>'+
+    cards+
+    '<div class="walking-route-note"><strong>'+t('ポイント','Point')+'</strong><br>'+t(d.routes[0].pointJa,d.routes[0].pointEn)+'</div>'+
+    '<div class="walking-route-note"><strong>'+t('ご注意','Caution')+'</strong><br>'+t(d.routes[0].noteJa,d.routes[0].noteEn)+'</div>'+
+    '<button class="front-action front-back" onclick="toggleRopewayEntry()">← '+t('ロープウェイ・観光一覧に戻る','Back to ropeway & sightseeing')+'</button>';
   detail.classList.add('show');
   detail.scrollIntoView({behavior:'smooth',block:'nearest'});
 }

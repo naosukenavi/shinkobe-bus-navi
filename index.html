@@ -1005,6 +1005,7 @@ function selectRailRoute(type){
   if(!d) return;
   const cards=d.routes.map((r,i)=>routeCard(r,i)).join('');
   detail.innerHTML='<div class="step-card"><div class="step-label">🚉 '+t('電車・鉄道乗継','Rail transfer')+'</div><h3>'+d.icon+' '+t(map[type],d.en)+'</h3><p>'+t(d.leadJa,d.leadEn)+'</p></div>'+
+    '<div class="step-card"><div class="step-label">STEP 1</div><h3>'+t('地下鉄新神戸駅へ向かう','Go to Subway Shin-Kobe Station')+'</h3><p>'+t('新幹線新神戸駅から地下鉄新神戸駅へ向かいます。写真を上から順に確認しながら進んでください。','Go from Shinkansen Shin-Kobe Station to Subway Shin-Kobe Station. Follow the photos in order.')+'</p></div>'+
     cards+
     '<div class="walking-route-note"><strong>'+t('ポイント','Point')+'</strong><br>'+t(d.routes[0].pointJa,d.routes[0].pointEn)+'</div>'+
     '<div class="walking-route-note"><strong>'+t('ご注意','Caution')+'</strong><br>'+t(d.routes[0].noteJa,d.routes[0].noteEn)+'</div>'+

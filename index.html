@@ -196,9 +196,9 @@ details.transfer-route[open] summary::after{content:'－'}
       <div class="step-label">MENU</div>
       <h3 data-ja="案内の種類を選ぶ" data-en="Choose a guide category">案内の種類を選ぶ</h3>
       <div class="front-category-grid">
-        <button class="front-category-btn bus" onclick="frontCategory('bus')">🚌 ${t('バス','Bus')}</button>
-        <button class="front-category-btn walking" onclick="frontCategory('walking')">🚶 ${t('徒歩ルート','Walking routes')}</button>
-        <button class="front-category-btn rail" onclick="frontCategory('rail')">🚉 ${t('鉄道・乗換','Rail & transfers')}</button>
+        <button class="front-category-btn bus" onclick="frontCategory('bus')" data-ja="🚌 バス" data-en="🚌 Bus">🚌 バス</button>
+        <button class="front-category-btn walking" onclick="frontCategory('walking')" data-ja="🚶 徒歩ルート" data-en="🚶 Walking routes">🚶 徒歩ルート</button>
+        <button class="front-category-btn rail" onclick="frontCategory('rail')" data-ja="🚉 鉄道・乗換" data-en="🚉 Rail & transfers">🚉 鉄道・乗換</button>
       </div>
     </div>
     <div id="busGuideSection">
@@ -987,8 +987,12 @@ function frontCategory(type){
   const items=type==='walking' ? ['布引の滝','竹中大工道具館','2系統・18系統「布引」バス停','92系統「布引」バス停'] : ['地下鉄（新神戸駅～三宮駅）','阪急 神戸三宮駅へ乗り継ぐ','阪神 神戸三宮駅へ乗り継ぐ','有馬温泉へ地下鉄・神鉄で行く','神戸空港へ地下鉄・ポートライナーで行く','六甲アイランドへ鉄道で行く'];
   const icon=type==='walking'?'🚶':'🚉';
   const title=type==='walking'?t('徒歩ルート','Walking routes'):t('鉄道・乗換','Rail & transfers');
-  panel.innerHTML='`<div class="front-category-panel"><h3>'+icon+' '+title+'</h3><p>'+t('既存の詳細説明をご覧いただけます。簡易版は後日追加します。','Existing detailed guides are available here. Quick guides will be added later.')+'</p><div class="front-actions">'+items.map(name=>'`<button class="front-category-item" onclick="openExistingDetail(\''+name.replace(/'/g,"\\'")+'\')">📖 '+t(name,data[name]?.en||name)+'</button>`').join('')+'</div></div><button class="front-action front-back" onclick="frontCategory(\'bus\')">← '+t('バス案内に戻る','Back to bus guide')+'</button>`';
-  panel.innerHTML=panel.innerHTML.replaceAll('`','`');
+  const intro=t('既存の詳細説明をご覧いただけます。簡易版は後日追加します。','Existing detailed guides are available here. Quick guides will be added later.');
+  const buttons=items.map(name=>{
+    const en=data[name]&&data[name].en?data[name].en:name;
+    return '<button class="front-category-item" onclick="openExistingDetail(\\''+name.replace(/'/g,"\\'")+'\\')">📖 '+t(name,en)+'</button>';
+  }).join('');
+  panel.innerHTML='<div class="front-category-panel"><h3>'+icon+' '+title+'</h3><p>'+intro+'</p><div class="front-actions">'+buttons+'</div></div><button class="front-action front-back" onclick="frontCategory(\\'bus\\')">← '+t('バス案内に戻る','Back to bus guide')+'</button>';
   panel.classList.add('show');
   panel.scrollIntoView({behavior:'smooth',block:'start'});
 }

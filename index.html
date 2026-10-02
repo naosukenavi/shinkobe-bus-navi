@@ -1036,7 +1036,7 @@ function frontC(){
       <div class="point">
         <strong>🚌 ${t('バスの名称から探す','Find by bus name')}</strong>
         <div class="front-actions">
-          <div class="simple-guide-card">✈️ ${t('神戸空港','Kobe Airport')}</div>
+          <button class="front-action" onclick="frontKobeAirport()">✈️ ${t('神戸空港','Kobe Airport')}</button>
           <div class="simple-guide-card">🚌 ${t('ポートループ','Port Loop')}</div>
           <div class="simple-guide-card">🚌 ${t('シティーループ','City Loop')}</div>
           <div class="simple-guide-card">🚌 ${t('みなと観光バス','Minato Kanko Bus')}</div>
@@ -1054,6 +1054,61 @@ function frontC(){
     </div>
     <button class="front-action front-back" onclick="frontWhere('rotary')">← ${t('STEP 2に戻る','Back to STEP 2')}</button>
     <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
+}
+function frontKobeAirport(){
+  return frontPanel(`
+    <div class="step-card">
+      <div class="step-label">C ― ${t('ロータリー','Rotary')}</div>
+      <h3>✈️ ${t('神戸空港へ行く','To Kobe Airport')}</h3>
+      <p><strong>${t('神戸空港へ行くバスは2種類あります。乗車前に確認してください。','There are two types of buses to Kobe Airport. Please check before boarding.')}</strong></p>
+
+      <div class="point">
+        <strong>① ${t('ロータリー東端','East end of the rotary')}</strong>
+        <ul>
+          <li>${t('県外から到着するバス','Buses arriving from outside the city')}</li>
+          <li>${t('神戸空港まで直通','Direct to Kobe Airport')}</li>
+          <li><strong>${t('現金支払いのみ','Cash payment only')}</strong></li>
+          <li>${t('のりばは定位置','The boarding point is fixed')}</li>
+        </ul>
+      </div>
+
+      <div class="point">
+        <strong>③ ${t('神姫バス','Shinki Bus')}</strong>
+        <ul>
+          <li>${t('市外から到着するバス','Buses arriving from outside the city')}</li>
+          <li>${t('神戸空港まで途中のバス停に停車','Stops at bus stops on the way to Kobe Airport')}</li>
+          <li>${t('現金後払い・ICタッチ決済・クレジットなど','Cash after boarding, IC touch payment, credit cards, etc.')}</li>
+          <li><strong>${t('混雑状況により停車位置が変わる場合があります。実際の停車位置を確認してください。','The stopping position may change depending on congestion. Please check the actual stopping position.')}</strong></li>
+        </ul>
+      </div>
+
+      <div class="warning">
+        <strong>⚠️ ${t('乗車前に必ず確認','Check before boarding')}</strong>
+        <div>${t('「神戸空港行き」の表示を必ず確認してください。','Always check the destination display for “Kobe Airport”.')}</div>
+      </div>
+
+      <div class="notice">
+        <strong>⚠️ ${t('繁忙期のご注意','Busy-period caution')}</strong>
+        <div>${t('繁忙期は道路状況などにより、定刻どおりの発車が難しい場合があります。','During busy periods, traffic conditions and other factors may make it difficult for buses to depart on schedule.')}</div>
+      </div>
+
+      <div class="step-card step3">
+        <h3>🚉 ${t('お急ぎの場合','If you are in a hurry')}</h3>
+        <p>${t('鉄道の利用もご検討ください。','Consider using the railway as an alternative.')}</p>
+        <button class="front-action light" onclick="frontKobeAirportRail()">🚉 ${t('鉄道ルートの写真説明を見る','See the photo guide for the railway route')}</button>
+      </div>
+    </div>
+    <button class="front-action front-back" onclick="frontC()">← ${t('C ― ロータリーに戻る','Back to C — Rotary')}</button>
+    <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
+}
+function frontKobeAirportRail(){
+  const el=document.getElementById('frontPanel');
+  document.getElementById('frontGuide').style.display='none';
+  document.getElementById('mainLayout').style.display='grid';
+  document.getElementById('stopListPage').classList.remove('show');
+  current='神戸空港へ地下鉄・ポートライナーで行く';
+  renderDetail();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 function frontB(){
   return frontPanel(`

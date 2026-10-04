@@ -24,10 +24,7 @@ jobs:
           s = p.read_text(encoding='utf-8')
           start = s.index('        <div class="walking-route-note">\n          <h3 data-ja="簡易版"')
           end = s.index('        <details class="site-policy elevator-detail">', start)
-          replacement = '''        <div class="walking-route-note">
-          <img src="assets/elevator_guide.webp" alt="エレベーター案内 簡易図" style="width:100%;height:auto;display:block;border-radius:10px;border:1px solid #d9dde5;background:#fff;">
-        </div>
-'''
+          replacement = '        <div class="walking-route-note">\n          <img src="assets/elevator_guide.webp" alt="エレベーター案内 簡易図" style="width:100%;height:auto;display:block;border-radius:10px;border:1px solid #d9dde5;background:#fff;">\n        </div>\n'
           p.write_text(s[:start] + replacement + s[end:], encoding='utf-8')
           PY
 

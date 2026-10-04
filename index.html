@@ -187,11 +187,31 @@ details.transfer-route[open] summary::after{content:'－'}
     <div class="simple-guide-card station-overview-card">
       <img id="stationOverviewImg" src="assets/shinkobe_bus_locations.png" alt="新神戸駅の高低差と3か所のバス乗り場">
     </div>
+    <div class="step-card">
+      <h3 data-ja="のりば から探す。" data-en="Find by boarding area">のりば から探す。</h3>
+      <div class="front-actions">
+        <button class="front-action yellow" onclick="frontLocation('hotel')" data-ja="🏨 ホテル玄関前" data-en="🏨 Hotel Entrance">🏨 ホテル玄関前</button>
+        <button class="front-action green" onclick="frontLocation('tunnel')" data-ja="🟢 トンネル入口" data-en="🟢 Tunnel Entrance">🟢 トンネル入口</button>
+        <button class="front-action" onclick="frontRotary()" data-ja="🚌 ロータリー" data-en="🚌 Rotary">🚌 ロータリー</button>
+      </div>
+    </div>
     <p class="front-intro">
       <span data-ja="バスのりばは西端と東端で" data-en="The west and east ends of the bus boarding areas are ">バスのりばは西端と東端で</span><strong data-ja="100メートル以上" data-en="more than 100 meters">100メートル以上</strong><span data-ja="離れています。" data-en=" apart.">離れています。</span><br>
       <span data-ja="また、" data-en="There is also a ">また、</span><strong data-ja="地階から4階まで高低差があり、利用するエレベーターも異なります。" data-en="vertical difference from the basement level to the 4th floor, and the elevators used are different.">地階から4階まで高低差があり、利用するエレベーターも異なります。</strong><br>
       <strong data-ja="目的地によって、移動する方向や階が変わります。" data-en="The direction and floor you need to use depend on your destination.">目的地によって、移動する方向や階が変わります。</strong>
     </p>
+    <div class="step-card">
+      <div class="step-label">STEP 1</div>
+      <h3 data-ja="今いる場所を確認する" data-en="Confirm your current location">今いる場所を確認する</h3>
+      <p data-ja="現在地に近い場所を選んでください。" data-en="Choose the location closest to where you are now.">現在地に近い場所を選んでください。</p>
+      <div class="location-grid">
+        <button class="location-btn" onclick="frontWhere('rotary')" data-ja="🚌 1階ロータリー" data-en="🚌 1F bus rotary">🚌 1階ロータリー</button>
+        <button class="location-btn" onclick="frontWhere('shinkansen')" data-ja="🚄 2階新幹線改札口" data-en="🚄 2F Shinkansen ticket gates">🚄 2階新幹線改札口</button>
+        <button class="location-btn" onclick="frontWhere('subway')" data-ja="🚇 地下鉄新神戸駅改札口付近" data-en="🚇 Near Subway Shin-Kobe Station ticket gates">🚇 地下鉄新神戸駅改札口付近</button>
+      </div>
+      <button class="lost-btn" onclick="frontLost()" data-ja="📍 どれもわからない" data-en="📍 I don't recognize any of these">📍 どれもわからない</button>
+    </div>
+    <div id="frontPanel" class="front-panel" aria-live="polite"></div>
     <div class="walking-entry">
       <button class="walking-entry-btn" onclick="toggleWalkingEntry()" data-ja="🚶 徒歩ルート" data-en="🚶 Walking routes">🚶 徒歩ルート</button>
       <div id="walkingEntryPanel" class="walking-entry-panel" aria-live="polite">
@@ -206,7 +226,7 @@ details.transfer-route[open] summary::after{content:'－'}
       </div>
     </div>
     <div class="walking-entry rail-entry">
-      <button class="walking-entry-btn" onclick="toggleRailEntry()" data-ja="🚉 電車・鉄道乗継" data-en="🚉 Rail transfers">🚉 電車・鉄道乗継</button>
+      <button class="walking-entry-btn" onclick="toggleRailEntry()" data-ja="🚉 電車・鉄道連絡" data-en="🚉 Rail connections">🚉 電車・鉄道連絡</button>
       <div id="railEntryPanel" class="walking-entry-panel" aria-live="polite">
         <div class="walking-route-list">
           <button class="walking-route-btn" onclick="selectRailRoute('subway')" data-ja="1. 地下鉄（新神戸駅～三宮駅）" data-en="1. Subway (Shin-Kobe–Sannomiya)">1. 地下鉄（新神戸駅～三宮駅）</button>
@@ -228,20 +248,7 @@ details.transfer-route[open] summary::after{content:'－'}
         <div id="ropewayRouteDetail" class="walking-route-detail" aria-live="polite"></div>
       </div>
     </div>
-    <div class="step-card">
-      <div class="step-label">STEP 1</div>
-      <h3 data-ja="今いる場所を確認する" data-en="Confirm your current location">今いる場所を確認する</h3>
-      <p data-ja="現在地に近い場所を選んでください。" data-en="Choose the location closest to where you are now.">現在地に近い場所を選んでください。</p>
-      <div class="location-grid">
-        <button class="location-btn" onclick="frontWhere('subway')" data-ja="🚇 地下鉄改札口付近" data-en="🚇 Near the subway ticket gates">🚇 地下鉄改札口付近</button>
-        <button class="location-btn" onclick="frontWhere('rotary')" data-ja="🚌 1階バスロータリー" data-en="🚌 1F bus rotary">🚌 1階バスロータリー</button>
-        <button class="location-btn" onclick="frontWhere('shinkansen')" data-ja="🚄 2階新幹線改札口近くのお店等" data-en="🚄 Shops near the 2F Shinkansen ticket gates">🚄 2階新幹線改札口近くのお店等</button>
-      </div>
-      <button class="lost-btn" onclick="frontLost()" data-ja="📍 どれも分からない" data-en="📍 I don't recognize any of these">📍 どれも分からない</button>
-    </div>
-    <div id="frontPanel" class="front-panel" aria-live="polite"></div>
   </section>
-</section>
   <div class="layout" id="mainLayout" style="display:none">
     <aside class="panel destinations" id="destinations"></aside>
     <main class="panel detail" id="detail"></main>

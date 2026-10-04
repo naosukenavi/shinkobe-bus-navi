@@ -20,29 +20,14 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import base64
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
           marker = '    <div id="frontPanel" class="front-panel" aria-live="polite"></div>\n    <div class="walking-entry">'
           if marker not in s:
               raise SystemExit('target marker not found')
-          section = '''    <div id="frontPanel" class="front-panel" aria-live="polite"></div>
-    <div class="step-card bus-basics-card">
-      <div class="step-label">🚌 BUS</div>
-      <h3 data-ja="新神戸・三宮周辺の路線バスの基本" data-en="Basic local bus rules around Shin-Kobe / Sannomiya">新神戸・三宮周辺の路線バスの基本</h3>
-      <div class="point">
-        <ul>
-          <li data-ja="後ろの扉から乗る" data-en="Board from the rear door">後ろの扉から乗る</li>
-          <li data-ja="前の扉から降りる" data-en="Exit from the front door">前の扉から降りる</li>
-          <li data-ja="ICカードは乗る時・降りる時の2回タッチ" data-en="Tap your IC card twice: when boarding and when getting off">ICカードは乗る時・降りる時の2回タッチ</li>
-          <li data-ja="三宮周辺は230円区間が多い" data-en="Many trips around Sannomiya cost ¥230">三宮周辺は230円区間が多い</li>
-          <li data-ja="運賃は降りる時に支払う" data-en="Pay the fare when getting off">運賃は降りる時に支払う</li>
-        </ul>
-      </div>
-      <div class="warning">
-        <strong data-ja="※ 一部の路線では、乗り方・料金が異なります。" data-en="Note: Boarding methods and fares may differ on some routes.">※ 一部の路線では、乗り方・料金が異なります。</strong>
-      </div>
-    </div>
-    <div class="walking-entry">'''
+          b64 = 'ICAgIDxkaXYgaWQ9ImZyb250UGFuZWwiIGNsYXNzPSJmcm9udC1wYW5lbCIgYXJpYS1saXZlPSJwb2xpdGUiPjwvZGl2PgogICAgPGRpdiBjbGFzcz0ic3RlcC1jYXJkIGJ1cy1iYXNpY3MtY2FyZCI+CiAgICAgIDxkaXYgY2xhc3M9InN0ZXAtbGFiZWwiPvCfmowgQlVTPC9kaXY+CiAgICAgIDxoMyBkYXRhLWphPSLmlrDnpZ7miLjjg7vkuInlrq7lkajovrrjga7ot6/nt5rjg5Djgrnjga7ln7rmnKwiIGRhdGEtZW49IkJhc2ljIGxvY2FsIGJ1cyBydWxlcyBhcm91bmQgU2hpbi1Lb2JlIC8gU2Fubm9taXlhIj7mlrDnpZ7miLjjg7vkuInlrq7lkajovrrjga7ot6/nt5rjg5Djgrnjga7ln7rmnKw8L2gzPgogICAgICA8ZGl2IGNsYXNzPSJwb2ludCI+CiAgICAgICAgPHVsPgogICAgICAgICAgPGxpIGRhdGEtamE9IuW+jOOCjeOBruaJieOBi+OCieS5l+OCiyIgZGF0YS1lbj0iQm9hcmQgZnJvbSB0aGUgcmVhciBkb29yIj7lvozjgo3jga7miYnjgYvjgonkuZfjgos8L2xpPgogICAgICAgICAgPGxpIGRhdGEtamE9IuWJjeOBruaJieOBi+OCiemZjeOCiuOCiyIgZGF0YS1lbj0iRXhpdCBmcm9tIHRoZSBmcm9udCBkb29yIj7liY3jga7miYnjgYvjgonpmY3jgorjgos8L2xpPgogICAgICAgICAgPGxpIGRhdGEtamE9IklD44Kr44O844OJ44Gv5LmX44KL5pmC44O76ZmN44KK44KL5pmC44GuMuWbnuOCv+ODg+ODgSIgZGF0YS1lbj0iVGFwIHlvdXIgSUMgY2FyZCB0d2ljZTogd2hlbiBib2FyZGluZyBhbmQgd2hlbiBnZXR0aW5nIG9mZiI+SUPjgqvjg7zjg4njga/kuZfjgovmmYLjg7vpmY3jgorjgovmmYLjga4y5Zue44K/44OD44OBPC9saT4KICAgICAgICAgIDxsaSBkYXRhLWphPSLkuInlrq7lkajovrrjga8yMzDlhobljLrplpPjgYzlpJrjgYQiIGRhdGEtZW49Ik1hbnkgdHJpcHMgYXJvdW5kIFNhbm5vbWl5YSBjb3N0IMKlMjMwIj7kuInlrq7lkajovrrjga8yMzDlhobljLrplpPjgYzlpJrjgYQ8L2xpPgogICAgICAgICAgPGxpIGRhdGEtamE9IumBi+izg+OBr+mZjeOCiuOCi+aZguOBq+aUr+aJleOBhiIgZGF0YS1lbj0iUGF5IHRoZSBmYXJlIHdoZW4gZ2V0dGluZyBvZmYiPumBi+izg+OBr+mZjeOCiuOCi+aZguOBq+aUr+aJleOBhjwvbGk+CiAgICAgICAgPC91bD4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9Indhcm5pbmciPgogICAgICAgIDxzdHJvbmcgZGF0YS1qYT0i4oC7IOS4gOmDqOOBrui3r+e3muOBp+OBr+OAgeS5l+OCiuaWueODu+aWmemHkeOBjOeVsOOBquOCiuOBvuOBmeOAgiIgZGF0YS1lbj0iTm90ZTogQm9hcmRpbmcgbWV0aG9kcyBhbmQgZmFyZXMgbWF5IGRpZmZlciBvbiBzb21lIHJvdXRlcy4iPuKAuyDkuIDpg6jjga7ot6/nt5rjgafjga/jgIHkuZfjgormlrnjg7vmlpnph5HjgYznlbDjgarjgorjgb7jgZnjgII8L3N0cm9uZz4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9IndhbGtpbmctZW50cnkiPg=='
+          section = base64.b64decode(b64).decode('utf-8')
           p.write_text(s.replace(marker, section, 1), encoding='utf-8')
           PY
 

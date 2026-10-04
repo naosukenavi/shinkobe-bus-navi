@@ -9,8 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  add-bus-basics:
-    if: github.actor != 'github-actions[bot]'
+  add_bus_basics:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

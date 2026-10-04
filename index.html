@@ -212,22 +212,11 @@ details.transfer-route[open] summary::after{content:'－'}
       <button class="lost-btn" onclick="frontLost()" data-ja="📍 どれもわからない" data-en="📍 I don't recognize any of these">📍 どれもわからない</button>
     </div>
     <div id="frontPanel" class="front-panel" aria-live="polite"></div>
-    <div class="step-card bus-basics-card">
-      <div class="step-label">🚌 BUS</div>
-      <h3 data-ja="新神戸・三宮周辺の路線バスの基本" data-en="Basic local bus rules around Shin-Kobe / Sannomiya">新神戸・三宮周辺の路線バスの基本</h3>
-      <div class="point">
-        <ul>
-          <li data-ja="後ろの扉から乗る" data-en="Board from the rear door">後ろの扉から乗る</li>
-          <li data-ja="前の扉から降りる" data-en="Exit from the front door">前の扉から降りる</li>
-          <li data-ja="ICカードは乗る時・降りる時の2回タッチ" data-en="Tap your IC card twice: when boarding and when getting off">ICカードは乗る時・降りる時の2回タッチ</li>
-          <li data-ja="三宮周辺は230円区間が多い" data-en="Many trips around Sannomiya cost ¥230">三宮周辺は230円区間が多い</li>
-          <li data-ja="運賃は降りる時に支払う" data-en="Pay the fare when getting off">運賃は降りる時に支払う</li>
-        </ul>
-      </div>
-      <div class="warning">
-        <strong data-ja="※ 一部の路線では、乗り方・料金が異なります。" data-en="Note: Boarding methods and fares may differ on some routes.">※ 一部の路線では、乗り方・料金が異なります。</strong>
-      </div>
-    </div>
+   <div class="step-card bus-basics-card">
+  <img src="assets/bus_basics.png"
+       alt="新神戸・三宮周辺の路線バスの基本"
+       style="width:100%;height:auto;display:block;border-radius:10px;border:1px solid #d9dde5;background:#fff;">
+</div>
     <div class="walking-entry elevator-entry">
       <button class="walking-entry-btn" onclick="toggleElevatorEntry()" data-ja="♿ エレベーター案内" data-en="♿ Elevator guide">♿ エレベーター案内</button>
       <div id="elevatorEntryPanel" class="walking-entry-panel" aria-live="polite">

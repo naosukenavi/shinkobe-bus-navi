@@ -10,14 +10,13 @@ permissions:
 
 jobs:
   replace-quick-guide:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: elevator-guide-20261004
 
-      - name: Replace text quick guide with image
+      - name: Replace quick guide
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -29,8 +28,7 @@ jobs:
           <img src="assets/elevator_guide.webp" alt="エレベーター案内 簡易図" style="width:100%;height:auto;display:block;border-radius:10px;border:1px solid #d9dde5;background:#fff;">
         </div>
 '''
-          s = s[:start] + replacement + s[end:]
-          p.write_text(s, encoding='utf-8')
+          p.write_text(s[:start] + replacement + s[end:], encoding='utf-8')
           PY
 
       - name: Commit result

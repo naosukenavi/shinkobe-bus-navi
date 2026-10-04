@@ -1,0 +1,43 @@
+name: Use elevator image safely
+
+on:
+  push:
+    branches:
+      - elevator-guide-20261004
+
+permissions:
+  contents: write
+
+jobs:
+  replace-quick-guide:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elevator-guide-20261004
+
+      - name: Replace text quick guide with image
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          start = s.index('        <div class="walking-route-note">\n          <h3 data-ja="簡易版"')
+          end = s.index('        <details class="site-policy elevator-detail">', start)
+          replacement = '''        <div class="walking-route-note">
+          <img src="assets/elevator_guide.webp" alt="エレベーター案内 簡易図" style="width:100%;height:auto;display:block;border-radius:10px;border:1px solid #d9dde5;background:#fff;">
+        </div>
+'''
+          s = s[:start] + replacement + s[end:]
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit result
+        run: |
+          rm -f .github/workflows/use-elevator-image-20261004.yml
+          git config user.name "naosukenavi"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Use elevator infographic as quick guide"
+          git push origin HEAD:elevator-guide-20261004

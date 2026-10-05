@@ -998,17 +998,17 @@ function routeCard(r,i){const s=stopInfo[r.stop]; let photos=r.photos || (s ? (s
 function portLoopSannomiyaGuide(){
   const figure=(src,ja,en)=>`<figure class="transfer-guide-page"><img src="${src}" alt="${t(ja,en)}"><figcaption>${t(ja,en)}</figcaption></figure>`;
   const subway=[ASSETS.portLoopSannomiyaSubway1,ASSETS.portLoopSannomiyaSubway2,ASSETS.portLoopSannomiyaSubway3,ASSETS.portLoopSannomiyaSubway4,ASSETS.portLoopSannomiyaSubway5]
-    .map((src,i)=>figure(src,`地下鉄三宮駅前バス停からポートループのりばへ ${i+1}`,`From Subway Sannomiya bus stop to the Port Loop stop ${i+1}`)).join('');
+    .map((src,i)=>figure(src,`地下鉄三宮駅からポートループ三宮のりばへ ${i+1}`,`From Subway Sannomiya Station to the Port Loop stop ${i+1}`)).join('');
   const mint=[ASSETS.portLoopSannomiyaMint1,ASSETS.portLoopSannomiyaMint2,ASSETS.portLoopSannomiyaMint3,ASSETS.portLoopSannomiyaMint4,ASSETS.portLoopSannomiyaMint5]
     .map((src,i)=>figure(src,`三宮MINT神戸ビルのふもとからポートループのりばへ ${i+1}`,`From MINT Kobe to the Port Loop stop ${i+1}`)).join('');
   const shinki=[ASSETS.portLoopSannomiyaShinki1,ASSETS.portLoopSannomiyaShinki2,ASSETS.portLoopSannomiyaShinki3,ASSETS.portLoopSannomiyaShinki4,ASSETS.portLoopSannomiyaShinki5,ASSETS.portLoopSannomiyaShinki6]
     .map((src,i)=>figure(src,`神姫バス神戸三宮バスターミナルからポートループのりばへ ${i+1}`,`From Shinki Bus Kobe-Sannomiya Bus Terminal to the Port Loop stop ${i+1}`)).join('');
   return `<section class="portloop-transfer">
-    <h3>🟦 ${t('ポートループが新神戸駅を通過する日の乗り方','How to take Port Loop when it bypasses Shin-Kobe')}</h3>
-    <p class="transfer-intro">${t('新神戸駅を通過する日は、三宮からポートループに乗車します。三宮のどこに到着しましたか？','When Port Loop bypasses Shin-Kobe, board in Sannomiya. Where did you arrive in Sannomiya?')}</p>
+    <h3>🟦 ${t('PLが新神戸駅を通過する日の乗り換え','Transfer when Port Loop bypasses Shin-Kobe')}</h3>
+    <p class="transfer-intro">${t('新神戸駅を通過する日は、地下鉄で新神戸駅から三宮駅へ移動し、地下鉄三宮駅からPL三宮のりばまで徒歩で向かいます。三宮へバスで移動した場合は、到着場所に合わせて下の案内を選んでください。','When Port Loop bypasses Shin-Kobe, take the subway from Shin-Kobe to Sannomiya, then walk from Subway Sannomiya Station to the Port Loop stop. If you arrive in Sannomiya by bus, choose the guide for your arrival point below.')}</p>
     <div class="transfer-caution">${t('※通過日・運行状況は、利用当日に公式情報や現地表示をご確認ください。','Please check official information and on-site signs on the day of travel for bypass dates and service status.')}</div>
-    <details class="transfer-route">
-      <summary>🚇 ${t('地下鉄三宮駅前バス停','Subway Sannomiya bus stop')}</summary>
+    <details class="transfer-route" open>
+      <summary>🚇 ${t('地下鉄三宮駅 → PL三宮のりば','Subway Sannomiya Station → Port Loop stop')}</summary>
       <div class="transfer-route-body">${subway}</div>
     </details>
     <details class="transfer-route">

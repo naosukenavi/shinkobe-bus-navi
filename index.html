@@ -1508,6 +1508,17 @@ function frontKobeAirportRail(){
   renderDetail();
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function showEncyclopedia(type){
+  const defaults={west:'ポートループ',middle:'神戸空港',east:'神戸空港',tunnel:'有馬温泉',hotel:'徳島'};
+  if(defaults[type] && data[defaults[type]]) current=defaults[type];
+  document.getElementById('frontGuide').style.display='none';
+  document.getElementById('stopListPage').classList.remove('show');
+  const layout=document.getElementById('mainLayout');
+  layout.style.display='grid';
+  renderDest();
+  renderDetail();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 function frontB(){
   return frontPanel(`
     <div class="step-card">

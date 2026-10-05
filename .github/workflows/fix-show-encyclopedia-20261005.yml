@@ -19,36 +19,13 @@ jobs:
           from pathlib import Path
           p=Path('index.html')
           s=p.read_text(encoding='utf-8')
-          marker="""function showGuideFromFront(type){
-  const el=document.getElementById('frontPanel');
-  el.innerHTML=`<div class=\"guide show\">${guideHtml(type)}</div><div class=\"front-actions\"><button class=\"front-action light\" onclick=\"frontLocation('${type}')\">← 簡略案内図に戻る</button><button class=\"front-action front-back\" onclick=\"frontHome()\">← 最初に戻る</button></div>`;
-  el.classList.add('show');
-  el.scrollIntoView({behavior:'smooth',block:'start'});
-}
-"""
-          addition=marker+"""function showEncyclopedia(type){
-  const defaults={
-    west:'ポートループ',
-    middle:'神戸空港',
-    east:'神戸空港',
-    tunnel:'有馬温泉',
-    hotel:'徳島'
-  };
-  if(defaults[type] && data[defaults[type]]) current=defaults[type];
-  document.getElementById('frontGuide').style.display='none';
-  document.getElementById('stopListPage').classList.remove('show');
-  const layout=document.getElementById('mainLayout');
-  layout.style.display='grid';
-  renderDest();
-  renderDetail();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-"""
           if 'function showEncyclopedia(type)' in s:
               raise SystemExit('showEncyclopedia already exists')
-          if marker not in s:
-              raise SystemExit('insert marker not found')
-          s=s.replace(marker,addition,1)
+          anchor='function frontB(){'
+          addition="function showEncyclopedia(type){\n  const defaults={west:'ポートループ',middle:'神戸空港',east:'神戸空港',tunnel:'有馬温泉',hotel:'徳島'};\n  if(defaults[type] && data[defaults[type]]) current=defaults[type];\n  document.getElementById('frontGuide').style.display='none';\n  document.getElementById('stopListPage').classList.remove('show');\n  const layout=document.getElementById('mainLayout');\n  layout.style.display='grid';\n  renderDest();\n  renderDetail();\n  window.scrollTo({top:0,behavior:'smooth'});\n}\n"
+          if anchor not in s:
+              raise SystemExit('insert anchor not found')
+          s=s.replace(anchor,addition+anchor,1)
           p.write_text(s,encoding='utf-8')
           PY
       - name: Commit and push

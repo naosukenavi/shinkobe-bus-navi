@@ -50,6 +50,18 @@
     .stop-list-link{display:block;margin-top:22px;padding:14px 16px;border:2px solid #6d7f96;border-radius:10px;background:#f4f7fa;color:#24364a;text-align:center;text-decoration:none;font-size:18px;font-weight:800}
     .stop-list-link:hover{background:#e9eff5}
     .stop-list-link + .stop-list-link{margin-top:10px}
+    .appendix-entry{margin:22px 0 4px;padding:16px;border:1px solid var(--border);border-radius:14px;background:#fbfcff}
+    .appendix-entry h3{margin:0 0 5px;font-size:22px}
+    .appendix-entry p{margin:0 0 12px;color:#555;font-size:14px}
+    .appendix-link{display:block;margin-top:10px;padding:13px 14px;border:2px solid #6d7f96;border-radius:10px;background:#fff;color:#24364a;text-align:center;text-decoration:none;font-size:18px;font-weight:800}
+    .appendix-link:hover{background:#f1f5f9}
+    .stop-group.rotary-group{border:2px solid #0b7ff3;background:#f7fbff}
+    .stop-group.rotary-group>h3{color:#075db3}
+    .stop-group.tunnel-group{border:2px solid #66cdb6;background:#f5fffc}
+    .stop-group.tunnel-group>h3{color:#0a6658}
+    .route-guide-box.rotary-guide-box{border-color:#0b7ff3;background:#f1f8ff;color:#075db3}
+    .route-guide-box.tunnel-guide-box{border-color:#66cdb6;background:#effcf8;color:#0a6658}
+    .route-info{border:1px solid #b7d8ff;background:#f1f8ff;border-radius:10px;padding:11px 13px;margin:10px 0;font-weight:700}
     .stop-list-page{display:none;margin-top:8px}
     .stop-list-page.show{display:block}
     .stop-list-page h2{font-size:30px;margin:8px 0 4px}
@@ -279,6 +291,12 @@ details.transfer-route[open] summary::after{content:'－'}
         </div>
         <div id="ropewayRouteDetail" class="walking-route-detail" aria-live="polite"></div>
       </div>
+    </div>
+    <div class="appendix-entry">
+      <h3 data-ja="📚 一覧・索引" data-en="📚 Lists & indexes">📚 一覧・索引</h3>
+      <p data-ja="停留所名・駅名から探したいときにご利用ください。" data-en="Use these lists when you know the stop or station name.">停留所名・駅名から探したいときにご利用ください。</p>
+      <a class="appendix-link" href="?view=stops" data-ja="🚌 系統別・全バス停名一覧" data-en="🚌 All bus stops by route">🚌 系統別・全バス停名一覧</a>
+      <a class="appendix-link" href="?view=stations" data-ja="🚉 地下鉄・新交通・神鉄 全駅名一覧" data-en="🚉 Subway, new transit & Kobe Electric Railway stations">🚉 地下鉄・新交通・神鉄 全駅名一覧</a>
     </div>
   </section>
   <div class="layout" id="mainLayout" style="display:none">
@@ -778,15 +796,19 @@ const railStationRoutes = [
     titleJa:'神戸市営地下鉄 西神・山手線',
     titleEn:'Kobe Municipal Subway Seishin-Yamate Line',
     stations:[
-      ['谷上','Tanigami'],['新神戸','Shin-Kobe'],['三宮','Sannomiya'],['県庁前','Kenchomae'],['大倉山','Okurayama'],['湊川公園','Minatogawa Koen'],['上沢','Kamisawa'],['長田（長田神社前）','Nagata (Nagata-jinja-mae)'],['新長田','Shin-Nagata'],['板宿','Itayado'],['妙法寺','Myodani'],['名谷','Myodani'],['総合運動公園','Sogo Undo Koen'],['学園都市','Gakuentoshi'],['伊川谷','Ikawadani'],['西神南','Seishin-minami'],['西神中央','Seishin-chuo']
-    ]
+      ['谷上','Tanigami'],['新神戸','Shin-Kobe'],['三宮','Sannomiya'],['県庁前','Kenchomae'],['大倉山','Okurayama'],['湊川公園','Minatogawa Koen'],['上沢','Kamisawa'],['長田（長田神社前）','Nagata (Nagata-jinja-mae)'],['新長田','Shin-Nagata'],['板宿','Itayado'],['妙法寺','Myohoji'],['名谷','Myodani'],['総合運動公園','Sogo Undo Koen'],['学園都市','Gakuentoshi'],['伊川谷','Ikawadani'],['西神南','Seishin-minami'],['西神中央','Seishin-chuo']
+    ],
+    infoJa:'乗換：三宮 → 阪急・阪神・ポートライナー／湊川公園 → 神戸電鉄（湊川駅）／新長田 → JR線・地下鉄海岸線',
+    infoEn:'Transfers: Sannomiya → Hankyu, Hanshin, Port Liner / Minatogawa Koen → Kobe Electric Railway (Minatogawa Station) / Shin-Nagata → JR and Kaigan Line'
   },
   {
     titleJa:'神戸市営地下鉄 海岸線',
     titleEn:'Kobe Municipal Subway Kaigan Line',
     stations:[
       ['三宮・花時計前','Sannomiya-Hanadokeimae'],['旧居留地・大丸前','Kyukyoryuchi-Daimarumae'],['みなと元町','Minato Motomachi'],['ハーバーランド','Harborland'],['中央市場前','Chuo-Ichibamae'],['和田岬','Wadamisaki'],['御崎公園','Misaki Koen'],['苅藻','Karumo'],['駒ヶ林','Komagabayashi'],['新長田','Shin-Nagata']
-    ]
+    ],
+    infoJa:'乗換：新長田 → JR線・地下鉄西神・山手線',
+    infoEn:'Transfer: Shin-Nagata → JR and Seishin-Yamate Line'
   },
   {
     titleJa:'ポートライナー 本線（神戸空港方面）',
@@ -810,6 +832,25 @@ const railStationRoutes = [
     stations:[
       ['住吉','Sumiyoshi'],['魚崎','Uozaki'],['南魚崎','Minami-Uozaki'],['アイランド北口','Island Kitaguchi'],['アイランドセンター','Island Center'],['マリンパーク','Marine Park']
     ]
+  },
+  {
+    titleJa:'神戸電鉄 有馬線・三田線',
+    titleEn:'Kobe Electric Railway Arima / Sanda Lines',
+    stations:[
+      ['新開地','Shinkaichi'],['湊川','Minatogawa'],['長田','Nagata'],['丸山','Maruyama'],['鵯越','Hiyodorigoe'],['鈴蘭台','Suzurandai'],['北鈴蘭台','Kita-Suzurandai'],['山の街','Yamanomachi'],['箕谷','Minotani'],['谷上','Tanigami'],['花山','Hanayama'],['大池','Oike'],['神鉄六甲','Shintetsu Rokko'],['唐櫃台','Karato-dai'],['有馬口','Arimaguchi'],['五社','Gosha'],['岡場','Okaba'],['田尾寺','Taoji'],['二郎','Niro'],['道場南口','Dojo-minamiguchi'],['神鉄道場','Shintetsu Dojo'],['横山','Yokoyama'],['三田本町','Sanda-hommachi'],['三田','Sanda']
+    ],
+    infoJa:'「箕谷」「谷上」などは、バス停名と駅名を混同して覚えている方もいます。交通手段を確認してから移動してください。',
+    infoEn:'Names such as Minotani and Tanigami may be remembered as either bus stops or railway stations. Please confirm the transport mode before travelling.'
+  },
+  {
+    titleJa:'神戸電鉄 有馬線（有馬口～有馬温泉）',
+    titleEn:'Kobe Electric Railway Arima Line (Arimaguchi–Arima Onsen)',
+    stations:[['有馬口','Arimaguchi'],['有馬温泉','Arima Onsen']]
+  },
+  {
+    titleJa:'神戸電鉄 公園都市線',
+    titleEn:'Kobe Electric Railway Koen-Toshi Line',
+    stations:[['横山','Yokoyama'],['フラワータウン','Flower Town'],['南ウッディタウン','Minami Woody Town'],['ウッディタウン中央','Woody Town Chuo']]
   }
 ];
 
@@ -943,7 +984,7 @@ function renderDest(){const el=document.getElementById('destinations');el.innerH
     else if(rotaryTunnel.has(name)) extraClass=' rotary-tunnel-btn';
     else if(rotaryHotel.has(name)) extraClass=' rotary-hotel-btn';
     b.className='dest-btn'+extraClass+(name===current?' selected':'');b.textContent=lang==='ja'?name:(data[name]?.en||name);b.onclick=()=>{current=name;render();scrollToDetail()};el.appendChild(b)})});
-  const note=document.createElement('div');note.className='small-note';note.textContent=t('※バスの運行状況は変更される場合があります。ご利用の際は最新情報をご確認ください。','Bus services may change. Please check the latest information before use.');el.appendChild(note);const link=document.createElement('a');link.className='stop-list-link';link.href=`?view=stops&lang=${lang}`;link.target='_blank';link.rel='noopener';link.textContent=t('系統別・全バス停名一覧','All bus stops by route');el.appendChild(link);const railLink=document.createElement('a');railLink.className='stop-list-link';railLink.href=`?view=stations&lang=${lang}`;railLink.target='_blank';railLink.rel='noopener';railLink.textContent=t('市営地下鉄・新交通 全駅名一覧','Municipal subway and new transit stations');el.appendChild(railLink)}
+  const note=document.createElement('div');note.className='small-note';note.textContent=t('※バスの運行状況は変更される場合があります。ご利用の際は最新情報をご確認ください。','Bus services may change. Please check the latest information before use.');el.appendChild(note);const link=document.createElement('a');link.className='stop-list-link';link.href=`?view=stops&lang=${lang}`;link.target='_blank';link.rel='noopener';link.textContent=t('系統別・全バス停名一覧','All bus stops by route');el.appendChild(link);const railLink=document.createElement('a');railLink.className='stop-list-link';railLink.href=`?view=stations&lang=${lang}`;railLink.target='_blank';railLink.rel='noopener';railLink.textContent=t('地下鉄・新交通・神鉄 全駅名一覧','Subway, new transit and Kobe Electric Railway stations');el.appendChild(railLink)}
 function renderDetail(){const d=data[current]; const el=document.getElementById('detail'); if(!d){el.innerHTML='<div class="empty">データ準備中です。</div>';return} if(d.directGuide){el.innerHTML=`<div class="selected-banner">${t('選択中：','Now showing: ')}${t(current,d.en)}</div><h2>${d.icon||'🚏'} ${t(current,d.en)}</h2><p class="lead">${t(d.leadJa,d.leadEn)}</p><div class="guide show">${guideHtml(d.directGuide)}</div><button class="back" onclick="window.scrollTo({top:0,behavior:'smooth'})">← ${t('行き先一覧に戻る','Back to destination list')}</button>`;return} const cards=d.routes.map((r,i)=>routeCard(r,i)).join(''); const walkingItems=groups.find(g=>g.kana==='🚶 徒歩で行く').items; const railItems=groups.find(g=>g.kana==='🚉 地下鉄・鉄道へ乗り継ぐ').items; const isWalking=walkingItems.includes(current); const isRail=railItems.includes(current); const isRopeway=current==='布引ロープウェイ'; const walkingInfo=`<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べながら進んでください。','Follow the route while comparing the photos with the signs and surroundings.')}</li><li>${t('道路状況や工事などにより、案内時と現地の様子が異なる場合があります。','Road conditions or construction may cause the surroundings to differ from the photos.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div>`; const railInfo=`<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べながら進んでください。','Follow the route while comparing the photos with the signs at the station.')}</li><li>${t('運行状況・乗り場・乗換方法などは、現地表示や各交通事業者の最新情報もご確認ください。','Please also check on-site displays and the latest information from each transport operator for service status, platforms and transfers.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div>`; const ropewayInfo=`<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('写真と現地の表示を見比べながら進んでください。','Follow the route while comparing the photos with the signs and surroundings.')}</li><li>${t('天候や点検などにより、運行状況・営業時間が変更される場合があります。現地表示や最新の公式情報もご確認ください。','Service status and operating hours may change due to weather or maintenance. Please also check on-site displays and the latest official information.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div>`; const busInfo=`<div class="notice"><h3>ℹ️ ${t('ご案内','Information')}</h3><ul><li>${t('道路状況により遅延することがあります。','Buses may be delayed due to traffic.')}</li></ul>${d.guideJa?`<p>${t(d.guideJa,d.guideEn)}</p>`:''}</div>`; const info=isWalking?walkingInfo:isRail?railInfo:isRopeway?ropewayInfo:busInfo; el.innerHTML=`<div class="selected-banner">${t('選択中：','Now showing: ')}${t(current,d.en)}</div><h2>${d.icon||'🚌'} ${t(current,d.en)}</h2><p class="lead">${t(d.leadJa,d.leadEn)}</p>${cards}${d.transferGood?transferBox():''}${d.portLoopSannomiyaGuide?portLoopSannomiyaGuide():''}${d.loopHelp?loopHelp():''}${d.noticeJa?`<div class="warning danger"><strong>${t('⚠ 乗り間違い注意','⚠ Avoid boarding the wrong bus')}</strong>${t(d.noticeJa,d.noticeEn)}</div>`:''}${info}<button class="back" onclick="window.scrollTo({top:0,behavior:'smooth'})">← ${t('行き先一覧に戻る','Back to destination list')}</button><div id="guideArea" class="guide"></div>`}
 function routeCard(r,i){const s=stopInfo[r.stop]; let photos=r.photos || (s ? (stopPhotos[r.stop]||[]) : []);
   if(r.stop==='west' && !r.photos){
@@ -1021,15 +1062,23 @@ function guideHtml(type){
 function showGuide(type){const el=document.getElementById('guideArea'); el.innerHTML=guideHtml(type); el.classList.add('show'); el.scrollIntoView({behavior:'smooth',block:'start'});}
 function renderStopList(){
   const page=document.getElementById('stopListPage');
-  const routeDetails=(items,openFirst=false,guideType='')=>items.map((r,idx)=>{const guideBox=guideType==='tunnel'?`<div class="route-guide-box"><p>${t('この路線は「トンネル入口バス停」から乗車します。','This route departs from the Tunnel Entrance bus stop.')}</p><a class="route-guide-link" href="?destination=${encodeURIComponent('トンネル入口バス停への行き方')}&lang=${lang}">📍 ${t('トンネル入口バス停への行き方を見る','How to get to the Tunnel Entrance bus stop')}</a></div>`:'';return `<details class="route-list" ${(openFirst&&idx===0)?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${guideBox}${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stops.map(x=>{const ja=Array.isArray(x)?x[0]:x;const en=Array.isArray(x)?x[1]:x;return `<li>${lang==='ja'?ja:`<span class="stop-ja">${ja}</span><span class="stop-en">${en}</span>`}</li>`}).join('')}</ol></div></details>`}).join('');
-  const rotaryRoutes=routeDetails(rotaryStopRoutes,true);
+  const routeDetails=(items,openFirst=false,guideType='')=>items.map((r,idx)=>{
+    let guideBox='';
+    if(guideType==='rotary'){
+      guideBox=`<div class="route-guide-box rotary-guide-box"><p>🔵 ${t('この路線は「1階ロータリー」から乗車します。','This route departs from the 1F rotary.')}</p></div>`;
+    }else if(guideType==='tunnel'){
+      guideBox=`<div class="route-guide-box tunnel-guide-box"><p>🟢 ${t('この路線は「地階・トンネル入口」から乗車します。','This route departs from the Basement Tunnel Entrance.')}</p><a class="route-guide-link" href="?destination=${encodeURIComponent('トンネル入口バス停への行き方')}&lang=${lang}">📍 ${t('トンネル入口バス停への行き方を見る','How to get to the Tunnel Entrance bus stop')}</a></div>`;
+    }
+    return `<details class="route-list" ${(openFirst&&idx===0)?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${guideBox}${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stops.map(x=>{const ja=Array.isArray(x)?x[0]:x;const en=Array.isArray(x)?x[1]:x;return `<li>${lang==='ja'?ja:`<span class="stop-ja">${ja}</span><span class="stop-en">${en}</span>`}</li>`}).join('')}</ol></div></details>`;
+  }).join('');
+  const rotaryRoutes=routeDetails(rotaryStopRoutes,true,'rotary');
   const tunnelRoutes=routeDetails(tunnelStopRoutes,false,'tunnel');
-  page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅前案内事典へ戻る','Back to Shin-Kobe Station Area Guide')}</a></div><h2>🚌 ${t('系統別・全バス停名一覧','All bus stops by route')}</h2><p class="stop-list-intro">${t('路線名を押すと、バス停名の一覧が開きます。','Select a route to open its stop list.')}</p><div class="stop-group"><h3>${t('1階ロータリー発着','Departing from the 1F rotary')}</h3>${rotaryRoutes}</div><div class="stop-group"><h3>${t('トンネル入口発着','Departing from the Tunnel Entrance stop')}</h3>${tunnelRoutes}</div><p class="small-note">${t('※停留所名・停車順・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Stop names, order and service details may change. Please also check signs and the latest official information.')}</p>`;
+  page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅前案内事典へ戻る','Back to Shin-Kobe Station Area Guide')}</a></div><h2>🚌 ${t('系統別・全バス停名一覧','All bus stops by route')}</h2><p class="stop-list-intro">${t('停留所名を探すときは、まず乗り場の色を確認してください。同じ北区方面でも乗り場が異なる路線があります。','First check the boarding-area color. Routes to the same general area may depart from different places.')}</p><div class="stop-group rotary-group"><h3>🔵 ${t('1階ロータリー発着','Departing from the 1F rotary')}</h3>${rotaryRoutes}</div><div class="stop-group tunnel-group"><h3>🟢 ${t('地階・トンネル入口発着','Departing from the Basement Tunnel Entrance')}</h3>${tunnelRoutes}</div><p class="small-note">${t('※停留所名・停車順・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Stop names, order and service details may change. Please also check signs and the latest official information.')}</p>`;
 }
 function renderRailStationList(){
   const page=document.getElementById('stopListPage');
-  const routeDetails=railStationRoutes.map((r,idx)=>`<details class="route-list" ${idx===0?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stations.map(x=>`<li>${lang==='ja'?x[0]:`<span class="stop-ja">${x[0]}</span><span class="stop-en">${x[1]}</span>`}</li>`).join('')}</ol></div></details>`).join('');
-  page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅前案内事典へ戻る','Back to Shin-Kobe Station Area Guide')}</a></div><h2>🚉 ${t('市営地下鉄・新交通 全駅名一覧','Municipal subway and new transit stations')}</h2><p class="stop-list-intro">${t('路線名を押すと、駅名の一覧が開きます。','Select a line to open its station list.')}</p><div class="stop-group">${routeDetails}</div><p class="small-note">${t('※駅名・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Station names and service details may change. Please also check signs and the latest official information.')}</p>`;
+  const routeDetails=railStationRoutes.map((r,idx)=>`<details class="route-list" ${idx===0?'open':''}><summary>${t(r.titleJa,r.titleEn)}</summary><div class="route-list-body">${r.infoJa?`<div class="route-info">${t(r.infoJa,r.infoEn)}</div>`:''}${r.cautionJa?`<div class="route-caution">${t(r.cautionJa,r.cautionEn)}</div>`:''}<ol>${r.stations.map(x=>`<li>${lang==='ja'?x[0]:`<span class="stop-ja">${x[0]}</span><span class="stop-en">${x[1]}</span>`}</li>`).join('')}</ol></div></details>`).join('');
+  page.innerHTML=`<div class="page-nav"><a href="./">← ${t('新神戸駅前案内事典へ戻る','Back to Shin-Kobe Station Area Guide')}</a></div><h2>🚉 ${t('地下鉄・新交通・神鉄 全駅名一覧','Subway, new transit and Kobe Electric Railway stations')}</h2><p class="stop-list-intro">${t('路線名を押すと、駅名の一覧が開きます。神鉄の駅名は、同名・類似のバス停と混同しないよう交通手段も確認してください。','Select a line to open its station list. For Kobe Electric Railway stations, also confirm the transport mode so they are not confused with bus stops of the same or similar name.')}</p><div class="stop-group">${routeDetails}</div><p class="small-note">${t('※駅名・運行内容は変更される場合があります。ご利用時は現地表示や最新の公式情報もご確認ください。','Station names and service details may change. Please also check signs and the latest official information.')}</p>`;
 }
 const listView=new URLSearchParams(location.search).get('view');
 const stopListView=listView==='stops';
@@ -1293,6 +1342,7 @@ function frontPortLoop(){
       <div class="point"><strong>🏙️ ${t('ハーバーランド方面','Harborland area')}</strong><div>${t('ポートループ・シティーループの停車位置は現在それぞれ異なります。','The Port Loop and City Loop stopping positions in the Harborland area are now different.')}</div><div>${t('みなと観光バス「ハーバーランド・モザイク前」もあります。','Minato Kanko Bus also serves “Harborland / Mosaic-mae”.')}</div><div class="warning"><strong>⚠️ ${t('乗車券に注意','Ticket caution')}</strong><div>${t('ポートループ／シティーループの1日乗車券・2日乗車券は、みなと観光バスでは使用できません。','Port Loop / City Loop 1-day and 2-day passes cannot be used on Minato Kanko Bus.')}</div></div><button class="front-action light" onclick="frontMinatoBus()">🚌 ${t('みなと観光バスを見る','See Minato Kanko Bus')}</button></div>
       <div class="point"><strong>💡 ${t('乗り方のコツ','Tips for riding')}</strong><div>${t('ポートループは代車が走る場合があります。ポートループにぜひ乗車したい方は、1台バスを見送るか、帰りの便で利用する方法もあります。','A substitute vehicle may operate as Port Loop. If you specifically want to ride Port Loop, you can wait for the next bus or try to ride Port Loop on your return trip.')}</div></div>
       <div class="notice"><strong>⚠️ ${t('運行について','Service changes')}</strong><div>${t('連休中などは減便や一部バス停を通過することもあります。当日の情報をご確認ください。','During consecutive holidays and other periods, service may be reduced or some stops may be skipped. Please check the information for the day.')}</div></div>
+      ${portLoopSannomiyaGuide()}
     </div>
     <button class="front-action front-back" onclick="frontC()">← ${t('C ― ロータリーに戻る','Back to C — Rotary')}</button><button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
@@ -1697,7 +1747,7 @@ function renderStaticText(){
 }
 function setLanguage(next){lang=next;localStorage.setItem('shinkobeLang',lang);render()}
 function reloadLatest(){window.location.reload()}
-function render(){renderStaticText();const layout=document.getElementById('mainLayout');const page=document.getElementById('stopListPage');if(stopListView){document.getElementById('frontGuide').style.display='none';layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('系統別・全バス停名一覧','All bus stops by route');document.querySelector('.subtitle').textContent=t('新神戸駅発着路線','Routes serving Shin-Kobe Station');renderStopList()}else if(stationListView){document.getElementById('frontGuide').style.display='none';layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('市営地下鉄・新交通 全駅名一覧','Municipal subway and new transit stations');document.querySelector('.subtitle').textContent=t('地下鉄・ポートライナー・六甲ライナー','Subway, Port Liner and Rokko Liner');renderRailStationList()}else{layout.style.display='none';page.classList.remove('show');document.getElementById('frontGuide').style.display='block';}}
+function render(){renderStaticText();const layout=document.getElementById('mainLayout');const page=document.getElementById('stopListPage');if(stopListView){document.getElementById('frontGuide').style.display='none';layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('系統別・全バス停名一覧','All bus stops by route');document.querySelector('.subtitle').textContent=t('新神戸駅発着路線','Routes serving Shin-Kobe Station');renderStopList()}else if(stationListView){document.getElementById('frontGuide').style.display='none';layout.style.display='none';page.classList.add('show');document.querySelector('h1 [data-ja]').textContent=t('地下鉄・新交通・神鉄 全駅名一覧','Subway, new transit and Kobe Electric Railway stations');document.querySelector('.subtitle').textContent=t('地下鉄・ポートライナー・六甲ライナー・神戸電鉄','Subway, Port Liner, Rokko Liner and Kobe Electric Railway');renderRailStationList()}else{layout.style.display='none';page.classList.remove('show');document.getElementById('frontGuide').style.display='block';}}
 document.getElementById('jaBtn').onclick=()=>setLanguage('ja');document.getElementById('enBtn').onclick=()=>setLanguage('en');render();
 </script>
 </body>

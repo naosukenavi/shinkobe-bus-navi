@@ -1,0 +1,60 @@
+name: Fix detailed guide button
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-show-encyclopedia-20261005.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore showEncyclopedia function
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          marker="""function showGuideFromFront(type){
+  const el=document.getElementById('frontPanel');
+  el.innerHTML=`<div class=\"guide show\">${guideHtml(type)}</div><div class=\"front-actions\"><button class=\"front-action light\" onclick=\"frontLocation('${type}')\">← 簡略案内図に戻る</button><button class=\"front-action front-back\" onclick=\"frontHome()\">← 最初に戻る</button></div>`;
+  el.classList.add('show');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+"""
+          addition=marker+"""function showEncyclopedia(type){
+  const defaults={
+    west:'ポートループ',
+    middle:'神戸空港',
+    east:'神戸空港',
+    tunnel:'有馬温泉',
+    hotel:'徳島'
+  };
+  if(defaults[type] && data[defaults[type]]) current=defaults[type];
+  document.getElementById('frontGuide').style.display='none';
+  document.getElementById('stopListPage').classList.remove('show');
+  const layout=document.getElementById('mainLayout');
+  layout.style.display='grid';
+  renderDest();
+  renderDetail();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+"""
+          if 'function showEncyclopedia(type)' in s:
+              raise SystemExit('showEncyclopedia already exists')
+          if marker not in s:
+              raise SystemExit('insert marker not found')
+          s=s.replace(marker,addition,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Fix detailed guide navigation"
+          git push

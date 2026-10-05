@@ -1713,7 +1713,7 @@ function frontStop(stop){
   const label=info?(lang==='ja'?info.ja:info.en):t('ロータリー','Rotary');
   const next=stop==='east'?t('JRバス・高速バス','JR Bus · Highway buses'):stop==='middle'?t('神姫バス・神戸市バス18系統など','Shinki Bus · Kobe City Bus 18 etc.'):t('シティーループ・ポートループ','City Loop · Port Loop');
   frontPanel(`<div class="step-card"><div class="step-label">STEP 3</div><h3>📍 ${label}</h3><img src="${photo}" alt="${label}"><p><strong>${t('この位置の主なバス：','Main buses at this point:')}</strong>${next}</p>
-  <div class="front-actions">${stop==='west'?'<button class="front-action" onclick="showEncyclopedia(\'west\')">📚 '+t('シティーループ・ポートループの詳しい案内','Detailed City Loop / Port Loop guide')+'</button>':''}
+  <div class="front-actions">${stop==='west'?'<button class="front-action" onclick="frontPortLoop()">📚 '+t('シティーループ・ポートループの詳しい案内','Detailed City Loop / Port Loop guide')+'</button>':''}
   ${stop==='east'?'<button class="front-action" onclick="showEncyclopedia(\'east\')">📚 '+t('JRバス・高速バスの詳しい案内','Detailed JR Bus / highway bus guide')+'</button>':''}
   ${stop==='middle'?'<button class="front-action" onclick="showEncyclopedia(\'middle\')">📚 '+t('神姫バス・18系統の詳しい案内','Detailed Shinki Bus / Route 18 guide')+'</button>':''}
   <button class="front-action light" onclick="frontRotary()">← ${t('ロータリー略図に戻る','Back to rotary map')}</button></div></div>`);

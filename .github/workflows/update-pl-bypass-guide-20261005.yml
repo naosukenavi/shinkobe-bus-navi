@@ -1,0 +1,37 @@
+name: Update PL bypass guide
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-pl-bypass-guide-20261005.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update PL bypass guide text
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          old="""  return `<section class=\"portloop-transfer\">\n    <h3>🟦 ${t('ポートループが新神戸駅を通過する日の乗り方','How to take Port Loop when it bypasses Shin-Kobe')}</h3>\n    <p class=\"transfer-intro\">${t('新神戸駅を通過する日は、三宮からポートループに乗車します。三宮のどこに到着しましたか？','When Port Loop bypasses Shin-Kobe, board in Sannomiya. Where did you arrive in Sannomiya?')}</p>\n    <div class=\"transfer-caution\">${t('※通過日・運行状況は、利用当日に公式情報や現地表示をご確認ください。','Please check official information and on-site signs on the day of travel for bypass dates and service status.')}</div>\n    <details class=\"transfer-route\">\n      <summary>🚇 ${t('地下鉄三宮駅前バス停','Subway Sannomiya bus stop')}</summary>\n      <div class=\"transfer-route-body\">${subway}</div>\n    </details>"""
+          new="""  return `<section class=\"portloop-transfer\">\n    <h3>🟦 ${t('PLが新神戸駅を通過する日の乗り換え','Transfer when Port Loop bypasses Shin-Kobe')}</h3>\n    <p class=\"transfer-intro\">${t('新神戸駅を通過する日は、地下鉄で新神戸駅から三宮駅へ移動し、地下鉄三宮駅からPL三宮のりばまで徒歩で向かいます。三宮へバスで移動した場合は、到着場所に合わせて下の案内を選んでください。','When Port Loop bypasses Shin-Kobe, take the subway from Shin-Kobe to Sannomiya, then walk from Subway Sannomiya Station to the Port Loop stop. If you arrive in Sannomiya by bus, choose the guide for your arrival point below.')}</p>\n    <div class=\"transfer-caution\">${t('※通過日・運行状況は、利用当日に公式情報や現地表示をご確認ください。','Please check official information and on-site signs on the day of travel for bypass dates and service status.')}</div>\n    <details class=\"transfer-route\" open>\n      <summary>🚇 ${t('地下鉄三宮駅 → PL三宮のりば','Subway Sannomiya Station → Port Loop stop')}</summary>\n      <div class=\"transfer-route-body\">${subway}</div>\n    </details>"""
+          if old not in s:
+              raise SystemExit('target block not found')
+          s=s.replace(old,new,1)
+          s=s.replace("`地下鉄三宮駅前バス停からポートループのりばへ ${i+1}`","`地下鉄三宮駅からポートループ三宮のりばへ ${i+1}`")
+          s=s.replace("`From Subway Sannomiya bus stop to the Port Loop stop ${i+1}`","`From Subway Sannomiya Station to the Port Loop stop ${i+1}`")
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Clarify PL bypass transfer guide"
+          git push

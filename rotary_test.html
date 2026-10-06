@@ -270,6 +270,60 @@ details.transfer-route[open] summary::after{content:'－'}
   .rotary-route-row{grid-template-columns:1fr}
 }
 
+
+/* ===== 2026-10-06 In-place detail trial ===== */
+.front-detail-panel{
+  margin-top:16px;
+  border:1px solid #d8e0ea;
+  border-radius:14px;
+  background:#fff;
+  padding:14px;
+}
+.front-detail-panel h3{
+  margin:0 0 10px;
+}
+.front-detail-panel .detail-card{
+  border:1px solid #d9e1ea;
+  border-radius:12px;
+  padding:12px;
+  margin-top:10px;
+  background:#fff;
+}
+.front-detail-panel .detail-card img{
+  max-width:100%;
+  height:auto;
+  border-radius:10px;
+  display:block;
+  margin:8px auto;
+}
+.front-detail-panel .detail-title{
+  font-weight:900;
+  font-size:18px;
+  margin-bottom:6px;
+}
+.front-detail-panel .detail-lead{
+  color:#444;
+  margin-bottom:10px;
+  line-height:1.6;
+}
+.front-detail-panel .detail-point{
+  border-radius:10px;
+  padding:10px;
+  margin-top:10px;
+  background:#eef6ff;
+  line-height:1.6;
+}
+.front-detail-panel .front-detail-back{
+  width:100%;
+  margin-top:14px;
+  border:0;
+  border-radius:10px;
+  padding:12px;
+  font-weight:800;
+  cursor:pointer;
+  background:#eceff3;
+}
+
 </style>
 </head>
 <body>
@@ -1785,14 +1839,45 @@ function frontLocation(type){
     <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
 function openRotaryDestination(name){
-  if(!data[name]) return;
-  current=name;
-  document.getElementById('frontGuide').style.display='none';
-  document.getElementById('stopListPage').classList.remove('show');
-  const layout=document.getElementById('mainLayout');
-  layout.style.display='grid';
-  renderDest();
-  renderDetail();
+  const item=data[name];
+  if(!item) return;
+
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  const title=t(name, item.en||name);
+  const lead=t(item.leadJa||'', item.leadEn||'');
+
+  let html=`<div class="front-detail-panel">
+    <h3>${item.icon||'🚌'} ${esc(title)}</h3>
+    ${lead?`<div class="detail-lead">${esc(lead)}</div>`:''}`;
+
+  (item.routes||[]).forEach(route=>{
+    const company=t(route.companyJa||'', route.companyEn||route.companyJa||'');
+    html+=`<div class="detail-card">
+      ${company?`<div class="detail-title">${esc(company)}</div>`:''}`;
+
+    if(route.stop && !route.hideBoarding){
+      const stopText=typeof route.stop==='string' ? route.stop : (route.stop?.ja||'');
+      if(stopText) html+=`<div><strong>${t('乗り場','Boarding point')}：</strong>${esc(stopText)}</div>`;
+    }
+
+    (route.photos||[]).forEach(ph=>{
+      if(ph.src){
+        html+=`<img src="${ph.src}" alt="${esc(t(ph.ja||'', ph.en||ph.ja||''))}">`;
+      }
+      const cap=t(ph.ja||'', ph.en||ph.ja||'');
+      if(cap) html+=`<div class="rotary-mini-note">${esc(cap)}</div>`;
+    });
+
+    const point=t(route.pointJa||'', route.pointEn||'');
+    if(point) html+=`<div class="detail-point">${esc(point)}</div>`;
+
+    html+=`</div>`;
+  });
+
+  html+=`<button class="front-detail-back" onclick="frontRotary()">← ${t('ロータリー案内へ戻る','Back to rotary guide')}</button>
+  </div>`;
+
+  frontPanel(html);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function frontRotary(){

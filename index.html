@@ -1856,7 +1856,15 @@ function openRotaryDestination(name){
       ${company?`<div class="detail-title">${esc(company)}</div>`:''}`;
 
     if(route.stop && !route.hideBoarding){
-      const stopText=typeof route.stop==='string' ? route.stop : (route.stop?.ja||'');
+      const rawStop=typeof route.stop==='string' ? route.stop : (route.stop?.ja||'');
+      const stopMap={
+        east:t('1階ロータリー東端','1F Rotary East End'),
+        middle:t('1階ロータリー中央付近','1F Rotary Center'),
+        west:t('1階ロータリー西端','1F Rotary West End'),
+        tunnel:t('地階トンネル入口','Basement / Tunnel Entrance'),
+        hotel:t('4階ホテル玄関前','4F Hotel Entrance')
+      };
+      const stopText=stopMap[rawStop] || rawStop;
       if(stopText) html+=`<div><strong>${t('乗り場','Boarding point')}：</strong>${esc(stopText)}</div>`;
     }
 

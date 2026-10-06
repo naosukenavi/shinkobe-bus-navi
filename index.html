@@ -170,6 +170,160 @@ details.transfer-route[open] summary::after{content:'－'}
 .front-bus-photos figcaption{text-align:center;font-size:13px;font-weight:700;margin-top:3px;color:#444}
 @media(max-width:700px){.front-bus-grid{grid-template-columns:1fr}}
 .rotary-map{background:#f8fbff;border:1px solid #cfd8e6;border-radius:12px;padding:10px}.rotary-map img{margin:0}@media(max-width:640px){.location-grid{grid-template-columns:1fr}.location-btn{min-height:58px}.front-title h2{font-size:26px}}
+
+/* ===== 2026-10-06 Rotary STEP 3 trial ===== */
+.rotary-destination-board{
+  margin-top:14px;
+  border:1px solid #d8e0ea;
+  border-radius:14px;
+  background:#fff;
+  padding:14px;
+}
+.rotary-destination-board h4{
+  margin:0 0 4px;
+  font-size:21px;
+}
+.rotary-order-note{
+  margin:0 0 14px;
+  color:#555;
+  text-align:center;
+  font-weight:700;
+}
+.rotary-row-label{
+  margin:12px 0 7px;
+  font-size:15px;
+  font-weight:900;
+  color:#555;
+  border-bottom:1px solid #d8e0ea;
+  padding-bottom:4px;
+}
+.rotary-route-row{
+  display:flex;
+  gap:8px;
+  align-items:stretch;
+  flex-wrap:wrap;
+}
+.rotary-route-box{
+  flex:1 1 150px;
+  min-width:135px;
+  border:2px solid #8fbce8;
+  border-radius:12px;
+  background:#f5fbff;
+  padding:10px 8px;
+  text-align:center;
+}
+.rotary-route-box.hotel-a{
+  border-color:#8fd3e5;
+  background:#f1fcff;
+}
+.rotary-route-box.hotel-b{
+  border-color:#d6a72d;
+  background:#fff9e8;
+}
+.rotary-route-box.local-green{
+  border-color:#71bb7c;
+  background:#f3fff5;
+}
+.rotary-route-box.local-warm{
+  border-color:#d7a85d;
+  background:#fff8ed;
+}
+.rotary-route-title{
+  font-size:18px;
+  font-weight:900;
+  line-height:1.35;
+  margin-bottom:7px;
+}
+.rotary-mini-btn{
+  width:100%;
+  display:block;
+  border:0;
+  border-radius:8px;
+  padding:8px 7px;
+  margin-top:6px;
+  background:#0b7ff3;
+  color:#fff;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+.rotary-mini-btn.hotel{
+  background:#a36b00;
+}
+.rotary-mini-btn.green{
+  background:#218b46;
+}
+.rotary-mini-btn.warm{
+  background:#a45f00;
+}
+.rotary-mini-note{
+  font-size:12px;
+  color:#555;
+  line-height:1.4;
+  margin-top:4px;
+}
+@media(max-width:700px){
+  .rotary-route-row{display:grid;grid-template-columns:1fr 1fr}
+  .rotary-route-box{min-width:0}
+}
+@media(max-width:430px){
+  .rotary-route-row{grid-template-columns:1fr}
+}
+
+
+/* ===== 2026-10-06 In-place detail trial ===== */
+.front-detail-panel{
+  margin-top:16px;
+  border:1px solid #d8e0ea;
+  border-radius:14px;
+  background:#fff;
+  padding:14px;
+}
+.front-detail-panel h3{
+  margin:0 0 10px;
+}
+.front-detail-panel .detail-card{
+  border:1px solid #d9e1ea;
+  border-radius:12px;
+  padding:12px;
+  margin-top:10px;
+  background:#fff;
+}
+.front-detail-panel .detail-card img{
+  max-width:100%;
+  height:auto;
+  border-radius:10px;
+  display:block;
+  margin:8px auto;
+}
+.front-detail-panel .detail-title{
+  font-weight:900;
+  font-size:18px;
+  margin-bottom:6px;
+}
+.front-detail-panel .detail-lead{
+  color:#444;
+  margin-bottom:10px;
+  line-height:1.6;
+}
+.front-detail-panel .detail-point{
+  border-radius:10px;
+  padding:10px;
+  margin-top:10px;
+  background:#eef6ff;
+  line-height:1.6;
+}
+.front-detail-panel .front-detail-back{
+  width:100%;
+  margin-top:14px;
+  border:0;
+  border-radius:10px;
+  padding:12px;
+  font-weight:800;
+  cursor:pointer;
+  background:#eceff3;
+}
+
 </style>
 </head>
 <body>
@@ -1684,22 +1838,124 @@ function frontLocation(type){
     </div>
     <button class="front-action front-back" onclick="frontHome()">← ${t('最初に戻る','Back to the beginning')}</button>`);
 }
+function openRotaryDestination(name){
+  const item=data[name];
+  if(!item) return;
+
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  const title=t(name, item.en||name);
+  const lead=t(item.leadJa||'', item.leadEn||'');
+
+  let html=`<div class="front-detail-panel">
+    <h3>${item.icon||'🚌'} ${esc(title)}</h3>
+    ${lead?`<div class="detail-lead">${esc(lead)}</div>`:''}`;
+
+  (item.routes||[]).forEach(route=>{
+    const company=t(route.companyJa||'', route.companyEn||route.companyJa||'');
+    html+=`<div class="detail-card">
+      ${company?`<div class="detail-title">${esc(company)}</div>`:''}`;
+
+    if(route.stop && !route.hideBoarding){
+      const stopText=typeof route.stop==='string' ? route.stop : (route.stop?.ja||'');
+      if(stopText) html+=`<div><strong>${t('乗り場','Boarding point')}：</strong>${esc(stopText)}</div>`;
+    }
+
+    (route.photos||[]).forEach(ph=>{
+      if(ph.src){
+        html+=`<img src="${ph.src}" alt="${esc(t(ph.ja||'', ph.en||ph.ja||''))}">`;
+      }
+      const cap=t(ph.ja||'', ph.en||ph.ja||'');
+      if(cap) html+=`<div class="rotary-mini-note">${esc(cap)}</div>`;
+    });
+
+    const point=t(route.pointJa||'', route.pointEn||'');
+    if(point) html+=`<div class="detail-point">${esc(point)}</div>`;
+
+    html+=`</div>`;
+  });
+
+  html+=`<button class="front-detail-back" onclick="frontRotary()">← ${t('ロータリー案内へ戻る','Back to rotary guide')}</button>
+  </div>`;
+
+  frontPanel(html);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 function frontRotary(){
   frontPanel(`
     <div class="step-card">
       <div class="step-label">STEP 2</div>
       <h3>${t('1階・ロータリーです','1F Rotary')}</h3>
       <div class="simple-guide-card"><div class="rotary-map"><img src="${ASSETS.westOverview}" alt="${t('1階ロータリー略図','Simplified 1F rotary map')}"></div></div>
+
       <div class="step-card step3">
         <div class="step-label">STEP 3</div>
-        <h3>${t('乗り場を確認する','Choose your boarding point')}</h3>
-        <p>${t('ロータリー内にも複数の乗り場があります。地図から選んでください。','There are several boarding points within the rotary. Choose one from the map.')}</p>
-        <div class="front-actions">
-          <button class="front-action" onclick="frontStop('east')">📷 ${t('東端・JRバス','East end · JR Bus')}</button>
-          <button class="front-action" onclick="frontStop('middle')">📷 ${t('中央付近・神姫バスなど','Center · Shinki Bus etc.')}</button>
-          <button class="front-action" onclick="frontStop('west')">📷 ${t('西端・観光バス','West end · Sightseeing buses')}</button>
+        <h3>${t('行き先から、ロータリー内の乗り場を探す','Find your boarding point by destination')}</h3>
+        <p>${t('下は、ロータリー内のバスのりばを左から右の順に並べています。行き先を選んでください。','The boarding areas below are arranged from left to right within the rotary. Choose your destination.')}</p>
+
+        <div class="rotary-destination-board">
+          <h4>🚌 ${t('ロータリー内 バスのりば','Bus stops within the rotary')}</h4>
+          <p class="rotary-order-note">${t('← 東側　　左 → 右 の順　　西側 →','← East side　　left → right　　West side →')}</p>
+
+          <div class="rotary-row-label">${t('広域方面','Regional / longer-distance services')}</div>
+          <div class="rotary-route-row">
+            <div class="rotary-route-box">
+              <div class="rotary-route-title">${t('徳島・淡路島','Tokushima / Awaji Island')}</div>
+              <button class="rotary-mini-btn" onclick="openRotaryDestination('徳島')">${t('徳島','Tokushima')}</button>
+              <button class="rotary-mini-btn" onclick="openRotaryDestination('淡路島')">${t('淡路島','Awaji Island')}</button>
+            </div>
+
+            <div class="rotary-route-box">
+              <div class="rotary-route-title">${t('高松・有馬・空港','Takamatsu / Arima / Kobe Airport')}</div>
+              <button class="rotary-mini-btn" onclick="openRotaryDestination('高松')">${t('高松','Takamatsu')}</button>
+              <button class="rotary-mini-btn" onclick="openRotaryDestination('有馬温泉')">${t('有馬温泉','Arima Onsen')}</button>
+              <button class="rotary-mini-btn" onclick="openRotaryDestination('神戸空港')">${t('神戸空港','Kobe Airport')}</button>
+            </div>
+
+            <div class="rotary-route-box hotel-a">
+              <div class="rotary-route-title">${t('ホテル①','Hotels ①')}</div>
+              <button class="rotary-mini-btn hotel" onclick="openRotaryDestination('メリケンパークオリエンタルホテル／ホテルオークラ神戸')">${t('オークラ／メリケンパークオリエンタル','Okura / Meriken Park Oriental')}</button>
+            </div>
+
+            <div class="rotary-route-box hotel-b">
+              <div class="rotary-route-title">${t('ホテル②','Hotels ②')}</div>
+              <button class="rotary-mini-btn hotel" onclick="openRotaryDestination('ポートピアホテル')">${t('ポートピアホテル','Portopia Hotel')}</button>
+              <button class="rotary-mini-btn hotel" onclick="openRotaryDestination('コートヤード・バイ・マリオット神戸（旧 ホテルパールシティ神戸）')">${t('コートヤード・バイ・マリオット神戸','Courtyard by Marriott Kobe')}</button>
+              <div class="rotary-mini-note">${t('（旧 ホテルパールシティ神戸）','(formerly Hotel Pearl City Kobe)')}</div>
+            </div>
+          </div>
+
+          <div class="rotary-row-label">${t('市内・近郊方面','City / nearby services')}</div>
+          <div class="rotary-route-row">
+            <div class="rotary-route-box local-green">
+              <div class="rotary-route-title">18 ${t('三宮・六甲道','Sannomiya / Rokkomichi')}</div>
+              <button class="rotary-mini-btn green" onclick="openRotaryDestination('六甲道')">${t('18系統を見る','Route 18')}</button>
+            </div>
+
+            <div class="rotary-route-box">
+              <div class="rotary-route-title">21・22・211</div>
+              <button class="rotary-mini-btn" onclick="openRotaryDestination('六甲アイランド')">21 ${t('六甲アイランド','Rokko Island')}</button>
+              <button class="rotary-mini-btn" onclick="openRotaryDestination('ハーバーランド・モザイク')">22 ${t('モザイク','Mosaic')}</button>
+              <button class="rotary-mini-btn" onclick="openRotaryDestination('筑紫が丘')">211 ${t('筑紫が丘','Tsukushigaoka')}</button>
+            </div>
+
+            <div class="rotary-route-box local-warm">
+              <div class="rotary-route-title">${t('三宮・神戸空港','Sannomiya / Kobe Airport')}</div>
+              <button class="rotary-mini-btn warm" onclick="openRotaryDestination('神戸空港')">${t('神姫バスを見る','Shinki Bus')}</button>
+            </div>
+
+            <div class="rotary-route-box local-green">
+              <div class="rotary-route-title">${t('シティループ','City Loop')}</div>
+              <button class="rotary-mini-btn green" onclick="openRotaryDestination('シティーループ')">${t('案内を見る','View guide')}</button>
+            </div>
+
+            <div class="rotary-route-box">
+              <div class="rotary-route-title">${t('ポートループ','Port Loop')}</div>
+              <button class="rotary-mini-btn" onclick="openRotaryDestination('ポートループ')">${t('案内を見る','View guide')}</button>
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="front-actions">
         <button class="front-action green" onclick="frontLocation('tunnel')">🟢 ${t('トンネル入口はこちら','Tunnel Entrance')}</button>
         <button class="front-action yellow" onclick="frontLocation('hotel')">🏨 ${t('ホテル玄関前はこちら','Hotel Entrance')}</button>

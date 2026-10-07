@@ -542,6 +542,7 @@ const ASSETS = {
   kobeAirportShinkiStop:'assets/kobe_airport_shinki_stop.png',
   tsukushigaokaMinatoStop:'assets/tsukushigaoka_minato_stop.png',
   rokkoIslandMinatoStop:'assets/rokko_island_minato_stop.png',
+  minatoKankoBusVehicle:'assets/minato_kanko_bus_vehicle.png',
   rokkomichi18Stop:'assets/rokkomichi_18_stop.png',
   minatoBusStop:'assets/minato_bus_stop.png',
   kobeAirportMiddleNew:'assets/kobe_airport_middle_new.png',
@@ -632,6 +633,7 @@ const ASSETS = {
   portopiaShuttleBus:'assets/portopia_shuttle_bus.png',
   portopiaShuttleSubstitute:'assets/portopia_shuttle_substitute.png',
   pearlcityShuttleTimetable:'assets/pearlcity_shuttle_timetable.png',
+  marriottShuttleBus:'assets/marriott_shuttle_bus.png',
   harborlandShuttleTimetable:'assets/harborland_shuttle_timetable.png',
   harborlandShuttleBus:'assets/harborland_shuttle_bus.png',
   frontKobeAirportHighway:'assets/kobe_airport_east.png',
@@ -901,16 +903,16 @@ const data = {
   '三田関西学院': routeSimple('🎓','Sanda Kwansei Gakuin','神姫バス','Shinki Bus','tunnel'),
   '三田プレミアムアウトレット': routeSimple('🛍️','Sanda Premium Outlets','神姫バス','Shinki Bus','tunnel'),
 
-  '筑紫が丘': {icon:'🚌', en:'Tsukushigaoka', leadJa:'みなと観光バスのバス停を写真で確認してください。', leadEn:'Check the Minato Kanko Bus stop with the photo.', routes:[
-    {companyJa:'みなと観光バス',companyEn:'Minato Kanko Bus',stop:'middle', photos:[{src:ASSETS.tsukushigaokaMinatoStop, ja:'紺地に白いカモメのマークのバス停が目印', en:'Look for the navy stop sign with the white seagull mark.'}], pointJa:'紺地に白いカモメのマークのバス停が目印です。', pointEn:'Use the navy stop sign with the white seagull mark as your landmark.', noteJa:'みなと観光バスの表示を確認して乗車してください。', noteEn:'Check the Minato Kanko Bus display before boarding.'}
+  '筑紫が丘': {icon:'🚌', en:'Tsukushigaoka', leadJa:'みなと観光バスの車体を写真で確認してください。', leadEn:'Check the Minato Kanko Bus vehicle with the photo.', routes:[
+    {companyJa:'みなと観光バス',companyEn:'Minato Kanko Bus',stop:'middle', photos:[{src:ASSETS.minatoKankoBusVehicle, ja:'みなと観光バス 車両', en:'Minato Kanko Bus vehicle'}], pointJa:'白い車体のみなと観光バスです。', pointEn:'Look for the white Minato Kanko Bus vehicle.', noteJa:'みなと観光バスの表示を確認して乗車してください。', noteEn:'Check the Minato Kanko Bus display before boarding.'}
   ]},
 
   '箕谷・神戸北町': routeSimple('🚌','Minotani / Kobe-Kitamachi','神戸市バス64系統','Kobe City Bus 64','tunnel'),
   '三木': routeSimple('🚌','Miki','神姫バス','Shinki Bus','tunnel'),
   '社': routeSimple('🚌','Yashiro','神姫バス','Shinki Bus','tunnel'),
 
-  '六甲アイランド': {icon:'🏝️', en:'Rokko Island', leadJa:'みなと観光バスのバス停を写真で確認してください。', leadEn:'Check the Minato Kanko Bus stop with the photo.', routes:[
-    {companyJa:'みなと観光バス',companyEn:'Minato Kanko Bus',stop:'middle', photos:[{src:ASSETS.rokkoIslandMinatoStop, ja:'紺地に白いカモメのマークのバス停が目印', en:'Look for the navy stop sign with the white seagull mark.'}], pointJa:'紺地に白いカモメのマークのバス停が目印です。', pointEn:'Use the navy stop sign with the white seagull mark as your landmark.', noteJa:'「みなと観光バス」の表示を確認して乗車してください。運行本数が少ないため、三宮からJR住吉経由で六甲ライナーを利用する方法もあります。', noteEn:'Check the Minato Kanko Bus display before boarding. Service is limited, so you can also go from Sannomiya via JR Sumiyoshi and the Rokko Liner.'}
+  '六甲アイランド': {icon:'🏝️', en:'Rokko Island', leadJa:'みなと観光バスの車体を写真で確認してください。', leadEn:'Check the Minato Kanko Bus vehicle with the photo.', routes:[
+    {companyJa:'みなと観光バス',companyEn:'Minato Kanko Bus',stop:'middle', photos:[{src:ASSETS.minatoKankoBusVehicle, ja:'みなと観光バス 車両', en:'Minato Kanko Bus vehicle'}], pointJa:'白い車体のみなと観光バスです。', pointEn:'Look for the white Minato Kanko Bus vehicle.', noteJa:'「みなと観光バス」の表示を確認して乗車してください。運行本数が少ないため、三宮からJR住吉経由で六甲ライナーを利用する方法もあります。', noteEn:'Check the Minato Kanko Bus display before boarding. Service is limited, so you can also go from Sannomiya via JR Sumiyoshi and the Rokko Liner.'}
   ]},
 
   '六甲道': {icon:'🚏', en:'Rokkomichi', leadJa:'神戸市バス18系統は土日限定で新神戸駅を通ります。', leadEn:'Kobe City Bus 18 serves Shin-Kobe only on weekends/holidays.', routes:[
@@ -918,7 +920,7 @@ const data = {
   ]},
 
   'ハーバーランド・モザイク': {icon:'🎡', en:'Harborland / Mosaic', leadJa:'複数ルートがあります。観光系バスはシティーループ（City Loop）／ポートループ（Port Loop）の違いに注意してください。', leadEn:'Several routes are possible. For sightseeing buses, pay attention to the difference between City Loop and Port Loop.', loopHelp:true, routes:[
-    {companyJa:'みなと観光バス（本数少ない）',companyEn:'Minato Kanko Bus / limited service',stop:'middle', photos:[{src:ASSETS.tsukushigaokaMinatoStop, ja:'紺地に白いカモメのマークのバス停が目印', en:'Look for the navy stop sign with the white seagull mark.'}], pointJa:'紺地に白いカモメのマークのバス停が目印です。', pointEn:'Use the navy stop sign with the white seagull mark as your landmark.', noteJa:'本数が少ないため時刻表を確認してください。<br><span class="red">1日乗車券・2日乗車券はご利用になれません。</span>',noteEn:'Service is limited, so check the timetable. 1-day and 2-day sightseeing passes cannot be used.'},
+    {companyJa:'みなと観光バス（本数少ない）',companyEn:'Minato Kanko Bus / limited service',stop:'middle', photos:[{src:ASSETS.minatoKankoBusVehicle, ja:'みなと観光バス 車両', en:'Minato Kanko Bus vehicle'}], pointJa:'白い車体のみなと観光バスです。', pointEn:'Look for the white Minato Kanko Bus vehicle.', noteJa:'本数が少ないため時刻表を確認してください。<br><span class="red">1日乗車券・2日乗車券はご利用になれません。</span>',noteEn:'Service is limited, so check the timetable. 1-day and 2-day sightseeing passes cannot be used.'},
     {icon:'🟩',companyJa:'シティーループ（City Loop）',companyEn:'City Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「City Loop」を確認してください。',noteEn:'Check the City Loop display.'},
     {icon:'🟦',companyJa:'ポートループ（Port Loop）',companyEn:'Port Loop',stop:'west',pointJa:'新神戸駅では、1階ロータリー西端付近から乗車します。',noteJa:'車体表示「Port Loop」を確認してください。',noteEn:'Check the Port Loop display.'}
   ]},
@@ -934,7 +936,8 @@ const data = {
 
   'コートヤード・バイ・マリオット神戸（旧 ホテルパールシティ神戸）': {icon:'🏨', en:'Courtyard by Marriott Kobe (formerly Hotel Pearl City Kobe)', leadJa:'ポートアイランド方面のホテルシャトルバスです。公式時刻表を写真のまま掲載しています。', leadEn:'Hotel shuttle bus for Port Island. The official timetable is shown as photographed.', routes:[
     {companyJa:'コートヤード・バイ・マリオット神戸 シャトルバス',companyEn:'Courtyard by Marriott Kobe Shuttle Bus',stop:null,hideBoarding:true,photos:[
-      {src:ASSETS.pearlcityShuttleTimetable,guidePage:true,ja:'コートヤード・バイ・マリオット神戸 シャトルバス時刻表',en:'Courtyard by Marriott Kobe shuttle bus timetable'}
+      {src:ASSETS.pearlcityShuttleTimetable,guidePage:true,ja:'コートヤード・バイ・マリオット神戸 シャトルバス時刻表',en:'Courtyard by Marriott Kobe shuttle bus timetable'},
+      {src:ASSETS.marriottShuttleBus,ja:'コートヤード・バイ・マリオット神戸 シャトルバス車両',en:'Courtyard by Marriott Kobe shuttle bus vehicle'}
     ],pointJa:'ご利用の際は、写真の公式時刻表と現地表示をご確認ください。',pointEn:'Please check the photographed official timetable and on-site information before use.'}
   ]},
 

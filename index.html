@@ -440,8 +440,14 @@ details.transfer-route[open] summary::after{content:'－'}
     <div class="walking-entry ropeway-entry">
       <button class="walking-entry-btn" onclick="toggleRopewayEntry()" data-ja="🚡 ロープウェイ・観光" data-en="🚡 Ropeway & sightseeing">🚡 ロープウェイ・観光</button>
       <div id="ropewayEntryPanel" class="walking-entry-panel" aria-live="polite">
+        <div class="walking-route-note">
+          <strong data-ja="⛰️ どの山へ行きますか？" data-en="⛰️ Which mountain would you like to visit?">⛰️ どの山へ行きますか？</strong><br>
+          <span data-ja="『Ropeway』『Cable car』だけでは場所を特定できません。行きたい山・施設を確認してください。" data-en="‘Ropeway’ or ‘Cable car’ alone does not identify the location. Please choose the mountain or facility you want to visit.">『Ropeway』『Cable car』だけでは場所を特定できません。行きたい山・施設を確認してください。</span>
+        </div>
         <div class="walking-route-list">
-          <button class="walking-route-btn" onclick="selectRopewayRoute()" data-ja="布引ハーブ園・ロープウェイ" data-en="Nunobiki Herb Gardens / Ropeway">🚡 布引ハーブ園・ロープウェイ</button>
+          <button class="walking-route-btn" onclick="selectMountainRoute('nunobiki')" data-ja="① 布引・ハーブ園　🚡 布引ロープウェイ　★新神戸駅から徒歩ですぐ" data-en="① Nunobiki / Herb Gardens — Nunobiki Ropeway — a short walk from Shin-Kobe">① 布引・ハーブ園　🚡 布引ロープウェイ　★新神戸駅から徒歩ですぐ</button>
+          <button class="walking-route-btn" onclick="selectMountainRoute('maya')" data-ja="② 摩耶山　🚠 摩耶ケーブル　→ 18系統" data-en="② Mt. Maya — Maya Cable — Route 18">② 摩耶山　🚠 摩耶ケーブル　→ 18系統</button>
+          <button class="walking-route-btn" onclick="selectMountainRoute('rokko')" data-ja="③ 六甲山　🚞 六甲ケーブル　→ 阪急六甲で乗り換え" data-en="③ Mt. Rokko — Rokko Cable — transfer at Hankyu Rokko">③ 六甲山　🚞 六甲ケーブル　→ 阪急六甲で乗り換え</button>
         </div>
         <div id="ropewayRouteDetail" class="walking-route-detail" aria-live="polite"></div>
       </div>
@@ -1283,9 +1289,56 @@ function selectRopewayRoute(){
     cards+
     '<div class="walking-route-note"><strong>'+t('ポイント','Point')+'</strong><br>'+t(d.routes[0].pointJa,d.routes[0].pointEn)+'</div>'+
     '<div class="walking-route-note"><strong>'+t('ご注意','Caution')+'</strong><br>'+t(d.routes[0].noteJa,d.routes[0].noteEn)+'</div>'+
-    '<button class="front-action front-back" onclick="toggleRopewayEntry()">← '+t('ロープウェイ・観光一覧に戻る','Back to ropeway & sightseeing')+'</button>';
+    '<button class="front-action front-back" onclick="clearMountainDetail()">← '+t('山の3択に戻る','Back to the three mountain choices')+'</button>';
   detail.classList.add('show');
   detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+
+function mountainRoute18Stops(targetJa){
+  const route18=rotaryStopRoutes[0];
+  if(!route18) return '';
+  const idx=route18.stops.findIndex(x=>x[0]===targetJa);
+  const stops=(idx>=0?route18.stops.slice(0,idx+1):route18.stops);
+  return '<ol>'+stops.map(x=>'<li>'+(lang==='ja'?x[0]:'<span class="stop-ja">'+x[0]+'</span><span class="stop-en">'+x[1]+'</span>')+'</li>').join('')+'</ol>';
+}
+function clearMountainDetail(){
+  const detail=document.getElementById('ropewayRouteDetail');
+  if(detail) detail.innerHTML='';
+  const panel=document.getElementById('ropewayEntryPanel');
+  if(panel) panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function selectMountainRoute(type){
+  const detail=document.getElementById('ropewayRouteDetail');
+  if(!detail) return;
+  if(type==='nunobiki'){
+    selectRopewayRoute();
+    return;
+  }
+  if(type==='maya'){
+    detail.innerHTML='<div class="step-card"><div class="step-label">② '+t('摩耶山','Mt. Maya')+'</div><h3>🚠 '+t('摩耶ケーブルへ','To Maya Cable')+'</h3><p>'+t('神戸市バス18系統で「摩耶ケーブル下」へ向かいます。','Take Kobe City Bus Route 18 to Maya Cable-shita.')+'</p></div>'+ 
+      '<div class="walking-route-note"><strong>🚌 '+t('18系統','Route 18')+'</strong>'+mountainRoute18Stops('摩耶ケーブル下')+'</div>'+ 
+      '<div class="warning"><strong>⚠️ '+t('運行日に注意','Check operating days')+'</strong>'+t('18系統は土日祝日の一部便のみ新神戸駅に停車します。平日などは「布引」バス停からご利用ください。','Only some Route 18 services stop at Shin-Kobe Station on Saturdays, Sundays and holidays. On weekdays and at other times, use the Nunobiki bus stop.')+'</div>'+ 
+      '<button class="front-action light" onclick="jumpMountainToNunobiki218()">🚶 '+t('「布引」バス停への徒歩ルートを見る','See the walking route to Nunobiki bus stop')+'</button>'+ 
+      '<button class="front-action front-back" onclick="clearMountainDetail()">← '+t('山の3択に戻る','Back to the three mountain choices')+'</button>';
+  }else if(type==='rokko'){
+    detail.innerHTML='<div class="step-card"><div class="step-label">③ '+t('六甲山','Mt. Rokko')+'</div><h3>🚞 '+t('六甲ケーブルへ','To Rokko Cable')+'</h3><p>'+t('阪急六甲で16系統または106系統に乗り換え、「六甲ケーブル下」へ向かいます。','At Hankyu Rokko, transfer to Route 16 or 106 for Rokko Cable-shita.')+'</p></div>'+ 
+      '<div class="point"><strong>🚌 '+t('A：新神戸駅から','A: From Shin-Kobe Station')+'</strong><div>'+t('18系統 → 阪急六甲 → 16系統または106系統 → 六甲ケーブル下','Route 18 → Hankyu Rokko → Route 16 or 106 → Rokko Cable-shita')+'</div>'+mountainRoute18Stops('阪急六甲')+'</div>'+ 
+      '<div class="point"><strong>🚶 '+t('B：布引バス停から','B: From Nunobiki bus stop')+'</strong><div>'+t('新神戸駅から「布引」バス停まで徒歩 → 2系統または18系統 → 阪急六甲 → 16系統または106系統 → 六甲ケーブル下','Walk from Shin-Kobe Station to Nunobiki bus stop → Route 2 or 18 → Hankyu Rokko → Route 16 or 106 → Rokko Cable-shita')+'</div></div>'+ 
+      '<div class="warning"><strong>⚠️ '+t('18系統について','About Route 18')+'</strong>'+t('18系統は土日祝日の一部便のみ新神戸駅に停車します。平日などは「布引」バス停から2系統・18系統をご利用ください。','Only some Route 18 services stop at Shin-Kobe Station on Saturdays, Sundays and holidays. On weekdays and at other times, use Route 2 or 18 from Nunobiki bus stop.')+'</div>'+ 
+      '<div class="notice"><strong>🚌 '+t('阪急六甲から','From Hankyu Rokko')+'</strong><div>'+t('16系統または106系統で「六甲ケーブル下」へ。運行日・時刻は最新の公式情報をご確認ください。','Take Route 16 or 106 to Rokko Cable-shita. Please check the latest official timetable and service information.')+'</div></div>'+ 
+      '<button class="front-action light" onclick="jumpMountainToNunobiki218()">🚶 '+t('「布引」バス停への徒歩ルートを見る','See the walking route to Nunobiki bus stop')+'</button>'+ 
+      '<button class="front-action front-back" onclick="clearMountainDetail()">← '+t('山の3択に戻る','Back to the three mountain choices')+'</button>';
+  }else{return;}
+  detail.classList.add('show');
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function jumpMountainToNunobiki218(){
+  const panel=document.getElementById('walkingEntryPanel');
+  if(panel) panel.classList.add('show');
+  selectWalkingRoute('bus218');
+  const target=document.getElementById('walkingRouteDetail');
+  if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function toggleElevatorEntry(){

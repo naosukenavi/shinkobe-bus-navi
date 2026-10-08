@@ -324,6 +324,29 @@ details.transfer-route[open] summary::after{content:'－'}
   background:#eceff3;
 }
 
+
+
+/* ご利用アンケート */
+.feedback-box{margin:26px 0 8px;padding:18px;border:2px solid #b7d8ff;border-radius:14px;background:#f7fbff}
+.feedback-box h2{margin:0 0 6px;font-size:24px;color:var(--blue-dark)}
+.feedback-intro{margin:0 0 14px;color:#445;line-height:1.55}
+.feedback-question{margin:16px 0;padding:14px;border:1px solid #d9e7f7;border-radius:12px;background:#fff}
+.feedback-question legend{font-weight:800;margin-bottom:8px;padding:0 4px}
+.feedback-choice-grid{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
+.feedback-choice{display:inline-flex;align-items:center;gap:7px;border:1px solid #b9c9da;border-radius:10px;padding:9px 12px;background:#fff;cursor:pointer;font-weight:700}
+.feedback-choice:has(input:checked){border-color:var(--blue);background:#eef6ff;box-shadow:0 0 0 2px rgba(11,127,243,.12)}
+.feedback-choice input{margin:0;accent-color:var(--blue)}
+.feedback-more{display:none}
+.feedback-more.show{display:block}
+.feedback-box textarea{width:100%;min-height:92px;padding:10px 12px;border:1px solid #b9c9da;border-radius:9px;font:inherit;resize:vertical}
+.feedback-submit{width:100%;margin-top:14px;border:0;border-radius:10px;padding:12px 16px;background:var(--blue);color:#fff;font-size:17px;font-weight:800;cursor:pointer}
+.feedback-submit:hover{background:var(--blue-dark)}
+.feedback-submit:disabled{opacity:.65;cursor:default}
+.feedback-privacy{margin:12px 0 0;font-size:12px;color:#566;line-height:1.55}
+.feedback-thanks{display:none;margin-top:12px;padding:13px 14px;border:1px solid #a9d8b4;border-radius:10px;background:#eefaf1;color:#185b2c;font-weight:800}
+.feedback-thanks.show{display:block}
+@media(max-width:640px){.feedback-box{padding:14px}.feedback-choice{width:100%}}
+
 </style>
 </head>
 <body>
@@ -464,6 +487,57 @@ details.transfer-route[open] summary::after{content:'－'}
     <main class="panel detail" id="detail"></main>
   </div>
   <section class="stop-list-page" id="stopListPage"></section>
+
+  <section class="feedback-box" id="feedbackBox" aria-labelledby="feedbackTitle">
+    <h2 id="feedbackTitle" data-ja="💬 この案内、役に立ちましたか？" data-en="💬 Was this guide helpful?">💬 この案内、役に立ちましたか？</h2>
+    <p class="feedback-intro" data-ja="今後の案内改善の参考に、よろしければ短いアンケートにご協力ください。" data-en="If you have a moment, please answer this short survey to help improve the guide.">今後の案内改善の参考に、よろしければ短いアンケートにご協力ください。</p>
+
+    <form id="feedbackForm" action="https://docs.google.com/forms/d/e/1FAIpQLSePnnY1Jxbt-4aalZ-I2TU3-iNjv2VFNJ4YroT_KtvCTyyl2A/formResponse" method="POST" target="feedbackSink">
+      <fieldset class="feedback-question">
+        <legend data-ja="この案内、役に立ちましたか？" data-en="Was this guide helpful?">この案内、役に立ちましたか？</legend>
+        <div class="feedback-choice-grid">
+          <label class="feedback-choice"><input type="radio" name="entry.505322471" value="👍 はい" required onchange="showFeedbackMore()"><span data-ja="👍 はい" data-en="👍 Yes">👍 はい</span></label>
+          <label class="feedback-choice"><input type="radio" name="entry.505322471" value="🤔 もう少し" required onchange="showFeedbackMore()"><span data-ja="🤔 もう少し" data-en="🤔 Could be clearer">🤔 もう少し</span></label>
+        </div>
+      </fieldset>
+
+      <div class="feedback-more" id="feedbackMore">
+        <p class="feedback-intro" style="font-weight:800" data-ja="ありがとうございます。あと2つだけ教えてください。" data-en="Thank you. Just two more quick questions.">ありがとうございます。あと2つだけ教えてください。</p>
+
+        <fieldset class="feedback-question">
+          <legend data-ja="どこで使いましたか？" data-en="Where did you use this guide?">どこで使いましたか？</legend>
+          <div class="feedback-choice-grid">
+            <label class="feedback-choice"><input type="radio" name="entry.1733793" value="新神戸駅" required><span data-ja="新神戸駅" data-en="At Shin-Kobe Station">新神戸駅</span></label>
+            <label class="feedback-choice"><input type="radio" name="entry.1733793" value="来る前に調べた" required><span data-ja="来る前に調べた" data-en="Before coming to Shin-Kobe">来る前に調べた</span></label>
+            <label class="feedback-choice"><input type="radio" name="entry.1733793" value="その他" required><span data-ja="その他" data-en="Other">その他</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="feedback-question">
+          <legend data-ja="何を調べましたか？（複数選択可）" data-en="What did you look up? (Select all that apply)">何を調べましたか？（複数選択可）</legend>
+          <div class="feedback-choice-grid">
+            <label class="feedback-choice"><input type="checkbox" name="entry.2074052478" value="ロータリー"><span data-ja="ロータリー" data-en="Rotary">ロータリー</span></label>
+            <label class="feedback-choice"><input type="checkbox" name="entry.2074052478" value="トンネル入口"><span data-ja="トンネル入口" data-en="Tunnel Entrance">トンネル入口</span></label>
+            <label class="feedback-choice"><input type="checkbox" name="entry.2074052478" value="ホテル玄関前"><span data-ja="ホテル玄関前" data-en="Hotel Entrance">ホテル玄関前</span></label>
+            <label class="feedback-choice"><input type="checkbox" name="entry.2074052478" value="徒歩"><span data-ja="徒歩" data-en="Walking">徒歩</span></label>
+            <label class="feedback-choice"><input type="checkbox" name="entry.2074052478" value="電車・乗換"><span data-ja="電車・乗換" data-en="Rail / transfers">電車・乗換</span></label>
+            <label class="feedback-choice"><input type="checkbox" name="entry.2074052478" value="多言語"><span data-ja="多言語" data-en="Multilingual guide">多言語</span></label>
+          </div>
+          <p class="feedback-privacy" data-ja="※ 1つ以上選んでください。" data-en="* Please select at least one.">※ 1つ以上選んでください。</p>
+        </fieldset>
+
+        <div class="feedback-question">
+          <label for="feedbackComment" style="display:block;font-weight:800;margin-bottom:8px" data-ja="もしよければ、分かりにくかったところを教えてください。（任意）" data-en="If you wish, tell us what was unclear. (Optional)">もしよければ、分かりにくかったところを教えてください。（任意）</label>
+          <textarea id="feedbackComment" name="entry.863636531" placeholder=""></textarea>
+        </div>
+
+        <button type="submit" class="feedback-submit" id="feedbackSubmit" data-ja="回答を送信する" data-en="Send feedback">回答を送信する</button>
+        <p class="feedback-privacy" data-ja="回答は案内改善のために利用します。氏名・メールアドレス・位置情報の入力欄はありません。回答の保存には Google フォーム／Google スプレッドシートを利用します。" data-en="Responses are used to improve this guide. There are no fields for your name, email address, or location. Responses are stored using Google Forms / Google Sheets.">回答は案内改善のために利用します。氏名・メールアドレス・位置情報の入力欄はありません。回答の保存には Google フォーム／Google スプレッドシートを利用します。</p>
+      </div>
+    </form>
+    <div class="feedback-thanks" id="feedbackThanks" role="status" aria-live="polite"></div>
+    <iframe name="feedbackSink" title="feedback response" style="display:none"></iframe>
+  </section>
 </div>
 
   <footer class="site-footer" id="siteInfo">
@@ -482,8 +556,8 @@ details.transfer-route[open] summary::after{content:'－'}
       <details class="site-policy">
         <summary data-ja="プライバシーについて" data-en="Privacy">プライバシーについて</summary>
         <div class="site-policy-body">
-          <p data-ja="本サイトには、会員登録・問い合わせフォーム・位置情報取得・独自のアクセス解析機能を設置しておらず、運営者が氏名やメールアドレスなどの個人情報を収集することはありません。" data-en="This site has no membership registration, contact form, location tracking or independent analytics, and the operator does not collect personal information such as names or email addresses.">本サイトには、会員登録・問い合わせフォーム・位置情報取得・独自のアクセス解析機能を設置しておらず、運営者が氏名やメールアドレスなどの個人情報を収集することはありません。</p>
-          <p data-ja="外部サイトへのリンクを利用した場合は、リンク先のプライバシーポリシーが適用されます。今後、アクセス解析などを導入した場合は、この項目を更新します。" data-en="When you follow a link to an external site, that site's privacy policy applies. This section will be updated if analytics or similar functions are added in the future.">外部サイトへのリンクを利用した場合は、リンク先のプライバシーポリシーが適用されます。今後、アクセス解析などを導入した場合は、この項目を更新します。</p>
+          <p data-ja="本サイトには、会員登録・位置情報取得・独自のアクセス解析機能を設置していません。案内改善のため、任意のご利用アンケートを設置していますが、氏名・メールアドレス・位置情報の入力欄はありません。" data-en="This site has no membership registration, location tracking, or independent analytics. An optional usage survey is provided to improve the guide, but it has no fields for names, email addresses, or location information.">本サイトには、会員登録・位置情報取得・独自のアクセス解析機能を設置していません。案内改善のため、任意のご利用アンケートを設置していますが、氏名・メールアドレス・位置情報の入力欄はありません。</p>
+          <p data-ja="アンケート回答の送信・保存には Google フォーム／Google スプレッドシートを利用します。外部サービス・外部サイトを利用した場合は、それぞれのプライバシーポリシーが適用されます。" data-en="Google Forms / Google Sheets are used to submit and store survey responses. When you use an external service or follow an external link, that service's privacy policy applies.">アンケート回答の送信・保存には Google フォーム／Google スプレッドシートを利用します。外部サービス・外部サイトを利用した場合は、それぞれのプライバシーポリシーが適用されます。</p>
         </div>
       </details>
 
@@ -2065,6 +2139,39 @@ function showGuideFromFront(type){
   el.classList.add('show');
   el.scrollIntoView({behavior:'smooth',block:'start'});
 }
+
+
+
+function showFeedbackMore(){
+  const more=document.getElementById('feedbackMore');
+  if(more) more.classList.add('show');
+}
+function handleFeedbackSubmit(event){
+  const form=event.currentTarget;
+  const checked=form.querySelectorAll('input[name="entry.2074052478"]:checked');
+  if(!checked.length){
+    event.preventDefault();
+    alert(t('「何を調べましたか？」を1つ以上選んでください。','Please select at least one item under “What did you look up?”'));
+    return false;
+  }
+  const btn=document.getElementById('feedbackSubmit');
+  if(btn){
+    btn.disabled=true;
+    btn.textContent=t('送信しました','Sent');
+  }
+  window.setTimeout(()=>{
+    const thanks=document.getElementById('feedbackThanks');
+    const more=document.getElementById('feedbackMore');
+    if(more) more.style.display='none';
+    if(thanks){
+      thanks.textContent=t('ご回答ありがとうございます。案内改善に役立てます。','Thank you. Your feedback will help improve this guide.');
+      thanks.classList.add('show');
+    }
+  },500);
+  return true;
+}
+const feedbackForm=document.getElementById('feedbackForm');
+if(feedbackForm) feedbackForm.addEventListener('submit',handleFeedbackSubmit);
 
 function renderStaticText(){
   document.querySelectorAll('[data-ja]').forEach(e=>{e.textContent=t(e.dataset.ja,e.dataset.en)});

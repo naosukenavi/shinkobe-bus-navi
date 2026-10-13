@@ -1,0 +1,39 @@
+name: Patch Kansai Airport times once
+
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-kansai-times-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Kansai Airport departure times
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          needle = '''        <img src="${ASSETS.hotelEntranceKansaiAirport}" alt="${t('関西空港リムジンバスの4階ホテル玄関前','4F Hotel Entrance for the Kansai Airport Limousine Bus')}">'''
+          addition = '''        <img src="${ASSETS.hotelEntranceKansaiAirport}" alt="${t('関西空港リムジンバスの4階ホテル玄関前','4F Hotel Entrance for the Kansai Airport Limousine Bus')}">
+        <div class="point pink" style="margin-top:12px">
+          <strong>🕒 ${t('発車時刻','Departure times')}</strong>
+          <div><strong>11:00／14:20</strong></div>
+          <div>${t('1日2便（2026年9月現在）','2 services per day (as of September 2026)')}</div>
+        </div>'''
+          if needle not in s:
+              raise SystemExit('Kansai Airport image line not found')
+          p.write_text(s.replace(needle, addition, 1), encoding='utf-8')
+          PY
+      - name: Commit change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Show Kansai Airport departure times on new top guide"
+          git push

@@ -1,0 +1,41 @@
+name: Patch Marriott shuttle images once
+
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-marriott-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.event.head_commit.message == 'Add one-time Marriott patch workflow'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Marriott shuttle images
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old_asset = "  marriottShuttleBus:'assets/marriott_shuttle_bus.png',"
+          new_asset = "  marriottShuttleBus:'assets/marriott_shuttle_bus.png',\n  marriottShuttleBus2:'assets/marriott_shuttle_bus_2.png',"
+          if old_asset not in s:
+              raise SystemExit('Marriott asset line not found')
+          s = s.replace(old_asset, new_asset, 1)
+          old_photo = "      {src:ASSETS.marriottShuttleBus,ja:'コートヤード・バイ・マリオット神戸 シャトルバス車両',en:'Courtyard by Marriott Kobe shuttle bus vehicle'}"
+          new_photo = "      {src:ASSETS.marriottShuttleBus,ja:'コートヤード・バイ・マリオット神戸　シャトルバス車両①',en:'Courtyard by Marriott Kobe shuttle bus vehicle 1'},\n      {src:ASSETS.marriottShuttleBus2,ja:'コートヤード・バイ・マリオット神戸　シャトルバス車両②',en:'Courtyard by Marriott Kobe shuttle bus vehicle 2'}"
+          if old_photo not in s:
+              raise SystemExit('Marriott photo entry not found')
+          s = s.replace(old_photo, new_photo, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add second Marriott shuttle vehicle image"
+          git push

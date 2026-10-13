@@ -8,7 +8,6 @@ permissions:
   contents: write
 jobs:
   patch:
-    if: github.event.head_commit.message == 'Add one-time Kansai limousine image patch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -19,13 +19,8 @@ jobs:
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          needle = '''        <img src="${ASSETS.hotelEntranceKansaiAirport}" alt="${t('関西空港リムジンバスの4階ホテル玄関前','4F Hotel Entrance for the Kansai Airport Limousine Bus')}">'''
-          addition = '''        <img src="${ASSETS.hotelEntranceKansaiAirport}" alt="${t('関西空港リムジンバスの4階ホテル玄関前','4F Hotel Entrance for the Kansai Airport Limousine Bus')}">
-        <div class="point pink" style="margin-top:12px">
-          <strong>🕒 ${t('発車時刻','Departure times')}</strong>
-          <div><strong>11:00／14:20</strong></div>
-          <div>${t('1日2便（2026年9月現在）','2 services per day (as of September 2026)')}</div>
-        </div>'''
+          needle = '        <img src="${ASSETS.hotelEntranceKansaiAirport}" alt="${t(\'関西空港リムジンバスの4階ホテル玄関前\',\'4F Hotel Entrance for the Kansai Airport Limousine Bus\')}">'
+          addition = needle + '\n' + '        <div class="point pink" style="margin-top:12px">' + '\n' + '          <strong>🕒 ${t(\'発車時刻\',\'Departure times\')}</strong>' + '\n' + '          <div><strong>11:00／14:20</strong></div>' + '\n' + '          <div>${t(\'1日2便（2026年9月現在）\',\'2 services per day (as of September 2026)\')}</div>' + '\n' + '        </div>'
           if needle not in s:
               raise SystemExit('Kansai Airport image line not found')
           p.write_text(s.replace(needle, addition, 1), encoding='utf-8')

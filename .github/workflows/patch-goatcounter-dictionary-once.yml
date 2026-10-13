@@ -1,0 +1,24 @@
+name: Patch GoatCounter dictionary once
+
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-goatcounter-dictionary-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch index
+        run: python .github/patch_goatcounter_dictionary.py
+      - name: Commit change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add GoatCounter analytics to dictionary"
+          git push

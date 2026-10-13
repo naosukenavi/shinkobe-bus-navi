@@ -10,28 +10,24 @@ permissions:
 
 jobs:
   patch:
+    if: github.event.head_commit.message == 'Fix Kansai Airport hotel stop patch workflow'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Patch index
+      - name: Update Kansai Airport hotel stop
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('index.html')
-          s=p.read_text(encoding='utf-8')
-          old="""        <p>${t('徳島方面・関西空港方面などのバスは、こちらの乗り場です。','Buses for Tokushima and Kansai Airport use this boarding area.')}</p>
-        <div class=\"front-actions\">"""
-          new="""        <p>${t('徳島方面・関西空港方面などのバスは、こちらの乗り場です。','Buses for Tokushima and Kansai Airport use this boarding area.')}</p>
-        <div class=\"point pink\" style=\"margin-bottom:14px\">
-          <strong>🔴 ${t('関西空港（関空リムジン）','Kansai International Airport (Airport Limousine)')}</strong>
-          <div>${t('4階ホテル玄関前発着','Departs from the 4F Hotel Entrance')}</div>
-        </div>
-        <div class=\"front-actions\">"""
-          if old not in s:
-              raise SystemExit('target block not found')
-          p.write_text(s.replace(old,new,1),encoding='utf-8')
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old_line = "        <p>${t('徳島方面・関西空港方面などのバスは、こちらの乗り場です。','Buses for Tokushima and Kansai Airport use this boarding area.')}</p>"
+          new_line = old_line + "\n        <div class=\"point pink\" style=\"margin-bottom:14px\">\n          <strong>🔴 ${t('関西空港（関空リムジン）','Kansai International Airport (Airport Limousine)')}</strong>\n          <div>${t('4階ホテル玄関前発着','Departs from the 4F Hotel Entrance')}</div>\n        </div>"
+          if old_line not in s:
+              raise SystemExit('Kansai Airport hotel stop target not found')
+          s = s.replace(old_line, new_line, 1)
+          p.write_text(s, encoding='utf-8')
           PY
-      - name: Commit
+      - name: Commit change
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

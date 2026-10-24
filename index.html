@@ -1752,8 +1752,10 @@ function frontKobeAirport(){
       <h3>✈️ ${t('神戸空港へ行く','To Kobe Airport')}</h3>
       <p><strong>${t('神戸空港へ行くバスは2種類あります。乗車前に確認してください。','There are two types of buses to Kobe Airport. Please check before boarding.')}</strong></p>
 
+      <button class="front-action light" onclick="openRotaryDestination('神戸空港')">📷 ${t('JRバス・神姫バスの乗り場写真を見る','See boarding-point photos for JR Bus and Shinki Bus')}</button>
+
       <div class="point">
-        <strong>① ${t('ロータリー東端','East end of the rotary')}</strong>
+        <strong>① ${t('JRバス：ロータリー東端','JR Bus: East end of the rotary')}</strong>
         <ul>
           <li>${t('県外から到着するバス','Buses arriving from outside the city')}</li>
           <li>${t('神戸空港まで直通','Direct to Kobe Airport')}</li>
@@ -2007,6 +2009,12 @@ function openRotaryDestination(name){
     <h3>${item.icon||'🚌'} ${esc(title)}</h3>
     ${lead?`<div class="detail-lead">${esc(lead)}</div>`:''}`;
 
+  if(name==='神戸空港'){
+    html+=`<div class="warning"><strong>⚠️ ${t('JRバスは現金支払いのみです。ICカード等は利用できません。','JR Bus accepts cash only. IC cards are not accepted.')}</strong></div>
+      <p>${t('どちらのバスも道路状況により遅れることがあります。乗車前に「神戸空港行き」の表示を確認してください。','Both buses may be delayed by traffic. Check the destination display for Kobe Airport before boarding.')}</p>
+      <button class="front-action light" onclick="frontKobeAirport()">ℹ️ ${t('神戸空港行きバスの支払い・注意事項／鉄道の案内を見る','See Kobe Airport bus payment information, cautions and railway options')}</button>`;
+  }
+
   (item.routes||[]).forEach(route=>{
     const company=t(route.companyJa||'', route.companyEn||route.companyJa||'');
     html+=`<div class="detail-card">
@@ -2036,6 +2044,11 @@ function openRotaryDestination(name){
     const point=t(route.pointJa||'', route.pointEn||'');
     if(point) html+=`<div class="detail-point">${esc(point)}</div>`;
 
+    if(name==='神戸空港'){
+      const note=t(route.noteJa||'', route.noteEn||'');
+      if(note) html+=`<div class="detail-point">${note}</div>`;
+      if(route.companyJa==='神姫バス') html+=`<div class="warning"><strong>${t('混雑状況により停車位置が変わる場合があります。実際の停車位置を確認してください。','The stopping position may change depending on congestion. Check the actual stopping position.')}</strong></div>`;
+    }
     html+=`</div>`;
   });
 
